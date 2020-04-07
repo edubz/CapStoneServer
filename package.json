@@ -1,0 +1,23 @@
+{
+  "name": "capstoneserver",
+  "version": "1.0.0",
+  "description": "node server for 2020 pcc capstone project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edubz/CapStoneServer.git"
+  },
+  "author": "PCC creative coding capstone participants",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edubz/CapStoneServer/issues"
+  },
+  "homepage": "https://github.com/edubz/CapStoneServer#readme",
+  "dependencies": {
+    "socket.io": "^2.3.0",
+    "twilio": "^3.42.1"
+  }
+}
