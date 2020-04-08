@@ -1,15 +1,15 @@
-const express = require("express");
-const app = express();
-const server = app.listen(3000);
-var numSockets=0;
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 
-app.use(express.static('public'));
 
-var socket = require('socket.io');
 
-var io = socket(server);
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/public/index.html');
+});
 
-io.sockets.on('connect', newConnection);
-function newConnection(socket){
-    console.log("New connection: " + socket.id);
-}
+
+http.listen(port, function(){
+  console.log('listening on *:' + port);
+});
