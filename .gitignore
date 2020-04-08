@@ -100,8 +100,6 @@ dist/
 # DynamoDB Local files
 .dynamodb/
 
-# Temporary folders
-tmp/
-temp/
+
 
 # End of https://www.gitignore.io/api/node
