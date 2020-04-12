@@ -4,7 +4,7 @@
   "description": "node server for 2020 pcc capstone project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
   "homepage": "https://github.com/edubz/CapStoneServer#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "path": "^0.12.7",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3",
     "socket.io": "^2.3.0",
     "twilio": "^3.42.1"
   }
