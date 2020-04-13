@@ -18,6 +18,7 @@
   "homepage": "https://github.com/edubz/CapStoneServer#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "http": "0.0.1-security",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "nodemon": "^2.0.3",
