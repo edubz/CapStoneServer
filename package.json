@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security",
+    "midi": "^1.0.0",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "nodemon": "^2.0.3",

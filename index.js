@@ -75,6 +75,44 @@ udpPort.on("error", function (err) {
 
 udpPort.open();
 
+//declare and start midi io
+const midi = require ('midi');
+const input = new midi.Input();
+input.getPortCount();
+input.getPortName(0);
+ 
+// Configure a callback.
+input.on('message', (deltaTime, message) => {
+  // The message is an array of numbers corresponding to the MIDI bytes:
+  //   [status, data1, data2]
+  // https://www.cs.cf.ac.uk/Dave/Multimedia/node158.html has some helpful
+  // information interpreting the messages.
+  console.log(`m: ${message} d: ${deltaTime}`);
+});
+input.openPort(0);
+ 
+// Sysex, timing, and active sensing messages are ignored
+// by default. To enable these message types, pass false for
+// the appropriate type in the function below.
+// Order: (Sysex, Timing, Active Sensing)
+// For example if you want to receive only MIDI Clock beats
+// you should use
+// input.ignoreTypes(true, false, true)
+input.ignoreTypes(false, false, false);
+// Close the port when done.
+setTimeout(function() {
+  input.closePort();
+}, 100000);
+
+
+const output = new midi.Output();
+output.getPortCount();
+output.getPortName(0);
+output.openPort(0);
+output.sendMessage([176,22,1]);
+output.closePort();
+
+
 // const MongoClient = require('mongodb').MongoClient;
 // const uri = "mongodb+srv://user:capstone@pcc-creative-coding-capstone-3cnck.mongodb.net/test?retryWrites=true&w=majority";
 // const client = new MongoClient(uri, { useNewUrlParser: true });
