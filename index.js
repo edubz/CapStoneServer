@@ -2,9 +2,7 @@
 const express = require('express');
 var app = express();
 var server = require('http').Server(app);
-app.use(express.static('public'));
 
-server.listen(3000);
 
 var http = require('http').Server(app);
 var port = process.env.PORT || 3000;
@@ -54,7 +52,7 @@ udpPort.on("ready", function () {
     });
     // For most Ports, send() should only be called after the "ready" event fires.
     this.send({
-        address: "/carrier/frequency",
+        address: "/",
         args: [
             {
                 type: "f",
@@ -111,6 +109,27 @@ output.getPortName(0);
 output.openPort(0);
 output.sendMessage([176,22,1]);
 output.closePort();
+
+//audio file upload from p5js
+const multer  = require('multer') 
+const upload = multer();  
+const fs = require('fs'); 
+app.post('/upload', upload.single('soundBlob'), function (req, res, next) {
+   //console.log(req.file); // see what got uploaded
+
+  let uploadLocation = __dirname + '/public/uploads/' + req.file.originalname // where to save the file to. make sure the incoming name has a .wav extension
+
+  fs.writeFileSync(uploadLocation, Buffer.from(new Uint8Array(req.file.buffer))); // write the blob to the server as a file
+  res.sendStatus(200); //send back that everything went ok
+
+});
+
+
+app.use(express.static('public'));
+
+server.listen(3000);
+
+
 
 
 // const MongoClient = require('mongodb').MongoClient;
