@@ -12,7 +12,7 @@ var io = require('socket.io')(server);
 io.on('connection', function (socket) {
 	console.log('new connection at ' + socket.id);
   	socket.on('report', function (val) {
-    console.log(socket.id + ':' + val);
+    // console.log(socket.id + ':' + val);
   });
 });
 
@@ -51,16 +51,20 @@ udpPort.on("ready", function () {
         console.log(" Host:", address + ", Port:", udpPort.options.localPort);
     });
     // For most Ports, send() should only be called after the "ready" event fires.
-    this.send({
-        address: "/",
-        args: [
-            {
-                type: "f",
-                value: 0
-            }
-        ]
-
-	});
+    io.on('connection', function(socket){
+      socket.on('report', function(val){
+        udpPort.send({
+          address: "/",
+          args: [
+              {
+                  type: "f",
+                  value: val
+              }
+            ]
+        });
+        io.emit('val', val);
+    });
+  });
 });
 
 udpPort.on("message", function (oscMessage) {
@@ -126,6 +130,10 @@ app.post('/upload', upload.single('soundBlob'), function (req, res, next) {
 
 
 app.use(express.static('public'));
+
+app.get('/maxinterface', function (req, res)  {
+  res.sendFile(__dirname + '/public/maxinterface.html');
+});
 
 server.listen(3000);
 
