@@ -1,5 +1,6 @@
 var socket=io.connect('http://localhost:3000');
 let mic, recorder, soundFile, soundElement;
+var uploadNum=0;
 
 let state = 0; // mousePress will increment from Record, to Stop, to Play
 
@@ -46,7 +47,7 @@ function audioRecord() {
   } else if (state === 2) {
 	    var soundBlob = soundFile.getBlob();  
 	    let formdata = new FormData() ; //create a from to of data to upload to the server
-	    formdata.append('soundBlob', soundBlob,'audiofile:' + socket.id + '.wav') ; // append the sound blob and the name of the file. third argument will show up on the server as req.file.originalname
+      formdata.append('soundBlob', soundBlob,'audiofile:' + uploadNum + '.wav') ; // append the sound blob and the name of the file. third argument will show up on the server as req.file.originalname
 	    let serverUrl = '/upload';
 	    let httpRequestOptions = {
 	    method: 'POST',
@@ -62,6 +63,7 @@ function audioRecord() {
         (error)=>{console.error(error);}
       )
    soundFile.play();
-    state++;
+    state=0;
   }
 }
+

@@ -2,6 +2,7 @@
 const express = require('express');
 var app = express();
 var server = require('http').Server(app);
+let uploadNum;
 
 
 var http = require('http').Server(app);
@@ -54,7 +55,7 @@ udpPort.on("ready", function () {
     io.on('connection', function(socket){
       socket.on('report', function(val){
         udpPort.send({
-          address: "/",
+          address: "/oscmessages",
           args: [
               {
                   type: "f",
@@ -89,9 +90,10 @@ input.on('message', (deltaTime, message) => {
   //   [status, data1, data2]
   // https://www.cs.cf.ac.uk/Dave/Multimedia/node158.html has some helpful
   // information interpreting the messages.
-  console.log(`m: ${message} d: ${deltaTime}`);
+  // console.log(`m: ${message} d: ${deltaTime}`);
+  io.emit('midi', message);
   udpPort.send({
-          address: "/",
+          address: "/midiarray",
           args: [
               {
                   type: "m",
@@ -111,9 +113,9 @@ input.openPort(0);
 // input.ignoreTypes(true, false, true)
 input.ignoreTypes(false, false, false);
 // Close the port when done.
-setTimeout(function() {
-  input.closePort();
-}, 100000);
+// setTimeout(function() {
+//   input.closePort();
+// }, 100000);
 
 
 const output = new midi.Output();
@@ -129,7 +131,8 @@ const upload = multer();
 const fs = require('fs'); 
 app.post('/upload', upload.single('soundBlob'), function (req, res, next) {
    //console.log(req.file); // see what got uploaded
-
+   uploadNum++;
+   io.emit('sent', uploadNum);
   let uploadLocation = __dirname + '/public/uploads/' + req.file.originalname // where to save the file to. make sure the incoming name has a .wav extension
 
   fs.writeFileSync(uploadLocation, Buffer.from(new Uint8Array(req.file.buffer))); // write the blob to the server as a file
