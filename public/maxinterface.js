@@ -7,13 +7,11 @@ var errorState=1;
 
 function preload(){
 	socket.on('files', function(files){
-		if (files.length==0) errorState=2;
 		for (var i = 0; i < files.length; i++) {
 			prevFiles[i] = files[i];
 			sounds[i] = loadSound('uploads/'+files[i]);
 			errorState=0;
-			if (!sounds[i])
-			errorState=1;
+		if (!sounds[0]) errorState=1;
 		}
 	});
 }
@@ -54,10 +52,10 @@ function reportMidi(message) {
 function draw(){
 	background(255);
 	if (errorState==1){
-		text('sound not working refresh until error disappears',20,20);
-	} else if (errorState=0) { 
+		text('sound not working refresh until error disappears or record some sounds to populate the buffer',20,20);
+	} else if (errorState==0) { 
 		text('sound ready. click to start stream',20,20)
-	} else if (errorState=2) {
+	} else if (errorState==2) {
 		text('no audio in buffer yet. record some at localhost:3000 and refresh',20,20)
 	}
 	if (value){

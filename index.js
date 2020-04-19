@@ -2,7 +2,6 @@
 const express = require('express');
 var app = express();
 var server = require('http').Server(app);
-let uploadNum;
 
 
 var http = require('http').Server(app);
@@ -125,7 +124,7 @@ output.closePort();
 const multer  = require('multer') 
 const upload = multer();  
 const fs = require('fs'); 
-
+var uploadNum;
 app.post('/upload', upload.single('soundBlob'), function (req, res, next) {
    //console.log(req.file); // see what got uploaded
   let uploadLocation = __dirname + '/public/uploads/' + req.file.originalname // where to save the file to. make sure the incoming name has a .wav extension
@@ -134,6 +133,13 @@ app.post('/upload', upload.single('soundBlob'), function (req, res, next) {
   res.sendStatus(200); //send back that everything went ok
   fileArray();
   maxio.emit('length', files);
+  if (uploadNum<5){
+    uploadNum+=1;
+  } else {
+    uploadNum=0;
+  }
+  console.log(files.length)
+  io.emit('num', uploadNum);
 });
 
 
@@ -147,6 +153,9 @@ function fileArray() {
       files[i]=file;
     }
   });
+  if (files.length<1){
+    uploadNum=0;
+  }
   files.splice(0,1);
   maxio.on('connection', function(){
     maxio.emit('files', files);
