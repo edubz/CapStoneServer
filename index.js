@@ -10,12 +10,7 @@ var port = process.env.PORT || 3000;
 
 //declare and start socket.io
 var io = require('socket.io')(server);
-io.on('connection', function (socket) {
-	console.log('new connection at ' + socket.id);
-  	socket.on('report', function (val) {
-    // console.log(socket.id + ':' + val);
-  });
-});
+var maxio = io.of('/maxio');
 
 
 //declare and start osc UDP
@@ -63,7 +58,7 @@ udpPort.on("ready", function () {
               }
             ]
         });
-        io.emit('val', val);
+        maxio.emit('val', val);
     });
   });
 });
@@ -86,12 +81,7 @@ input.getPortName(0);
  
 // Configure a callback.
 input.on('message', (deltaTime, message) => {
-  // The message is an array of numbers corresponding to the MIDI bytes:
-  //   [status, data1, data2]
-  // https://www.cs.cf.ac.uk/Dave/Multimedia/node158.html has some helpful
-  // information interpreting the messages.
-  // console.log(`m: ${message} d: ${deltaTime}`);
-  io.emit('midi', message);
+  maxio.emit('midi', message);
   udpPort.send({
           address: "/midiarray",
           args: [
@@ -112,10 +102,6 @@ input.openPort(0);
 // you should use
 // input.ignoreTypes(true, false, true)
 input.ignoreTypes(false, false, false);
-// Close the port when done.
-// setTimeout(function() {
-//   input.closePort();
-// }, 100000);
 
 
 const output = new midi.Output();
@@ -124,21 +110,50 @@ output.getPortName(0);
 output.openPort(0);
 output.sendMessage([176,22,1]);
 output.closePort();
+  //   if (dirent.isFile && dirent.name !='.DS_Store' && dirent.name!='spaceholderfile.txt')
+  //   files[i] = dirent;
+  // }
+
+  
+    // var stat = fs.statSync(__dirname + '/public/uploads/audiofile10.wav');
+    // var stream = ss.createStream();
+    // var readableStream = fs.createReadStream(__dirname + '/public/uploads/audiofile10.wav');
+    // readableStream.pipe(stream);    
+// }
 
 //audio file upload from p5js
 const multer  = require('multer') 
 const upload = multer();  
 const fs = require('fs'); 
+
 app.post('/upload', upload.single('soundBlob'), function (req, res, next) {
    //console.log(req.file); // see what got uploaded
-   uploadNum++;
-   io.emit('sent', uploadNum);
   let uploadLocation = __dirname + '/public/uploads/' + req.file.originalname // where to save the file to. make sure the incoming name has a .wav extension
 
   fs.writeFileSync(uploadLocation, Buffer.from(new Uint8Array(req.file.buffer))); // write the blob to the server as a file
   res.sendStatus(200); //send back that everything went ok
-
+  fileArray();
+  maxio.emit('length', files);
 });
+
+
+var files = new Array;
+function fileArray() {
+  const dir = __dirname + '/public/uploads';
+  var i=0;
+  fs.readdirSync(dir).forEach(function(file){
+    if (file!='spaceholderfile.txt' && file!='.DS_Store'){
+      i++;
+      files[i]=file;
+    }
+  });
+  files.splice(0,1);
+  maxio.on('connection', function(){
+    maxio.emit('files', files);
+  });
+};
+fileArray();
+
 
 
 app.use(express.static('public'));
