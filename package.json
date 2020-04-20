@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "node server for 2020 pcc capstone project",
   "main": "index.js",
+  "engines": {
+    "node": "12.14.x"
+  },
   "scripts": {
     "server": "nodemon index.js"
   },
@@ -28,7 +31,6 @@
     "os": "^0.1.1",
     "osc": "^2.4.1",
     "socket.io": "^2.3.0",
-    "socket.io-stream": "^0.9.1",
     "twilio": "^3.42.1"
   }
 }
