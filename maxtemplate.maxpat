@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 1,
-			"revision" : 3,
+			"minor" : 0,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ -72.0, -773.0, 647.0, 480.0 ],
+		"rect" : [ -869.0, 772.0, 644.0, 476.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -108,8 +108,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -298,8 +298,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -488,8 +488,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -678,8 +678,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -868,8 +868,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1082,8 +1082,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1344,12 +1344,12 @@
 					"patching_rect" : [ 291.75, 266.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~",
 							"parameter_mmax" : 6.0,
 							"parameter_shortname" : "live.gain~",
 							"parameter_type" : 0,
-							"parameter_unitstyle" : 4
+							"parameter_unitstyle" : 4,
+							"parameter_mmin" : -70.0,
+							"parameter_longname" : "live.gain~"
 						}
 
 					}
@@ -1440,14 +1440,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 3,
+							"minor" : 0,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 54.0, -888.0, 1213.0, 465.0 ],
+						"rect" : [ -1743.0, 620.0, 1210.0, 461.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1494,7 +1494,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
-									"patching_rect" : [ 1124.0, 620.0, 71.0, 22.0 ],
+									"patching_rect" : [ 1124.0, 620.0, 73.0, 22.0 ],
 									"text" : "buffer~ file5"
 								}
 
@@ -1506,7 +1506,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
-									"patching_rect" : [ 1051.0, 620.0, 71.0, 22.0 ],
+									"patching_rect" : [ 1051.0, 620.0, 73.0, 22.0 ],
 									"text" : "buffer~ file4"
 								}
 
@@ -1518,7 +1518,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
-									"patching_rect" : [ 978.0, 620.0, 71.0, 22.0 ],
+									"patching_rect" : [ 978.0, 620.0, 73.0, 22.0 ],
 									"text" : "buffer~ file3"
 								}
 
@@ -1530,7 +1530,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
-									"patching_rect" : [ 906.0, 620.0, 71.0, 22.0 ],
+									"patching_rect" : [ 906.0, 620.0, 73.0, 22.0 ],
 									"text" : "buffer~ file2"
 								}
 
@@ -1566,7 +1566,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
-									"patching_rect" : [ 832.0, 620.0, 71.0, 22.0 ],
+									"patching_rect" : [ 832.0, 620.0, 73.0, 22.0 ],
 									"text" : "buffer~ file1"
 								}
 
@@ -1691,8 +1691,7 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 1068.0, 413.5, 63.0, 23.0 ],
 									"saved_object_attributes" : 									{
-										"embed" : 0,
-										"precision" : 6
+										"embed" : 0
 									}
 ,
 									"text" : "coll"
@@ -1772,11 +1771,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-25",
+									"linecount" : 10,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 55.0, 447.0, 50.0, 22.0 ]
+									"patching_rect" : [ 55.0, 447.0, 50.0, 143.0 ],
+									"text" : "C:/Users/jmej/Documents/projects/CapStoneServer/public/uploads/"
 								}
 
 							}
@@ -1799,8 +1800,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 925.0, 6.5, 311.0, 49.0 ],
-									"text" : "readfolder \"Macintosh HD/Users/fluffy/Documents/capstone2020/CapstoneServer/public/uploads\""
+									"patching_rect" : [ 925.0, 6.5, 265.0, 49.0 ],
+									"text" : "readfolder C:/Users/jmej/Documents/projects/CapStoneServer/public/uploads/"
 								}
 
 							}
@@ -1914,13 +1915,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-11",
-									"linecount" : 4,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 12.0, 17.0, 148.0, 62.0 ],
-									"text" : "\"Macintosh HD/Users/fluffy/Documents/capstone2020/CapstoneServer/public/uploads\""
+									"patching_rect" : [ 12.0, 17.0, 365.0, 22.0 ],
+									"text" : "C:/Users/jmej/Documents/projects/CapStoneServer/public/uploads/"
 								}
 
 							}
@@ -2326,8 +2326,8 @@
 									"saved_object_attributes" : 									{
 										"autostart" : 0,
 										"defer" : 0,
-										"node_bin_path" : "",
-										"npm_bin_path" : "",
+										"node" : "",
+										"npm" : "",
 										"watch" : 0
 									}
 ,
@@ -3253,11 +3253,8 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "index.js",
-				"bootpath" : "~/Documents/capstone2020/CapStoneServer",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
+				"name" : "node.script.mxe64",
+				"type" : "mx64"
 			}
  ],
 		"autosave" : 0
