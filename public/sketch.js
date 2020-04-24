@@ -1,5 +1,5 @@
 var socket = io.connect('http://localhost:3000');
-let mic, recorder, soundFile, soundElement;
+let mic, recorder, soundFile, soundElement, micPng;
 var uploadNum2 = 0;
 
 let state = 0; // mousePress will increment from Record, to Stop, to Play
@@ -7,9 +7,11 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
 
 function setup() {
   canvas = createCanvas(400, 400);
-  background(200);
-  fill(0);
-  text('Enable mic and click the mouse to begin recording', 20, 20);
+  micPng = loadImage('microphone-png.png');
+  
+  image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
+  canvas.text('Enable mic and click the mouse to begin recording', 20, 20);
+  canvas.background(200);
   mic = new p5.AudioIn();
   mic.start();
   recorder = new p5.SoundRecorder();
@@ -20,6 +22,7 @@ function setup() {
   slider.input(reportValue);
   socket.on('num', reportNum);
   canvas.mousePressed(mouse);
+  
 }
 
 function reportValue() {
@@ -39,15 +42,23 @@ function mouse() {
 }
 
 function audioRecord() {
+  canvas.background(200);
+  image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
+  canvas.text('Enable mic and click the mouse to begin recording', 20, 20);
+
   if (state === 0 && mic.enabled) {
     recorder.record(soundFile);
     canvas.background(255, 0, 0);
+    image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
+     
+ 
     canvas.text('Recording now! Click to stop.', 20, 20);
     state++;
   } else if (state === 1) {
     recorder.stop();
 
     canvas.background(0, 255, 0);
+    image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
     canvas.text('Recording stopped. Click to play & save', 20, 20);
     state++;
   } else if (state === 2) {
@@ -74,3 +85,4 @@ function audioRecord() {
     state = 0;
   }
 }
+
