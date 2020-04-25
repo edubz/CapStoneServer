@@ -3,7 +3,22 @@ const express = require('express');
 var app = express();
 var server = require('http').Server(app);
 
+/*
 
+//experimenting with https funtionality
+
+const https = require('https');
+
+https.get('https://localhost:3000', 
+  res => {
+    console.log(res.statusCode);
+    console.log(res.headers);
+  }
+)
+
+var staticAlias = require("node-static-alias");
+
+*/
 var http = require('http').Server(app);
 var port = process.env.PORT || 3000;
 
