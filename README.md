@@ -18,3 +18,12 @@ open a powershell with admin privilages (right click on the powershell shortcut 
 after that, from inside the CapstoneServer directory, do
 
 `npm install`
+
+
+*if debugging outside of max is required
+
+cd into Capstone Server
+
+run this code and check for errors:
+
+'node test.js'
