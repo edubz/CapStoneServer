@@ -26,9 +26,6 @@ var port = process.env.PORT || 3000;
 var io = require('socket.io')(server);
 var maxio = io.of('/maxio');
 
-const maxApi = require('max-api');
-maxApi.post('hello max');
-
 //declare and start osc UDP
 var osc = require("osc");
 
@@ -57,8 +54,6 @@ var udpPort = new osc.UDPPort({
 
 udpPort.on("ready", function() {
   var ipAddresses = getIPAddresses();
-
-  maxApi.post("Listening for OSC over UDP.");
   ipAddresses.forEach(function(address) {
     console.log(" Host:", address + ", Port:", udpPort.options.localPort);
   });
@@ -79,7 +74,6 @@ udpPort.on("ready", function() {
 
 udpPort.on("message", function(oscMessage) {
   console.log(oscMessage);
-  maxApi.outlet(oscMessage);
 });
 
 udpPort.on("error", function(err) {
@@ -95,6 +89,7 @@ var midiStarted=false;
 setInterval(function(){
   if (input.getPortCount()>0 && midiStarted == false){
     midiStarted = true;
+    console.log('new ports');
     input.openPort(0);
   }
 }, 2000);
@@ -112,32 +107,7 @@ input.on('message', (deltaTime, message) => {
   });
 });
 
-// Sysex, timing, and active sensing messages are ignored
-// by default. To enable these message types, pass false for
-// the appropriate type in the function below.
-// Order: (Sysex, Timing, Active Sensing)
-// For example if you want to receive only MIDI Clock beats
-// you should use
-// input.ignoreTypes(true, false, true)
 input.ignoreTypes(false, false, false);
-
-
-const output = new midi.Output();
-output.getPortCount();
-output.getPortName(0);
-output.openPort(0);
-output.sendMessage([176, 22, 1]);
-output.closePort();
-//   if (dirent.isFile && dirent.name !='.DS_Store' && dirent.name!='spaceholderfile.txt')
-//   files[i] = dirent;
-// }
-
-
-// var stat = fs.statSync(__dirname + '/public/uploads/audiofile10.wav');
-// var stream = ss.createStream();
-// var readableStream = fs.createReadStream(__dirname + '/public/uploads/audiofile10.wav');
-// readableStream.pipe(stream);    
-// }
 
 //audio file upload from p5js
 const multer = require('multer')
