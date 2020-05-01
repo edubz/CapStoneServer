@@ -189,9 +189,11 @@ app.get('/maxinterface', function(req, res) {
   res.sendFile(__dirname + '/public/maxinterface.html');
 });
 
+/*
 //set header content type / cross origin access
 res.set("Content-Type", "text/html");
 res.append(" Access-Control-Allow_Origin:",  " * ");
+*/
 
 server.listen(3000);
 
