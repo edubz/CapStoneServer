@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/edubz/CapStoneServer#readme",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
@@ -32,6 +33,7 @@
     "os": "^0.1.1",
     "osc": "^2.4.1",
     "socket.io": "^2.3.0",
-    "twilio": "^3.42.1"
+    "twilio": "^3.42.1",
+    "utf-8-validate": "^5.0.2"
   }
 }
