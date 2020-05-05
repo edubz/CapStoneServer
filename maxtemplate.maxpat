@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 0,
-			"revision" : 2,
+			"minor" : 1,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 42.0, 85.0, 1298.0, 617.0 ],
+		"rect" : [ 253.0, 127.0, 739.0, 549.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,12 +39,45 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-33",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 595.0, 687.0, 150.0, 20.0 ],
+					"text" : "cycle"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-29",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 595.0, 660.0, 150.0, 20.0 ],
+					"text" : "phasor"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-27",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 591.5, 688.0, 150.0, 20.0 ],
-					"text" : "Cycle"
+					"patching_rect" : [ 595.0, 632.0, 150.0, 20.0 ],
+					"text" : "percussive"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-18",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 591.5, 598.0, 150.0, 20.0 ],
+					"text" : "spoken"
 				}
 
 			}
@@ -180,41 +213,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 478.5, 519.0, 189.0, 44.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Ability to choose between which source"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-98",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 591.5, 658.0, 150.0, 20.0 ],
-					"text" : "Phasor"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-18",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 591.5, 630.0, 150.0, 20.0 ],
-					"text" : "percussive"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-76",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 591.5, 600.0, 150.0, 34.0 ],
-					"text" : "spoken word\n"
 				}
 
 			}
@@ -243,7 +242,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 570.5, 571.0, 19.0, 176.0 ],
 					"size" : 6,
-					"value" : 3
+					"value" : 0
 				}
 
 			}
@@ -353,8 +352,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1103.0, 4.0, 153.0, 234.0 ],
-					"presentation_linecount" : 17,
+					"patching_rect" : [ 1103.0, 4.0, 153.0, 241.0 ],
 					"text" : "Spoken word: bigger chunk of audio----treatment: slight pitch shift, slight delay\nPercussive: making percussive sound by just extracting a short segment of audio and not using random to trigger. Using a clear pattern\nmelodic: 1-5 seconds. Treatments: delay, reverb, granular synthesis\nWE HAVE TO DECIDE: In which instance which would work better, playlist or buffer"
 				}
 
@@ -394,8 +392,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -436,7 +434,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "bang" ],
 									"patching_rect" : [ 60.5, 251.0, 72.0, 22.0 ],
-									"text" : "play~ files.2"
+									"text" : "play~ files.3"
 								}
 
 							}
@@ -622,8 +620,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -946,8 +944,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1012,7 +1010,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "int", "", "", "int" ],
 									"patching_rect" : [ 50.0, 172.0, 69.0, 22.0 ],
-									"text" : "counter 1 3"
+									"text" : "counter 2 5"
 								}
 
 							}
@@ -1430,8 +1428,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1515,7 +1513,6 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-44",
-									"int" : 1,
 									"maxclass" : "gswitch2",
 									"numinlets" : 2,
 									"numoutlets" : 2,
@@ -1657,7 +1654,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "bang" ],
 									"patching_rect" : [ 372.0, 416.0, 72.0, 22.0 ],
-									"text" : "play~ files.3"
+									"text" : "play~ files.2"
 								}
 
 							}
@@ -1951,7 +1948,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 69.5, 406.0, 153.0, 141.0 ],
+					"patching_rect" : [ 69.5, 406.0, 153.0, 144.0 ],
 					"text" : "VERY IMPORTANT:\n1.find the Capstone server file \n2.go to the enclosed \"public\" folder\n3.drag and drop the \"uploads\" folder into the the box above \n4.hit the button labeled \"start\" in the top left"
 				}
 
@@ -2038,8 +2035,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2228,8 +2225,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2345,7 +2342,7 @@
 										"loopstart" : [ 0.0, "ms" ],
 										"mode" : "basic",
 										"originallength" : [ 0.0, "ticks" ],
-										"originaltempo" : 120.0,
+										"originaltempo" : 120.000000000000028,
 										"phase" : [ 0.0, "ticks" ],
 										"pitchcorrection" : 0,
 										"quality" : "basic",
@@ -2418,8 +2415,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2535,7 +2532,7 @@
 										"loopstart" : [ 0.0, "ms" ],
 										"mode" : "basic",
 										"originallength" : [ 0.0, "ticks" ],
-										"originaltempo" : 120.0,
+										"originaltempo" : 120.000000000000014,
 										"phase" : [ 0.0, "ticks" ],
 										"pitchcorrection" : 0,
 										"quality" : "basic",
@@ -2608,8 +2605,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2725,7 +2722,7 @@
 										"loopstart" : [ 0.0, "ms" ],
 										"mode" : "basic",
 										"originallength" : [ 0.0, "ticks" ],
-										"originaltempo" : 120.0,
+										"originaltempo" : 119.999999999999929,
 										"phase" : [ 0.0, "ticks" ],
 										"pitchcorrection" : 0,
 										"quality" : "basic",
@@ -2798,8 +2795,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2915,7 +2912,7 @@
 										"loopstart" : [ 0.0, "ms" ],
 										"mode" : "basic",
 										"originallength" : [ 0.0, "ticks" ],
-										"originaltempo" : 120.000000000000014,
+										"originaltempo" : 119.999999999999957,
 										"phase" : [ 0.0, "ticks" ],
 										"pitchcorrection" : 0,
 										"quality" : "basic",
@@ -3000,8 +2997,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3206,7 +3203,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 285.0, 4.0, 349.0, 60.0 ],
+					"patching_rect" : [ 285.0, 4.0, 349.0, 62.0 ],
 					"text" : "click the \"0\" to start playback. if this has no audio files, go to localhost:3000 and record some audio. you can pass any of the messages you would pass the first inlet of a groove~ object to the first inlet of the p file... object"
 				}
 
@@ -3290,7 +3287,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 118.0, 187.0, 108.0, 87.0 ],
+					"patching_rect" : [ 118.0, 187.0, 108.0, 89.0 ],
 					"text" : "midi from browser\n(for now controller has to be pulgged in when server starts to recognize)"
 				}
 
@@ -3302,7 +3299,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 11.0, 188.0, 103.0, 33.0 ],
+					"patching_rect" : [ 11.0, 188.0, 103.0, 34.0 ],
 					"text" : "osc from slider\nat localhost:3000"
 				}
 
@@ -3315,7 +3312,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 146.0, 150.0, 50.0, 35.0 ],
+					"patching_rect" : [ 146.0, 150.0, 50.0, 36.0 ],
 					"text" : "176 15 52 0"
 				}
 
@@ -3343,8 +3340,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 2,
+							"minor" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3389,8 +3386,9 @@
 									"maxclass" : "bpatcher",
 									"name" : "n4m.monitor.maxpat",
 									"numinlets" : 1,
-									"numoutlets" : 0,
+									"numoutlets" : 1,
 									"offset" : [ 0.0, 0.0 ],
+									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 775.0, 237.0, 400.0, 220.0 ],
 									"viewvisibility" : 1
 								}
@@ -3493,7 +3491,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 925.0, 6.5, 268.0, 35.0 ],
+									"patching_rect" : [ 925.0, 6.5, 268.0, 36.0 ],
 									"text" : "readfolder \"C:/Users/PCC User/CapStoneServer/public/uploads/\""
 								}
 
@@ -3985,8 +3983,6 @@
 									"saved_object_attributes" : 									{
 										"autostart" : 0,
 										"defer" : 0,
-										"node" : "",
-										"npm" : "",
 										"watch" : 0
 									}
 ,
@@ -4997,13 +4993,13 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-22" : [ "live.gain~[2]", "live.gain~[2]", 0 ],
-			"obj-34" : [ "live.gain~[1]", "live.gain~", 0 ],
-			"obj-25" : [ "live.gain~[5]", "live.gain~[2]", 0 ],
 			"obj-71" : [ "Transp", "Transp", 0 ],
 			"obj-24" : [ "live.gain~[4]", "live.gain~[2]", 0 ],
 			"obj-15" : [ "live.gain~", "live.gain~", 0 ],
+			"obj-25" : [ "live.gain~[5]", "live.gain~[2]", 0 ],
+			"obj-34" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-23" : [ "live.gain~[3]", "live.gain~[2]", 0 ],
+			"obj-22" : [ "live.gain~[2]", "live.gain~[2]", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -5084,8 +5080,8 @@
 , 			{
 				"name" : "Default M4L",
 				"default" : 				{
-					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
 					"fontsize" : [ 11.0 ],
+					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
 					"fontname" : [ "Arial Bold" ]
 				}
 ,
@@ -5095,8 +5091,8 @@
 , 			{
 				"name" : "Default M4L Poletti",
 				"default" : 				{
-					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
 					"fontsize" : [ 10.0 ],
+					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
 					"fontname" : [ "Arial Bold" ]
 				}
 ,
@@ -5107,6 +5103,8 @@
 				"name" : "Default M4L-1",
 				"default" : 				{
 					"fontface" : [ 1 ],
+					"fontsize" : [ 11.0 ],
+					"fontname" : [ "Arial" ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
@@ -5115,9 +5113,7 @@
 						"angle" : 270.0,
 						"proportion" : 0.39
 					}
-,
-					"fontsize" : [ 11.0 ],
-					"fontname" : [ "Arial" ]
+
 				}
 ,
 				"parentstyle" : "",
@@ -5148,6 +5144,8 @@
 , 			{
 				"name" : "jbb",
 				"default" : 				{
+					"fontsize" : [ 9.0 ],
+					"fontname" : [ "Arial" ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
@@ -5156,9 +5154,7 @@
 						"angle" : 270.0,
 						"proportion" : 0.39
 					}
-,
-					"fontsize" : [ 9.0 ],
-					"fontname" : [ "Arial" ]
+
 				}
 ,
 				"parentstyle" : "",
@@ -5203,8 +5199,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
