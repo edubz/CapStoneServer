@@ -46,38 +46,40 @@ var getIPAddresses = function() {
   return ipAddresses;
 };
 
-var udpPort = new osc.UDPPort({
-  localAddress: "0.0.0.0",
-  localPort: 57121
-});
 
-udpPort.on("ready", function() {
-  var ipAddresses = getIPAddresses();
-  ipAddresses.forEach(function(address) {
-    console.log(" Host:", address + ", Port:", udpPort.options.localPort);
-  });
-  io.on('connection', function(socket) {
-    socket.on('report', function(val) {
-      udpPort.send({
-        address: "/oscmessages",
-        args: [{
-          type: "f",
-          value: val
-        }]
-      });
-    });
-  });
-});
 
-udpPort.on("message", function(oscMessage) {
-  console.log(oscMessage);
-});
+// var udpPort = new osc.UDPPort({
+//   localAddress: "0.0.0.0",
+//   localPort: 57121
+// });
 
-udpPort.on("error", function(err) {
-  console.log(err);
-});
+// udpPort.on("ready", function() {
+//   var ipAddresses = getIPAddresses();
+//   ipAddresses.forEach(function(address) {
+//     console.log(" Host:", address + ", Port:", udpPort.options.localPort);
+//   });
+//   io.on('connection', function(socket) {
+//     socket.on('report', function(val) {
+//       udpPort.send({
+//         address: "/oscmessages",
+//         args: [{
+//           type: "f",
+//           value: val
+//         }]
+//       });
+//     });
+//   });
+// });
 
-udpPort.open();
+// udpPort.on("message", function(oscMessage) {
+//   console.log(oscMessage);
+// });
+
+// udpPort.on("error", function(err) {
+//   console.log(err);
+// });
+
+// udpPort.open();
 
 //declare and start midi io
 const midi = require('midi');
@@ -166,6 +168,142 @@ function fileArray() {
   files.splice(0, 1);
 };
 fileArray();
+var params = {
+  Bucket: 'capstone-control-data',
+  Key: '',
+  Body: ''
+}
+io.on('connection', (socket) => { 
+  socket.on('report1', (data) => {
+    params.Key = 's1vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s1.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report2', (data) => {
+    params.Key = 's2vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s2.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report3', (data) => {
+    params.Key = 's3vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s3.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report4', (data) => {
+    params.Key = 's4vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s4.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report5', (data) => {
+    params.Key = 's5vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s5.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report6', (data) => {
+    params.Key = 's6vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s6.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report7', (data) => {
+    params.Key = 's7vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s7.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report8', (data) => {
+    params.Key = 's8vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s8.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report9', (data) => {
+    params.Key = 's9vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s9.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+
+  socket.on('report10', (data) => {
+    params.Key = 's10vals';
+    params.Body = data.toString();
+    var bits = new Array;
+    bits = data;
+    var file = fs.createWriteStream('./reference-control-vals/s10.txt');
+    file.write(bits.join(', ') + '\n');
+    file.end();
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  })
+})
 
 
 app.use(express.static('public'));
