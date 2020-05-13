@@ -1,6 +1,6 @@
 var socket = io.connect('http://localhost:3000');
 let mic, recorder, soundFile, soundElement, micPng;
-var uploadNum2 = 0;
+var uploadNum2=-1;
 
 let state = 0; // mousePress will increment from Record, to Stop, to Play
 
@@ -20,7 +20,7 @@ function setup() {
   soundElement = select('#soundElement');
   var slider = createSlider();
   slider.input(reportValue);
-  socket.on('num', reportNum);
+  //socket.on('num', reportNum);
   canvas.mousePressed(mouse);
   
 }
@@ -29,10 +29,6 @@ function reportValue() {
   var val = this.value();
   socket.emit('report', val);
 
-}
-
-function reportNum(uploadNum) {
-  uploadNum2 = uploadNum;
 }
 
 function mouse() {
@@ -61,10 +57,16 @@ function audioRecord() {
     image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
     canvas.text('Recording stopped. Click to play & save', 20, 20);
     state++;
-  } else if (state === 2) {
+  } else if (state === 2) { 
+  if (uploadNum2<5){
+      uploadNum2++;
+    } else {
+      uploadNum2=0;
+    }
     var soundBlob = soundFile.getBlob();
     let formdata = new FormData();
     formdata.append('soundBlob', soundBlob, 'file' + uploadNum2 + '.wav');
+    print(uploadNum2)
     let serverUrl = '/upload';
     let httpRequestOptions = {
       method: 'POST',

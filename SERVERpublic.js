@@ -24,10 +24,6 @@ var port = process.env.PORT || 3000;
 
 //declare and start socket.io
 var io = require('socket.io')(server);
-var maxio = io.of('/maxio');
-
-const maxApi = require('max-api');
-maxApi.post('hello max');
 
 //declare and start osc UDP
 var osc = require("osc");
@@ -57,12 +53,9 @@ var udpPort = new osc.UDPPort({
 
 udpPort.on("ready", function() {
   var ipAddresses = getIPAddresses();
-
-  maxApi.post("Listening for OSC over UDP.");
   ipAddresses.forEach(function(address) {
     console.log(" Host:", address + ", Port:", udpPort.options.localPort);
   });
-  // For most Ports, send() should only be called after the "ready" event fires.
   io.on('connection', function(socket) {
     socket.on('report', function(val) {
       udpPort.send({
@@ -72,14 +65,12 @@ udpPort.on("ready", function() {
           value: val
         }]
       });
-      maxio.emit('val', val);
     });
   });
 });
 
 udpPort.on("message", function(oscMessage) {
   console.log(oscMessage);
-  maxApi.outlet(oscMessage);
 });
 
 udpPort.on("error", function(err) {
@@ -102,7 +93,6 @@ setInterval(function(){
 console.log(input.getPortCount());
 input.on('message', (deltaTime, message) => {
   console.log(message);
-  maxio.emit('midi', message);
   udpPort.send({
     address: "/midiarray",
     args: [{
@@ -111,14 +101,6 @@ input.on('message', (deltaTime, message) => {
     }]
   });
 });
-
-// Sysex, timing, and active sensing messages are ignored
-// by default. To enable these message types, pass false for
-// the appropriate type in the function below.
-// Order: (Sysex, Timing, Active Sensing)
-// For example if you want to receive only MIDI Clock beats
-// you should use
-// input.ignoreTypes(true, false, true)
 input.ignoreTypes(false, false, false);
 
 
@@ -128,36 +110,41 @@ output.getPortName(0);
 output.openPort(0);
 output.sendMessage([176, 22, 1]);
 output.closePort();
-//   if (dirent.isFile && dirent.name !='.DS_Store' && dirent.name!='spaceholderfile.txt')
-//   files[i] = dirent;
-// }
-
-
-// var stat = fs.statSync(__dirname + '/public/uploads/audiofile10.wav');
-// var stream = ss.createStream();
-// var readableStream = fs.createReadStream(__dirname + '/public/uploads/audiofile10.wav');
-// readableStream.pipe(stream);    
-// }
 
 //audio file upload from p5js
-const multer = require('multer')
-const upload = multer();
-const fs = require('fs');
-var uploadNum;
-app.post('/upload', upload.single('soundBlob'), function(req, res, next) {
-  //console.log(req.file); // see what got uploaded
-  let uploadLocation = __dirname + '/public/uploads/' + req.file.originalname // where to save the file to. make sure the incoming name has a .wav extension
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multer_s3 = require('multer-s3');
 
-  fs.writeFileSync(uploadLocation, Buffer.from(new Uint8Array(req.file.buffer))); // write the blob to the server as a file
-  res.sendStatus(200); //send back that everything went ok
+aws.config.loadFromPath('./credentials.json');
+
+const s3 = new aws.S3();
+var uploadNum;
+const upload = multer({
+  storage: multer_s3({
+    s3: s3,
+    bucket: 'capstone-audio-files',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldname: file.originalname.toString()});
+    },
+    key: function(req,file,cb){
+      cb(null, file.originalname.toString() );
+    },
+  })
+});
+
+const fs = require('fs');
+var uploadSingle = upload.single('soundBlob');
+app.post('/upload', function(req, res) {
+  uploadSingle(req, res, (err) => {
+    console.log(req.file.key);
+  });
   fileArray();
-  maxio.emit('length', files);
   if (uploadNum < 5) {
     uploadNum += 1;
   } else {
     uploadNum = 0;
   }
-  console.log(files.length)
   io.emit('num', uploadNum);
 });
 
@@ -177,17 +164,11 @@ function fileArray() {
     uploadNum = 0;
   }
   files.splice(0, 1);
-  maxio.on('connection', function() {
-    maxio.emit('files', files);
-  });
 };
 fileArray();
 
-app.use(express.static('public'));
 
-app.get('/maxinterface', function(req, res) {
-  res.sendFile(__dirname + '/public/maxinterface.html');
-});
+app.use(express.static('public'));
 
 /*
 //set header content type / cross origin access

@@ -110,16 +110,33 @@ input.on('message', (deltaTime, message) => {
 input.ignoreTypes(false, false, false);
 
 //audio file upload from p5js
-const multer = require('multer')
-const upload = multer();
-const fs = require('fs');
-var uploadNum;
-app.post('/upload', upload.single('soundBlob'), function(req, res, next) {
-  //console.log(req.file); // see what got uploaded
-  let uploadLocation = __dirname + '/public/uploads/' + req.file.originalname // where to save the file to. make sure the incoming name has a .wav extension
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multer_s3 = require('multer-s3');
 
-  fs.writeFileSync(uploadLocation, Buffer.from(new Uint8Array(req.file.buffer))); // write the blob to the server as a file
-  res.sendStatus(200); //send back that everything went ok
+aws.config.loadFromPath('./credentials.json');
+
+const s3 = new aws.S3();
+var uploadNum;
+const upload = multer({
+  storage: multer_s3({
+    s3: s3,
+    bucket: 'capstone-audio-files',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldname: file.originalname.toString()});
+    },
+    key: function(req,file,cb){
+      cb(null, file.originalname.toString() );
+    },
+  })
+});
+
+const fs = require('fs');
+var uploadSingle = upload.single('soundBlob');
+app.post('/upload', function(req, res) {
+  uploadSingle(req, res, (err) => {
+    console.log(req.file.key);
+  });
   fileArray();
   maxio.emit('length', files);
   if (uploadNum < 5) {
@@ -127,7 +144,6 @@ app.post('/upload', upload.single('soundBlob'), function(req, res, next) {
   } else {
     uploadNum = 0;
   }
-  console.log(files.length)
   io.emit('num', uploadNum);
 });
 
@@ -147,11 +163,33 @@ function fileArray() {
     uploadNum = 0;
   }
   files.splice(0, 1);
-  maxio.on('connection', function() {
-    maxio.emit('files', files);
-  });
 };
 fileArray();
+
+var params = {
+  Bucket: 'capstone-audio-files',
+  Key: '',
+};
+
+var i;
+function iterate(){
+  if (i<5) i++;
+  else i=0;
+}
+setInterval(()=>{
+  var it = setInterval(() => {
+    iterate();
+    var name = 'file' + i + '.wav';
+    console.log(name);
+    params.Key = name;
+    //console.log(params);
+    let uploadLocation = __dirname + '/public/uploads/' + name; // where to save the file to. make sure the incoming name has a .wav extension
+    var file = fs.createWriteStream(uploadLocation);
+    var object = s3.getObject(params).createReadStream();
+    object.pipe(file);
+    if (i==5) clearInterval(it);
+  }, 10);
+}, 5000);
 
 app.use(express.static('public'));
 
