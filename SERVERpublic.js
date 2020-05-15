@@ -168,142 +168,196 @@ function fileArray() {
   files.splice(0, 1);
 };
 fileArray();
-var params = {
-  Bucket: 'capstone-control-data',
-  Key: '',
-  Body: ''
-}
+
+
 io.on('connection', (socket) => { 
   socket.on('report1', (data) => {
-    params.Key = 's1vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s1.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params1 = {
+      Bucket: 'capstone-control-data',
+      Key: 's1vals',
+      Body: data.toString()
+    }
+    params1.Body = data.toString();
+    s3.upload(params1, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report2', (data) => {
-    params.Key = 's2vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s2.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params2 = {
+      Bucket: 'capstone-control-data',
+      Key: 's2vals',
+      Body: data.toString()
+    }
+    s3.upload(params2, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report3', (data) => {
-    params.Key = 's3vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s3.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params3 = {
+      Bucket: 'capstone-control-data',
+      Key: 's3vals',
+      Body: data.toString()
+    }    
+    s3.upload(params3, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report4', (data) => {
-    params.Key = 's4vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s4.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params4 = {
+      Bucket: 'capstone-control-data',
+      Key: 's4vals',
+      Body: data.toString()
+    }
+    s3.upload(params4, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report5', (data) => {
-    params.Key = 's5vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s5.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params5 = {
+      Bucket: 'capstone-control-data',
+      Key: 's5vals',
+      Body: data.toString()
+    }
+    s3.upload(params5, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report6', (data) => {
-    params.Key = 's6vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s6.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params6 = {
+      Bucket: 'capstone-control-data',
+      Key: 's6vals',
+      Body: data.toString()
+    }
+    s3.upload(params6, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report7', (data) => {
-    params.Key = 's7vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s7.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params7 = {
+      Bucket: 'capstone-control-data',
+      Key: 's7vals',
+      Body: data.toString()
+    }
+    s3.upload(params7, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report8', (data) => {
-    params.Key = 's8vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s8.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params8 = {
+      Bucket: 'capstone-control-data',
+      Key: 's8vals',
+      Body: data.toString()
+    }
+    s3.upload(params8, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report9', (data) => {
-    params.Key = 's9vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s9.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params9 = {
+      Bucket: 'capstone-control-data',
+      Key: 's9vals',
+      Body: data.toString()
+    }
+    s3.upload(params9, (err, data) => {
       if (err) console.log(err);
     });
   })
 
   socket.on('report10', (data) => {
-    params.Key = 's10vals';
-    params.Body = data.toString();
-    var bits = new Array;
-    bits = data;
-    var file = fs.createWriteStream('./reference-control-vals/s10.txt');
-    file.write(bits.join(', ') + '\n');
-    file.end();
-    s3.upload(params, (err, data) => {
+    let params10 = {
+      Bucket: 'capstone-control-data',
+      Key: 's10vals',
+      Body: data.toString()
+    }
+    s3.upload(params10, (err, data) => {
       if (err) console.log(err);
     });
   })
 })
+
+var Particle = require('particle-api-js');
+var particle = new Particle();
+var token;
+
+particle.login({username: 'thecapstoners2020@gmail.com', password: 'capstone2020'}).then(
+  function(data) {
+    //console.log(data.body.access_token)
+    token = data.body.access_token;
+    particle.getVariable({deviceId: '390037000e47373334323233' , name:"flex", auth: token})
+    .then((data) => {
+      console.log(data.body.result);
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+
+    //list();
+    //getVars(data.body.access_token);
+  },
+  function (err) {
+    console.log('Could not log in.', err);
+  }
+);
+
+// function list(){
+//   var deviceList = particle.listDevices({ auth: token});
+
+//   deviceList.then((devices) => {
+//     console.log(devices);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+// }
+// let accessToken;
+// const credentials = {
+//   client: {
+//     id: 'urks-is-the-best-8360',
+//     secret: '56a2caaf33a94b782f2f4d54e5b959e17cf760bd'
+//   },
+//   auth: {
+//     tokenHost: 'https://api.particle.io/oauth/token'
+//   }
+// };
+
+// async function run() {
+//   const oauth2 = require('simple-oauth2').create(credentials);
+ 
+//   const tokenConfig = {
+//     username: 'thecapstoners2020@gmail.com',
+//     password: 'capstone2020',
+//   };
+ 
+//   try {
+//     const result = await oauth2.ownerPassword.getToken(tokenConfig);
+//     const access = oauth2.accessToken.create(result);
+//     accessToken = access.token.access_token;
+//     getVars(accessToken);
+//   } catch (error) {
+//     console.log('Access Token Error', error.message);
+//   }
+// }
+
+// console.log(accessToken);
+
+function getVars(token){
+  particle.getVariable({deviceId: 390037000e47373334323233 , name:"flex", auth: token})
+    .then((data) => {
+      console.log(data.body.result);
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+}
+
 
 
 app.use(express.static('public'));
