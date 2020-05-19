@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 118.0, 98.0, 572.0, 617.0 ],
+		"rect" : [ 450.0, 134.0, 572.0, 617.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,40 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-36",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 292.771095156669617, 691.566290616989136, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-29",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 162.650608420372009, 696.385567903518677, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 56.626508116722107, 692.771109938621521, 50.0, 22.0 ],
+					"text" : "-70"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-19",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -52,13 +86,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-32",
-					"linecount" : 8,
+					"linecount" : 6,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 229.0, 500.0, 50.0, 119.0 ],
-					"text" : "C:/Users/erikr/Documents/CapStoneServer/public/uploads/"
+					"patching_rect" : [ 229.0, 500.0, 50.0, 91.0 ],
+					"text" : "C:/Users/erikr/Documents/CapStoneServer/"
 				}
 
 			}
@@ -74,13 +108,13 @@
 					"patching_rect" : [ 1086.5, 569.536585330963135, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ],
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~[6]"
+							"parameter_longname" : "live.gain~[6]",
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -191,7 +225,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 265.5, 410.0, 50.0, 22.0 ],
-									"text" : "699"
+									"text" : "659"
 								}
 
 							}
@@ -442,15 +476,15 @@
 									"patching_rect" : [ 603.0, 205.0, 54.0, 36.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_mmax" : 10000.0,
-											"parameter_initial" : [ 0 ],
-											"parameter_shortname" : "Glide",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 2,
 											"parameter_linknames" : 1,
 											"parameter_exponent" : 3.0,
 											"parameter_longname" : "Glide",
-											"parameter_initial_enable" : 1
+											"parameter_initial_enable" : 1,
+											"parameter_mmax" : 10000.0,
+											"parameter_initial" : [ 0 ],
+											"parameter_shortname" : "Glide"
 										}
 
 									}
@@ -497,8 +531,8 @@
 									"patching_rect" : [ 422.0, 402.0, 63.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"enabled" : [ 1 ],
-										"pitchshift" : [ 2.519842099789746 ],
-										"pitchshiftcent" : [ 1600 ],
+										"pitchshift" : [ 1.259921049894873 ],
+										"pitchshiftcent" : [ 400 ],
 										"quality" : "basic",
 										"reportlatency" : 0,
 										"usecents" : 0
@@ -652,8 +686,8 @@
 										"basictuning" : 440,
 										"followglobaltempo" : 0,
 										"formantcorrection" : 0,
-										"loopend" : [ 5.381889763779528, "ms" ],
-										"loopstart" : [ -224.618110236220474, "ms" ],
+										"loopend" : [ 16.0, "ms" ],
+										"loopstart" : [ -1037.0, "ms" ],
 										"mode" : "basic",
 										"originallength" : [ 0.0, "ticks" ],
 										"originaltempo" : 120.000000000000014,
@@ -1130,13 +1164,13 @@
 					"patching_rect" : [ 1012.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ],
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~[5]"
+							"parameter_longname" : "live.gain~[5]",
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1157,13 +1191,13 @@
 					"patching_rect" : [ 939.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ],
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~[4]"
+							"parameter_longname" : "live.gain~[4]",
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1184,13 +1218,13 @@
 					"patching_rect" : [ 862.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ],
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~[3]"
+							"parameter_longname" : "live.gain~[3]",
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1211,13 +1245,13 @@
 					"patching_rect" : [ 782.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ],
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~[2]"
+							"parameter_longname" : "live.gain~[2]",
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1865,16 +1899,16 @@
 					"patching_rect" : [ 462.0, 738.0, 56.0, 48.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 2400.0,
-							"parameter_initial" : [ 0 ],
-							"parameter_shortname" : "Transp",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 9,
 							"parameter_linknames" : 1,
 							"parameter_units" : "ct",
 							"parameter_mmin" : -2400.0,
 							"parameter_longname" : "Transp",
-							"parameter_initial_enable" : 1
+							"parameter_initial_enable" : 1,
+							"parameter_mmax" : 2400.0,
+							"parameter_initial" : [ 0 ],
+							"parameter_shortname" : "Transp"
 						}
 
 					}
@@ -1929,6 +1963,8 @@
 					"patching_rect" : [ 849.5, 764.0, 73.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"enabled" : [ 1 ],
+						"pitchshift" : [ 0.997692176527023 ],
+						"pitchshiftcent" : [ -4 ],
 						"quality" : "basic",
 						"reportlatency" : 0,
 						"usecents" : 0
@@ -2140,7 +2176,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 417.5, 123.107139587402344, 22.0 ],
-									"text" : "set files.3"
+									"text" : "set files.2"
 								}
 
 							}
@@ -2152,7 +2188,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.142822265625, 314.25, 103.285713195800781, 22.0 ],
-									"text" : "files. 3"
+									"text" : "files. 2"
 								}
 
 							}
@@ -2417,12 +2453,12 @@
 					"patching_rect" : [ 852.25, 808.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_shortname" : "live.gain~",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~[1]"
+							"parameter_longname" : "live.gain~[1]",
+							"parameter_mmax" : 6.0,
+							"parameter_shortname" : "live.gain~"
 						}
 
 					}
@@ -4279,7 +4315,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 285.0, 4.0, 349.0, 62.0 ],
-					"text" : "click the \"0\" to start playback. if this has no audio files, go to localhost:3000 and record some audio. you can pass any of the messages you would pass the first inlet of a groove~ object to the first inlet of the p file... object"
+					"text" : "click the \"0\" to start playback. if this has no audio files, go to localhost:3000 and record some audio. you can pass any of the messages you would pass the first inlet of a play~ object to the first inlet of the p file... object"
 				}
 
 			}
@@ -4319,12 +4355,12 @@
 					"patching_rect" : [ 388.75, 434.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_mmax" : 6.0,
-							"parameter_shortname" : "live.gain~",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
-							"parameter_longname" : "live.gain~"
+							"parameter_longname" : "live.gain~",
+							"parameter_mmax" : 6.0,
+							"parameter_shortname" : "live.gain~"
 						}
 
 					}
@@ -4400,7 +4436,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 28.0, 158.0, 50.0, 22.0 ],
-					"text" : "-4"
+					"text" : "-10"
 				}
 
 			}
@@ -4422,7 +4458,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 43.0, 98.0, 1083.0, 699.0 ],
+						"rect" : [ 43.0, 84.0, 1083.0, 699.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4739,13 +4775,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-21",
-									"linecount" : 8,
+									"linecount" : 6,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 23.0, 13.0, 50.0, 119.0 ],
-									"text" : "C:/Users/erikr/Documents/CapStoneServer/public/uploads/"
+									"patching_rect" : [ 23.0, 13.0, 50.0, 91.0 ],
+									"text" : "C:/Users/erikr/Documents/CapStoneServer/"
 								}
 
 							}
@@ -4861,13 +4897,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-19",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 925.0, 6.5, 322.0, 36.0 ],
-									"text" : "readfolder C:/Users/erikr/Documents/CapStoneServer/public/uploads/"
+									"patching_rect" : [ 925.0, 6.5, 312.0, 50.0 ],
+									"text" : "readfolder C:/Users/erikr/Documents/CapStoneServer/public/uploads"
 								}
 
 							}
@@ -5277,6 +5313,12 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 265.0, 104.0, 154.0, 22.0 ],
+									"saved_object_attributes" : 									{
+										"autostart" : 0,
+										"defer" : 0,
+										"watch" : 0
+									}
+,
 									"text" : "node.script SERVERmax.js"
 								}
 
@@ -5992,6 +6034,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-21", 1 ],
+					"order" : 1,
+					"source" : [ "obj-126", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-22", 0 ],
 					"source" : [ "obj-126", 9 ]
 				}
@@ -6007,6 +6057,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-24", 0 ],
+					"order" : 0,
 					"source" : [ "obj-126", 2 ]
 				}
 
@@ -6480,15 +6531,15 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-28" : [ "live.gain~[6]", "live.gain~[2]", 0 ],
+			"obj-71" : [ "Transp", "Transp", 0 ],
+			"obj-24" : [ "live.gain~[4]", "live.gain~[2]", 0 ],
+			"obj-22" : [ "live.gain~[2]", "live.gain~[2]", 0 ],
+			"obj-25" : [ "live.gain~[5]", "live.gain~[2]", 0 ],
 			"obj-15" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-16::obj-3" : [ "Glide", "Glide", 0 ],
-			"obj-25" : [ "live.gain~[5]", "live.gain~[2]", 0 ],
-			"obj-71" : [ "Transp", "Transp", 0 ],
 			"obj-23" : [ "live.gain~[3]", "live.gain~[2]", 0 ],
 			"obj-34" : [ "live.gain~[1]", "live.gain~", 0 ],
-			"obj-22" : [ "live.gain~[2]", "live.gain~[2]", 0 ],
-			"obj-24" : [ "live.gain~[4]", "live.gain~[2]", 0 ],
+			"obj-28" : [ "live.gain~[6]", "live.gain~[2]", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -6496,6 +6547,13 @@
 		}
 ,
 		"dependency_cache" : [ 			{
+				"name" : "SERVERmax.js",
+				"bootpath" : "~/Documents/CapStoneServer",
+				"patcherrelativepath" : "..",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "n4m.monitor.maxpat",
 				"bootpath" : "C74:/packages/Node For Max/patchers/debug-monitor",
 				"type" : "JSON",
@@ -6563,8 +6621,8 @@
 				"name" : "Default M4L",
 				"default" : 				{
 					"fontsize" : [ 11.0 ],
-					"fontname" : [ "Arial Bold" ],
-					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ]
+					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
+					"fontname" : [ "Arial Bold" ]
 				}
 ,
 				"parentstyle" : "",
@@ -6574,8 +6632,8 @@
 				"name" : "Default M4L Poletti",
 				"default" : 				{
 					"fontsize" : [ 10.0 ],
-					"fontname" : [ "Arial Bold" ],
-					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ]
+					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
+					"fontname" : [ "Arial Bold" ]
 				}
 ,
 				"parentstyle" : "",
@@ -6584,9 +6642,7 @@
 , 			{
 				"name" : "Default M4L-1",
 				"default" : 				{
-					"fontface" : [ 1 ],
 					"fontsize" : [ 11.0 ],
-					"fontname" : [ "Arial" ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
@@ -6595,7 +6651,9 @@
 						"angle" : 270.0,
 						"proportion" : 0.39
 					}
-
+,
+					"fontname" : [ "Arial" ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
@@ -6627,7 +6685,6 @@
 				"name" : "jbb",
 				"default" : 				{
 					"fontsize" : [ 9.0 ],
-					"fontname" : [ "Arial" ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
@@ -6636,7 +6693,8 @@
 						"angle" : 270.0,
 						"proportion" : 0.39
 					}
-
+,
+					"fontname" : [ "Arial" ]
 				}
 ,
 				"parentstyle" : "",
@@ -6681,8 +6739,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
