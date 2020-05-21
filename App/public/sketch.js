@@ -1,7 +1,8 @@
-var socket = io.connect('http://localhost:3000');
-let mic, recorder, soundFile, soundElement, micPng;
-var uploadNum2=-1;
-var s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+var socket = io.connect("https://capstone-public-server.herokuapp.com/");
+let mic, recorder, soundFile, soundElement;
+let stateImg = [];
+var uploadNum2 = -1;
+var s1, s2, s3, s4, s5, s6, s7, s8, s9, s10;
 var s1vals = [];
 var s2vals = [];
 var s3vals = [];
@@ -13,22 +14,25 @@ var s8vals = [];
 var s9vals = [];
 var s10vals = [];
 let state = 0; // mousePress will increment from Record, to Stop, to Play
-var i=0;
+var i = 0;
 
+function preload() {
+  stateImg[0] = loadImage("/Assets/record.png");
+  stateImg[1] = loadImage("/Assets/stop.png");
+  stateImg[2] = loadImage("/Assets/play.png");
+}
 
 function setup() {
   canvas = createCanvas(400, 400);
-  micPng = loadImage('microphone-png.png');
-  
-  image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
-  canvas.text('Enable mic and click the mouse to begin recording', 20, 20);
-  canvas.background(200);
+  image(stateImg[0], 0, 0);
+  canvas.text("Enable mic and click the button to begin recording", 20, 20);
+
   mic = new p5.AudioIn();
   mic.start();
   recorder = new p5.SoundRecorder();
   recorder.setInput(mic);
   soundFile = new p5.SoundFile();
-  soundElement = select('#soundElement');
+  soundElement = select("#soundElement");
   s1 = createSlider(-70.0, -4.0);
   s2 = createSlider(-70.0, -4.0);
   s3 = createSlider(-70.0, -4.0);
@@ -39,156 +43,156 @@ function setup() {
   s8 = createSlider(-70.0, -4.0);
   s9 = createSlider(-70.0, -4.0);
   s10 = createSlider(-70.0, -4.0);
-  setInterval(s1Array,100);
-  setInterval(s2Array,100);
-  setInterval(s3Array,100);
-  setInterval(s4Array,100);
-  setInterval(s5Array,100);
-  setInterval(s6Array,100);
-  setInterval(s7Array,100);
-  setInterval(s8Array,100);
-  setInterval(s9Array,100);
-  setInterval(s10Array,100);
-  //canvas.mousePressed(mouse);
+  setInterval(s1Array, 100);
+  setInterval(s2Array, 100);
+  setInterval(s3Array, 100);
+  setInterval(s4Array, 100);
+  setInterval(s5Array, 100);
+  setInterval(s6Array, 100);
+  setInterval(s7Array, 100);
+  setInterval(s8Array, 100);
+  setInterval(s9Array, 100);
+  setInterval(s10Array, 100);
+  canvas.mousePressed(mouse);
 }
 
 function s1Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s1Report(s1vals);
   }
-  s1vals[i]=s1.value();
+  s1vals[i] = s1.value();
 }
 
-function s1Report(vals){
-  socket.emit('report1', s1vals);
+function s1Report(vals) {
+  socket.emit("report1", s1vals);
 }
 
 function s2Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s2Report(s2vals);
   }
-  s2vals[i]=s2.value();
+  s2vals[i] = s2.value();
 }
 
-function s2Report(vals){
-  socket.emit('report2', s2vals);
+function s2Report(vals) {
+  socket.emit("report2", s2vals);
 }
 
 function s3Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s3Report(s3vals);
   }
-  s3vals[i]=s3.value();
+  s3vals[i] = s3.value();
 }
 
-function s3Report(vals){
-  socket.emit('report3', s3vals);
+function s3Report(vals) {
+  socket.emit("report3", s3vals);
 }
 
 function s4Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s4Report(s4vals);
   }
-  s4vals[i]=s4.value();
+  s4vals[i] = s4.value();
 }
 
-function s4Report(vals){
-  socket.emit('report4', s4vals);
+function s4Report(vals) {
+  socket.emit("report4", s4vals);
 }
 function s5Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s5Report(s5vals);
   }
-  s5vals[i]=s5.value();
+  s5vals[i] = s5.value();
 }
 
-function s5Report(vals){
-  socket.emit('report5', s5vals);
+function s5Report(vals) {
+  socket.emit("report5", s5vals);
 }
 
 function s6Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s6Report(s6vals);
   }
-  s6vals[i]=s6.value();
+  s6vals[i] = s6.value();
 }
 
-function s6Report(vals){
-  socket.emit('report6', s6vals);
+function s6Report(vals) {
+  socket.emit("report6", s6vals);
 }
 
 function s7Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s7Report(s7vals);
   }
-  s7vals[i]=s7.value();
+  s7vals[i] = s7.value();
 }
 
-function s7Report(vals){
-  socket.emit('report7', s7vals);
+function s7Report(vals) {
+  socket.emit("report7", s7vals);
 }
 
 function s8Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s8Report(s8vals);
   }
-  s8vals[i]=s8.value();
+  s8vals[i] = s8.value();
 }
 
-function s8Report(vals){
-  socket.emit('report8', s8vals);
+function s8Report(vals) {
+  socket.emit("report8", s8vals);
 }
 
 function s9Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s9Report(s9vals);
   }
-  s9vals[i]=s9.value();
+  s9vals[i] = s9.value();
 }
 
-function s9Report(vals){
-  socket.emit('report9', s9vals);
+function s9Report(vals) {
+  socket.emit("report9", s9vals);
 }
 
 function s10Array() {
-  if (i<50){
+  if (i < 50) {
     i++;
   } else {
-    i=0;
+    i = 0;
     s10Report(s10vals);
   }
-  s10vals[i]=s10.value();
+  s10vals[i] = s10.value();
 }
 
-function s10Report(vals){
-  socket.emit('report10', s10vals);
+function s10Report(vals) {
+  socket.emit("report10", s10vals);
 }
 
 function mouse() {
@@ -197,51 +201,45 @@ function mouse() {
 }
 
 function audioRecord() {
-  canvas.background(200);
-  image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
-  canvas.text('Enable mic and click the mouse to begin recording', 20, 20);
-
   if (state === 0 && mic.enabled) {
     recorder.record(soundFile);
-    canvas.background(255, 0, 0);
-    image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
-     
- 
-    canvas.text('Recording now! Click to stop.', 20, 20);
+    image(stateImg[1], 0, 0);
+    canvas.text("Recording now! Click to stop.", 20, 20);
     state++;
   } else if (state === 1) {
     recorder.stop();
-
-    canvas.background(0, 255, 0);
-    image(micPng, 0, 0, micPng.width / 2, micPng.height / 2);
-    canvas.text('Recording stopped. Click to play & save', 20, 20);
+    image(stateImg[2], 0, 0);
+    canvas.text("Recording stopped. Click to play & save", 20, 20);
     state++;
-  } else if (state === 2) { 
-  if (uploadNum2<5){
+  } else if (state === 2) {
+    image(stateImg[0], 0, 0);
+    canvas.text("Enable mic and click the button to begin recording", 20, 20);
+    if (uploadNum2 < 5) {
       uploadNum2++;
     } else {
-      uploadNum2=0;
+      uploadNum2 = 0;
     }
     var soundBlob = soundFile.getBlob();
     let formdata = new FormData();
-    formdata.append('soundBlob', soundBlob, 'file' + uploadNum2 + '.wav');
-    print(uploadNum2)
-    let serverUrl = '/upload';
+    formdata.append("soundBlob", soundBlob, "file" + uploadNum2 + ".wav");
+    print(uploadNum2);
+    let serverUrl = "/upload";
     let httpRequestOptions = {
-      method: 'POST',
-      body: formdata
+      method: "POST",
+      body: formdata,
     };
 
     httpDo(
       serverUrl,
       httpRequestOptions,
-      (successStatusCode) => { //if we were successful...
-        console.log("uploaded recording successfully: " + successStatusCode)
+      (successStatusCode) => {
+        //if we were successful...
+        console.log("uploaded recording successfully: " + successStatusCode);
       },
       (error) => {
         console.error(error);
       }
-    )
+    );
     soundFile.play();
     state = 0;
   }

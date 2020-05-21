@@ -25,26 +25,26 @@ var port = process.env.PORT || 3000;
 //declare and start socket.io
 var io = require("socket.io")(server);
 
-//declare and start osc UDP
-var osc = require("osc");
+// //declare and start osc UDP
+// var osc = require("osc");
 
-var getIPAddresses = function () {
-  var os = require("os"),
-    interfaces = os.networkInterfaces(),
-    ipAddresses = [];
+// var getIPAddresses = function () {
+//   var os = require("os"),
+//     interfaces = os.networkInterfaces(),
+//     ipAddresses = [];
 
-  for (var deviceName in interfaces) {
-    var addresses = interfaces[deviceName];
-    for (var i = 0; i < addresses.length; i++) {
-      var addressInfo = addresses[i];
-      if (addressInfo.family === "IPv4" && !addressInfo.internal) {
-        ipAddresses.push(addressInfo.address);
-      }
-    }
-  }
+//   for (var deviceName in interfaces) {
+//     var addresses = interfaces[deviceName];
+//     for (var i = 0; i < addresses.length; i++) {
+//       var addressInfo = addresses[i];
+//       if (addressInfo.family === "IPv4" && !addressInfo.internal) {
+//         ipAddresses.push(addressInfo.address);
+//       }
+//     }
+//   }
 
-  return ipAddresses;
-};
+//   return ipAddresses;
+// };
 
 // var udpPort = new osc.UDPPort({
 //   localAddress: "0.0.0.0",
@@ -115,9 +115,11 @@ const aws = require("aws-sdk");
 const multer = require("multer");
 const multer_s3 = require("multer-s3");
 
-aws.config.loadFromPath("./credentials.json");
+const s3 = new aws.S3({
+  accessKeyId: process.env.S3_KEY,
+  secretAccessKey: process.env.S3_SECRET,
+});
 
-const s3 = new aws.S3();
 var uploadNum;
 const upload = multer({
   storage: multer_s3({
@@ -165,148 +167,118 @@ function fileArray() {
 }
 fileArray();
 
-io.on("connection", (socket) => {
-  socket.on("report1", (data) => {
-    let params1 = {
-      Bucket: "capstone-control-data",
-      Key: "s1vals",
-      Body: data.toString(),
-    };
-    params1.Body = data.toString();
-    s3.upload(params1, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+// io.on("connection", (socket) => {
+//   socket.on("report1", (data) => {
+//     let params1 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s1vals",
+//       Body: data.toString(),
+//     };
+//     params1.Body = data.toString();
+//     s3.upload(params1, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report2", (data) => {
-    let params2 = {
-      Bucket: "capstone-control-data",
-      Key: "s2vals",
-      Body: data.toString(),
-    };
-    s3.upload(params2, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report2", (data) => {
+//     let params2 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s2vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params2, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report3", (data) => {
-    let params3 = {
-      Bucket: "capstone-control-data",
-      Key: "s3vals",
-      Body: data.toString(),
-    };
-    s3.upload(params3, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report3", (data) => {
+//     let params3 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s3vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params3, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report4", (data) => {
-    let params4 = {
-      Bucket: "capstone-control-data",
-      Key: "s4vals",
-      Body: data.toString(),
-    };
-    s3.upload(params4, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report4", (data) => {
+//     let params4 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s4vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params4, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report5", (data) => {
-    let params5 = {
-      Bucket: "capstone-control-data",
-      Key: "s5vals",
-      Body: data.toString(),
-    };
-    s3.upload(params5, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report5", (data) => {
+//     let params5 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s5vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params5, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report6", (data) => {
-    let params6 = {
-      Bucket: "capstone-control-data",
-      Key: "s6vals",
-      Body: data.toString(),
-    };
-    s3.upload(params6, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report6", (data) => {
+//     let params6 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s6vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params6, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report7", (data) => {
-    let params7 = {
-      Bucket: "capstone-control-data",
-      Key: "s7vals",
-      Body: data.toString(),
-    };
-    s3.upload(params7, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report7", (data) => {
+//     let params7 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s7vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params7, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report8", (data) => {
-    let params8 = {
-      Bucket: "capstone-control-data",
-      Key: "s8vals",
-      Body: data.toString(),
-    };
-    s3.upload(params8, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report8", (data) => {
+//     let params8 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s8vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params8, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report9", (data) => {
-    let params9 = {
-      Bucket: "capstone-control-data",
-      Key: "s9vals",
-      Body: data.toString(),
-    };
-    s3.upload(params9, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
+//   socket.on("report9", (data) => {
+//     let params9 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s9vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params9, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
 
-  socket.on("report10", (data) => {
-    let params10 = {
-      Bucket: "capstone-control-data",
-      Key: "s10vals",
-      Body: data.toString(),
-    };
-    s3.upload(params10, (err, data) => {
-      if (err) console.log(err);
-    });
-  });
-});
-
-var Particle = require("particle-api-js");
-var particle = new Particle();
-var token;
-
-function getVars(token) {
-  setInterval(() => {
-    particle
-      .getVariable({
-        deviceId: "390037000e47373334323233",
-        name: "flex",
-        auth: token,
-      })
-      .then((data) => {
-        console.log(data.body.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, 100);
-}
-
-particle
-  .login({ username: "thecapstoners2020@gmail.com", password: "capstone2020" })
-  .then(function (data) {
-    getVars(data.body.access_token);
-  })
-  .catch(function (err) {
-    console.log("Could not log in.", err);
-  });
+//   socket.on("report10", (data) => {
+//     let params10 = {
+//       Bucket: "capstone-control-data",
+//       Key: "s10vals",
+//       Body: data.toString(),
+//     };
+//     s3.upload(params10, (err, data) => {
+//       if (err) console.log(err);
+//     });
+//   });
+// });
 
 app.use(express.static("public"));
 
@@ -316,7 +288,7 @@ res.set("Content-Type", "text/html");
 res.append(" Access-Control-Allow_Origin:",  " * ");
 */
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 
 // const MongoClient = require('mongodb').MongoClient;
 // const uri = "mongodb+srv://user:capstone@pcc-creative-coding-capstone-3cnck.mongodb.net/test?retryWrites=true&w=majority";
