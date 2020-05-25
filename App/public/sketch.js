@@ -23,7 +23,10 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(400, 400);
+  canvas = createCanvas(200, 200);
+  for (var i=0;i<3;i++){
+    stateImg[i].resize(canvas.width+5,0);
+  }
   image(stateImg[0], 0, 0);
   canvas.text("Enable mic and click the button to begin recording", 20, 20);
 
@@ -203,15 +206,21 @@ function mouse() {
 function audioRecord() {
   if (state === 0 && mic.enabled) {
     recorder.record(soundFile);
+    canvas.clear();
+    canvas.background(color(0,0,0,0));
     image(stateImg[1], 0, 0);
     canvas.text("Recording now! Click to stop.", 20, 20);
     state++;
   } else if (state === 1) {
     recorder.stop();
+    canvas.clear();
+    canvas.background(color(0,0,0,0));
     image(stateImg[2], 0, 0);
     canvas.text("Recording stopped. Click to play & save", 20, 20);
     state++;
   } else if (state === 2) {
+    canvas.clear();
+    canvas.background(color(0,0,0,0));
     image(stateImg[0], 0, 0);
     canvas.text("Enable mic and click the button to begin recording", 20, 20);
     if (uploadNum2 < 5) {
