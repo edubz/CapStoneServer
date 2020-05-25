@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 248.0, 105.0, 572.0, 617.0 ],
+		"rect" : [ 263.0, 110.0, 572.0, 617.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -108,13 +108,13 @@
 					"patching_rect" : [ 1086.5, 569.536585330963135, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~[6]",
 							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ]
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -225,7 +225,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 265.5, 410.0, 50.0, 22.0 ],
-									"text" : "550"
+									"text" : "506"
 								}
 
 							}
@@ -476,7 +476,6 @@
 									"patching_rect" : [ 603.0, 205.0, 54.0, 36.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_shortname" : "Glide",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 2,
 											"parameter_linknames" : 1,
@@ -484,7 +483,8 @@
 											"parameter_longname" : "Glide",
 											"parameter_initial_enable" : 1,
 											"parameter_mmax" : 10000.0,
-											"parameter_initial" : [ 0 ]
+											"parameter_initial" : [ 0 ],
+											"parameter_shortname" : "Glide"
 										}
 
 									}
@@ -531,8 +531,8 @@
 									"patching_rect" : [ 422.0, 402.0, 63.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"enabled" : [ 1 ],
-										"pitchshift" : [ 1.887748625363387 ],
-										"pitchshiftcent" : [ 1100 ],
+										"pitchshift" : [ 2.0 ],
+										"pitchshiftcent" : [ 1200 ],
 										"quality" : "basic",
 										"reportlatency" : 0,
 										"usecents" : 0
@@ -1164,13 +1164,13 @@
 					"patching_rect" : [ 1012.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~[5]",
 							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ]
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1191,13 +1191,13 @@
 					"patching_rect" : [ 939.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~[4]",
 							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ]
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1218,13 +1218,13 @@
 					"patching_rect" : [ 862.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~[3]",
 							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ]
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1245,13 +1245,13 @@
 					"patching_rect" : [ 782.0, 565.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~[2]",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~[2]",
 							"parameter_mmax" : 6.0,
-							"parameter_initial" : [ 0.0 ]
+							"parameter_initial" : [ 0.0 ],
+							"parameter_shortname" : "live.gain~[2]"
 						}
 
 					}
@@ -1899,7 +1899,6 @@
 					"patching_rect" : [ 462.0, 738.0, 56.0, 48.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "Transp",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 9,
 							"parameter_linknames" : 1,
@@ -1908,7 +1907,8 @@
 							"parameter_longname" : "Transp",
 							"parameter_initial_enable" : 1,
 							"parameter_mmax" : 2400.0,
-							"parameter_initial" : [ 0 ]
+							"parameter_initial" : [ 0 ],
+							"parameter_shortname" : "Transp"
 						}
 
 					}
@@ -2174,7 +2174,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 417.5, 123.107139587402344, 22.0 ],
-									"text" : "set files.2"
+									"text" : "set files.1"
 								}
 
 							}
@@ -2186,7 +2186,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.142822265625, 314.25, 103.285713195800781, 22.0 ],
-									"text" : "files. 2"
+									"text" : "files. 1"
 								}
 
 							}
@@ -2451,12 +2451,12 @@
 					"patching_rect" : [ 852.25, 808.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~[1]",
-							"parameter_mmax" : 6.0
+							"parameter_mmax" : 6.0,
+							"parameter_shortname" : "live.gain~"
 						}
 
 					}
@@ -4021,7 +4021,7 @@
 										"loopstart" : [ 0.0, "ms" ],
 										"mode" : "basic",
 										"originallength" : [ 0.0, "ticks" ],
-										"originaltempo" : 119.999999999999929,
+										"originaltempo" : 119.999999999999915,
 										"phase" : [ 0.0, "ticks" ],
 										"pitchcorrection" : 0,
 										"quality" : "basic",
@@ -4353,12 +4353,12 @@
 					"patching_rect" : [ 388.75, 434.0, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.gain~",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "live.gain~",
-							"parameter_mmax" : 6.0
+							"parameter_mmax" : 6.0,
+							"parameter_shortname" : "live.gain~"
 						}
 
 					}
@@ -4484,6 +4484,26 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgmode" : 0,
+									"border" : 0,
+									"clickthrough" : 0,
+									"enablehscroll" : 0,
+									"enablevscroll" : 0,
+									"id" : "obj-2",
+									"lockeddragscroll" : 0,
+									"maxclass" : "bpatcher",
+									"name" : "n4m.monitor.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"offset" : [ 0.0, 0.0 ],
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 749.397618055343628, 328.915674805641174, 400.0, 220.0 ],
+									"viewvisibility" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-7",
 									"maxclass" : "message",
@@ -4700,26 +4720,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bgmode" : 0,
-									"border" : 0,
-									"clickthrough" : 0,
-									"enablehscroll" : 0,
-									"enablevscroll" : 0,
-									"id" : "obj-12",
-									"lockeddragscroll" : 0,
-									"maxclass" : "bpatcher",
-									"name" : "n4m.monitor.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 774.0, 251.0, 400.0, 220.0 ],
-									"viewvisibility" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-27",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -4798,12 +4798,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-19",
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 925.0, 6.5, 312.0, 22.0 ],
-									"text" : "readfolder C:/Users/erikr/Documents/CapStoneServer/"
+									"patching_rect" : [ 925.0, 6.5, 307.0, 50.0 ],
+									"text" : "readfolder C:/Users/erikr/Documents/CapStoneServer/App/public/uploads"
 								}
 
 							}
@@ -5204,8 +5205,6 @@
 									"saved_object_attributes" : 									{
 										"autostart" : 0,
 										"defer" : 0,
-										"node_bin_path" : "",
-										"npm_bin_path" : "",
 										"watch" : 0
 									}
 ,
@@ -5216,7 +5215,7 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
-									"destination" : [ "obj-12", 0 ],
+									"destination" : [ "obj-2", 0 ],
 									"source" : [ "obj-1", 1 ]
 								}
 
@@ -6279,15 +6278,15 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-16::obj-3" : [ "Glide", "Glide", 0 ],
+			"obj-24" : [ "live.gain~[4]", "live.gain~[2]", 0 ],
 			"obj-34" : [ "live.gain~[1]", "live.gain~", 0 ],
+			"obj-28" : [ "live.gain~[6]", "live.gain~[2]", 0 ],
 			"obj-15" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-25" : [ "live.gain~[5]", "live.gain~[2]", 0 ],
-			"obj-16::obj-3" : [ "Glide", "Glide", 0 ],
-			"obj-23" : [ "live.gain~[3]", "live.gain~[2]", 0 ],
 			"obj-71" : [ "Transp", "Transp", 0 ],
-			"obj-28" : [ "live.gain~[6]", "live.gain~[2]", 0 ],
-			"obj-24" : [ "live.gain~[4]", "live.gain~[2]", 0 ],
 			"obj-22" : [ "live.gain~[2]", "live.gain~[2]", 0 ],
+			"obj-23" : [ "live.gain~[3]", "live.gain~[2]", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -6368,9 +6367,9 @@
 , 			{
 				"name" : "Default M4L",
 				"default" : 				{
-					"fontsize" : [ 11.0 ],
+					"fontname" : [ "Arial Bold" ],
 					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
-					"fontname" : [ "Arial Bold" ]
+					"fontsize" : [ 11.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -6379,9 +6378,9 @@
 , 			{
 				"name" : "Default M4L Poletti",
 				"default" : 				{
-					"fontsize" : [ 10.0 ],
+					"fontname" : [ "Arial Bold" ],
 					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ],
-					"fontname" : [ "Arial Bold" ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -6390,6 +6389,7 @@
 , 			{
 				"name" : "Default M4L-1",
 				"default" : 				{
+					"fontname" : [ "Arial" ],
 					"fontface" : [ 1 ],
 					"fontsize" : [ 11.0 ],
 					"bgfillcolor" : 					{
@@ -6400,8 +6400,7 @@
 						"angle" : 270.0,
 						"proportion" : 0.39
 					}
-,
-					"fontname" : [ "Arial" ]
+
 				}
 ,
 				"parentstyle" : "",
@@ -6432,6 +6431,7 @@
 , 			{
 				"name" : "jbb",
 				"default" : 				{
+					"fontname" : [ "Arial" ],
 					"fontsize" : [ 9.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -6441,8 +6441,7 @@
 						"angle" : 270.0,
 						"proportion" : 0.39
 					}
-,
-					"fontname" : [ "Arial" ]
+
 				}
 ,
 				"parentstyle" : "",

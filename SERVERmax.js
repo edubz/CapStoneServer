@@ -1,5 +1,6 @@
 const fs = require("fs");
 const aws = require("aws-sdk");
+aws.config.loadFromPath("credentials.json");
 const s3 = new aws.S3();
 var maxAPI = require("max-api");
 var params = {

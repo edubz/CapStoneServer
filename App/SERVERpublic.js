@@ -2,7 +2,7 @@
 const express = require("express");
 var app = express();
 var server = require("http").Server(app);
-
+console.log('fuck this')
 /*
 
 //experimenting with https funtionality
@@ -23,7 +23,7 @@ var http = require("http").Server(app);
 var port = process.env.PORT || 3000;
 
 //declare and start socket.io
-var io = require("socket.io")(server);
+//var io = require("socket.io")(serer);
 
 // //declare and start osc UDP
 // var osc = require("osc");
@@ -116,8 +116,9 @@ const multer = require("multer");
 const multer_s3 = require("multer-s3");
 
 const s3 = new aws.S3({
-  accessKeyId: process.env.S3_KEY,
-  secretAccessKey: process.env.S3_SECRET,
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region
 });
 
 var uploadNum;
@@ -138,34 +139,36 @@ const fs = require("fs");
 var uploadSingle = upload.single("soundBlob");
 app.post("/upload", function (req, res) {
   uploadSingle(req, res, (err) => {
-    console.log(req.file.key);
+    console.log(err);
   });
-  fileArray();
-  if (uploadNum < 5) {
-    uploadNum += 1;
-  } else {
-    uploadNum = 0;
-  }
-  io.emit("num", uploadNum);
+  console.log(res);
+  console.log('anything');
+  // fileArray();
+  // if (uploadNum < 5) {
+  //   uploadNum += 1;
+  // } else {
+  //   uploadNum = 0;
+  // }
+  //io.emit("num", uploadNum);
 });
 
-var files = new Array();
+// var files = new Array();
 
-function fileArray() {
-  const dir = __dirname + "/public/uploads";
-  var i = 0;
-  fs.readdirSync(dir).forEach(function (file) {
-    if (file != "spaceholderfile.txt" && file != ".DS_Store") {
-      i++;
-      files[i] = file;
-    }
-  });
-  if (files.length < 1) {
-    uploadNum = 0;
-  }
-  files.splice(0, 1);
-}
-fileArray();
+// function fileArray() {
+//   const dir = __dirname + "/public/uploads";
+//   var i = 0;
+//   fs.readdirSync(dir).forEach(function (file) {
+//     if (file != "spaceholderfile.txt" && file != ".DS_Store") {
+//       i++;
+//       files[i] = file;
+//     }
+//   });
+//   if (files.length < 1) {
+//     uploadNum = 0;
+//   }
+//   files.splice(0, 1);
+// }
+// fileArray();
 
 // io.on("connection", (socket) => {
 //   socket.on("report1", (data) => {
