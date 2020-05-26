@@ -23,7 +23,7 @@ var http = require("http").Server(app);
 var port = process.env.PORT || 3000;
 
 //declare and start socket.io
-//var io = require("socket.io")(serer);
+//var io = require("socket.io")(server);
 
 // //declare and start osc UDP
 // var osc = require("osc");
@@ -142,14 +142,6 @@ app.post("/upload", function (req, res) {
     console.log(err);
   });
   console.log(res);
-  console.log('anything');
-  // fileArray();
-  // if (uploadNum < 5) {
-  //   uploadNum += 1;
-  // } else {
-  //   uploadNum = 0;
-  // }
-  //io.emit("num", uploadNum);
 });
 
 // var files = new Array();
