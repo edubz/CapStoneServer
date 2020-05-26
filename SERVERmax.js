@@ -1,4 +1,4 @@
-const fs = require("fs");
+         const fs = require("fs");
 const aws = require("aws-sdk");
 aws.config.loadFromPath("credentials.json");
 const s3 = new aws.S3();
@@ -31,26 +31,6 @@ setTimeout(() => {
   }, 200);
 }, 100);
 
-// var toArray = require("stream-to-array");
-// var it = setInterval(() => {
-//   if (j < 9) j++;
-//   else j = 0;
-
-//   var name = "s" + (j + 1) + "vals";
-//   //maxAPI.post(name);
-//   params2.Bucket = "capstone-control-data";
-//   params2.Key = name;
-//   var object = s3.getObject(params2, (err, data) => {
-//     var buffer = Buffer.from(data.Body);
-//     array[j] = buffer.toString().split(",");
-//     if (array[j]) {
-//       maxAPI.outlet(j + " " + array[j][0]);
-//     }
-//   });
-//   if (i == 9) {
-//     clearInterval(it);
-//   }
-// }, 200);
 
 var Particle = require("particle-api-js");
 var particle = new Particle();
@@ -65,7 +45,7 @@ function getVars(token) {
         auth: token,
       })
       .then((data) => {
-        maxAPI.post(data.body.result);
+        if (data) maxAPI.post(data.body.result);
       })
       .catch((err) => {
         maxAPI.post(err["errorDescription"]);
