@@ -2,7 +2,6 @@
 const express = require("express");
 var app = express();
 var server = require("http").Server(app);
-console.log('fuck this')
 /*
 
 //experimenting with https funtionality
@@ -19,7 +18,6 @@ https.get('https://localhost:3000',
 var staticAlias = require("node-static-alias");
 
 */
-var http = require("http").Server(app);
 var port = process.env.PORT || 3000;
 
 //declare and start socket.io
@@ -118,10 +116,9 @@ const multer_s3 = require("multer-s3");
 const s3 = new aws.S3({
   accessKeyId: process.env.accessKeyId,
   secretAccessKey: process.env.secretAccessKey,
-  region: process.env.region
+  region: process.env.region,
 });
 
-var uploadNum;
 const upload = multer({
   storage: multer_s3({
     s3: s3,

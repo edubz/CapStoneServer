@@ -1,4 +1,4 @@
-         const fs = require("fs");
+const fs = require("fs");
 const aws = require("aws-sdk");
 aws.config.loadFromPath("credentials.json");
 const s3 = new aws.S3();
@@ -35,17 +35,24 @@ setTimeout(() => {
 var Particle = require("particle-api-js");
 var particle = new Particle();
 var token;
+var prevData;
+let IDs = ["39003b000e47373334323233", "390037000e47373334323233", "330042000947373336323230", "230030001747373335333438"];
+let names = ['flex', 'buttonState'];
 
-function getVars(token) {
+function getVarFlex(token, name, id) {
   setInterval(() => {
     particle
       .getVariable({
-        deviceId: "390037000e47373334323233",
-        name: "flex",
+        deviceId: id,
+        name: name,
         auth: token,
       })
       .then((data) => {
-        if (data) maxAPI.post(data.body.result);
+        if (data.body.result && data.body.result!=prevData && name) {
+         // maxAPI.post(data.body.result);
+          maxAPI.outlet('pvar ' + data.body.result);
+        }
+		prevData = data.body.result;
       })
       .catch((err) => {
         //maxAPI.post(err["errorDescription"]);
@@ -57,8 +64,10 @@ particle
   .login({ username: "thecapstoners2020@gmail.com", password: "capstone2020" })
   .then(function (data) {
     maxAPI.post("logged in");
-    getVars(data.body.access_token);
+    for (var i = IDs.length - 1; i >= 0; i--) {
+      getVarFlex(data.body.access_token, names[i], IDs[i]);
+    }
   })
   .catch(function (err) {
-    console.log("Could not log in.", err);
+    maxAPI.post('could not log in' + err);
   });
