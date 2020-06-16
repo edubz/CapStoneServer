@@ -48,7 +48,7 @@ function getVars(token) {
         if (data) maxAPI.post(data.body.result);
       })
       .catch((err) => {
-        maxAPI.post(err["errorDescription"]);
+        //maxAPI.post(err["errorDescription"]);
       });
   }, 100);
 }
