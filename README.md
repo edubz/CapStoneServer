@@ -1,4 +1,4 @@
-# PCC Creative Coding Capstone Project
+# PCC Creative Coding Capstone Project 2020
 ## [theinput.tk](https://capstone-public-server.herokuapp.com/)
 
 This is a permanent web-based sound installation made by Portland Community College creative coding students. 
