@@ -7,4 +7,4 @@ sound is recorded and played back [here](https://capstone-public-server.herokuap
 ![webpage screenshot](https://github.com/edubz/CapStoneServer/blob/master/screenshot.png)
 
 and processed here
-![max patch screenshot](https://github.com/edubz/CapStoneServer/blob/master/screenshot.png)
+![max patch screenshot](https://github.com/edubz/CapStoneServer/blob/master/screenshot2.png)
