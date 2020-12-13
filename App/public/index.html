@@ -1,67 +1,62 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<base href="/" />
-		<!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script> -->
-		<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
-		<script
-			language="javascript"
-			src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.js"
-		></script>
-		<script src="sketch.js"></script>
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-			crossorigin="anonymous"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
-			rel="stylesheet"
-		/>
-		<link href="style.css" rel="stylesheet" type="text/css" />
-	</head>
-	<body>
-		<!-- <div id="header"> -->
-			<img src="Assets/bgmask.png" class="bgmask" />
-			<!-- <h1>The INPUT:</h1>
-			<h4>
-				In & Out Of Euclidean Closeness, We Disregard Distance To Take
-				Digital Pills & Dive Into The Algorithm Life
-			</h4> -->
-		<!-- </div> -->
-		<audio
-			style="display: none;"
-			id="soundElement"
-			action="/upload"
-		></audio>
-		<div id="twitch-embed">
-			<!-- Load the Twitch embed script -->
-			<script src="https://embed.twitch.tv/embed/v1.js"></script>
-
-			<!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
-			<script type="text/javascript">
-				w = 840;
-				h = 525;
-				if (screen.width < w) {
-					w = screen.width;
-					h -= screen.height/4;
-				}
-				new Twitch.Embed("twitch-embed", {
-					width: w,
-					height: h,
-					channel: "the_input",
-					layout: "video",
-				});
-			</script>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<base href="/" />
+	<title>the input</title>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+	<script
+	language="javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.js"
+	></script>
+	<script src="sketch.js"></script>
+	<link
+	rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous"
+	/>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="header">
+		<img src="Assets/bgmask.png" class="bgmask" />
+		<h1>THE INPUT:</h1>
+		<h4>
+			In & Out Of Euclidean Closeness, 
+		We Disregard Distance 
+			To Take Digital Pills & Dive Into The Algorithm Life
+		</h4>
+	</div>
+	<audio
+	style="display: none;"
+	id="soundElement"
+	action="/upload"
+	></audio>
+		<div class="blurbs">
+			<p class="blurb1">
+					The embedded radio player is a live stream of an audio system made in
+				Max 8, which involves using web servers to collect user
+				submitted audio files from this website.
+			</p>
+			<p class="blurb1">
+					The audio files are then processed through a variety of effects
+				with parameters that can be controlled wirelessly via a limited
+				amount of collectible sensor-filled devices.
+			</p>
+			<p class="blurb1">
+					This website, the Max patch, and all microcontroller devices
+				designed, handcrafted, and maintained by PCC Creative Coding
+				Capstone students.
+				<a href="https://github.com/edubz/CapStoneServer"
+				>Source code here</a
+				>
+			</p>
 		</div>
-		<div class="sidebar">
-		<p>The embedded video is a live stream of an audio system made in Max 8, which involves using web servers to collect user submitted audio files from this website and a limited amount of custom raspberry pi devices.</p>
-		<p>The audio files are then processed through variety of effects with parameters that can be controlled wirelessly via a limited amount of collectible sensor-filled devices.</p>
-		<p>This website, the Max patch, and all microcontroller devices designed, handcrafted, and maintained by PCC Creative Coding Capstone students.
-		<a href="https://github.com/edubz/CapStoneServer">Source code here</a> </p>
+		<div class="player">
+		<audio controls><source src="https://pcc-capstone-icecast.com/stream" type="audio/mpeg">Your browser does not support the audio element.</audio>
 		</div>
 	</body>
 </html>
