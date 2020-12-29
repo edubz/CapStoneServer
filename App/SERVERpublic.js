@@ -7,6 +7,7 @@ bucket using multer middleware.
 */
 //declare express and start server instance
 const express = require("express");
+const WebSocket = require('ws');
 var app = express();
 var server = require("http").Server(app);
 var port = process.env.PORT || 3000;
@@ -23,6 +24,18 @@ const s3 = new aws.S3({
   secretAccessKey: process.env.secretAccessKey,
   region: process.env.region,
 });
+
+//make a websocket connection to an esp32 with a known ip
+var ws = new WebSocket("ws://192.168.1.78/ws");
+
+ws.onopen = function() {
+  window.alert("Connected");
+};
+
+//display it on our page
+ws.onmessage = function(evt) {
+  document.getElementById("koala-status").innerHTML  = "koala flex sensor: " + evt.data;
+};
 
 //configure the multer upload's storage settings. in this case uploads are stored in our s3 bucket
 const upload = multer({
