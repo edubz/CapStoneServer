@@ -33,6 +33,21 @@ function keyReleased() {
   }
 }
 
+function getCurrentTime() {
+  var currentdate = new Date();
+  return currentdate.getDate() +
+    "/" +
+    (currentdate.getMonth() + 1) +
+    "/" +
+    currentdate.getFullYear() +
+    " @ " +
+    currentdate.getHours() +
+    ":" +
+    currentdate.getMinutes() +
+    ":" +
+    currentdate.getSeconds();
+}
+
 function upload() {
   if (uploadNum < 5) {
     uploadNum++;
@@ -41,11 +56,13 @@ function upload() {
   }
 
   var soundBlob = soundFile.getBlob();
+  var lastModifiedHeader = "Last-Modified: "+ getCurrentTime();
   let formdata = new FormData();
   formdata.append("soundBlob", soundBlob, "file" + uploadNum + ".wav");
   let serverUrl = "/upload";
   let httpRequestOptions = {
     method: "POST",
+    headers: {lastModifiedHeader},
     body: formdata,
   };
 

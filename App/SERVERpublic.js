@@ -18,34 +18,34 @@ const multer_s3 = require("multer-s3");
 const fs = require("fs");
 
 //gain access to s3
-const s3 = new aws.S3({
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-  region: process.env.region,
-});
+// const s3 = new aws.S3({
+//   accessKeyId: process.env.accessKeyId,
+//   secretAccessKey: process.env.secretAccessKey,
+//   region: process.env.region,
+// });
 
 //configure the multer upload's storage settings. in this case uploads are stored in our s3 bucket
-const upload = multer({
-  storage: multer_s3({
-    s3: s3,
-    bucket: "capstone-audio-files",
-    metadata: function (req, file, cb) {
-      cb(null, { fieldname: file.originalname.toString() });
-    },
-    key: function (req, file, cb) {
-      cb(null, file.originalname.toString());
-    },
-  }),
-});
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, __dirname + '/public/uploads')
+  },
+  filename: function(req, file, cb){
+    // console.log(file);
+    cb(null, file.originalname);
+  }
+})
+
+const upload = multer({storage: storage});
+
 //single file upload
 var uploadSingle = upload.single("soundBlob");
 
 //POST request route to allow p5js request to reach server in order to upload to s3 via multer
 app.post("/upload", function (req, res) {
   uploadSingle(req, res, (err) => {
-    console.log(err);
+    
   });
-  console.log(res);
+   //console.log(res);
 });
 
 //serve static site and listen on port 3000 or build platform port
