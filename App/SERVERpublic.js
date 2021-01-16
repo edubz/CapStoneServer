@@ -7,6 +7,7 @@ bucket using multer middleware.
 */
 //declare express and start server instance
 const express = require("express");
+const WebSocket = require('ws');
 var app = express();
 var server = require("http").createServer(app);
 var port = process.env.PORT || 3000;
@@ -28,7 +29,7 @@ const fs = require("fs");
 //   region: process.env.region,
 // });
 
-const multer = require('multer');
+
 //configure the multer upload's storage settings. in this case uploads are stored in our s3 bucket
 const storage = multer.diskStorage({
   destination: function(req, file, cb){
