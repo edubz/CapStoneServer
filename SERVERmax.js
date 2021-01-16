@@ -1,18 +1,14 @@
-/*
-This script checks an s3 bucket to see if an audio 
-file has been uploaded in the last 10 seconds, and 
-if so it downloads the file to disk. When a file is
-finished downloading an osc message is sent to Max  
-to load the file into a buffer for post-processing.
-*/
-
 //global state vairables
 var i = 0;
 var ranOnce = false;
 var currDL;
 
-//import function to compute difference of current time and upload time
+//import function to compute difference between two js time objects
 const timediff = require('./get_time_diff.js')
+
+//setup fs for stream
+const fs = require("fs");
+const Errors = require("errors");
 
 //init osc comms on port 57121
 var osc = require('osc');
@@ -29,18 +25,14 @@ var AWS = require("aws-sdk");
 AWS.config.loadFromPath("./credentials.json");
 const s3 = new AWS.S3();
 
-//set up fs for stream
-const fs = require("fs");
-const Errors = require("errors");
-
-//returns promise that checks metadata of each file and resolves when a file has been modified in the last 10 seconds
+//retrieve metadata and resolve when a file has been modified in the last 10 seconds
 function checkS3Promise() {
   
-  //iterate through files(variable i is incremented later once a file has been downloaded)
+  //iterate through files
   if (i > 5) i = 0;
   var params = { Bucket: "capstone-audio-files", Key: "file" + i + ".wav" };
   
-  //create a promise that will check metadata and resolve once a it finds a file that was created < 10 seconds ago 
+  //create metadata promise
   return new Promise((resolve, reject) => {
   
     //get metadata
@@ -65,7 +57,7 @@ function checkS3Promise() {
         resolve(currDL);
       } else {
   
-        //if the recently modified file has already been downloaded don't download again
+        //if 10 seconds has passed since file was downloaded, reset flag to allow new download 
         if (currDL && currDL.Key == params.Key) {
           ranOnce = false;
         }
@@ -78,14 +70,15 @@ function checkS3Promise() {
   });
 }
 
-//returns promise that resolves once an object has been successfully downloaded from s3
 function downloadS3Promise(params) {
+  
+  //create download promise
   return new Promise((resolve, reject) => {
   
     //where to save the file to
     let uploadLocation = __dirname + "/App/public/uploads/" + params.Key;
   
-    //create writeable file on disk at upload location and handle errors
+    //create writable stream on disk at upload location and handle errors
     var file = fs.createWriteStream(uploadLocation).on("error",(err) => {
       console.log(err);
       reject();
@@ -112,24 +105,22 @@ function downloadS3Promise(params) {
 }
 
 function checkS3() {
-  
   //if a file has been recently modified download it
   checkS3Promise()
-    .then((currDL) => downloadS3(currDL))
+    .then((currDL) => {
+      downloadS3(currDL);
+    })
     .catch((err) => console.log(err));
 }
 checkS3();
 
 function downloadS3(params) {
-  
   //if recently modified file has already been downloaded don't download again
   if (ranOnce == true) {
     checkS3();
   } else {
-  
     //set already downloaded flag
     ranOnce = true;
-  
     //when file is done downloading send osc message to max containing the name of the file
     downloadS3Promise(params)
       .then((data) => {
@@ -152,3 +143,98 @@ function downloadS3(params) {
       .catch((err) => console.log(err));
   }
 }
+
+var Particle = require("particle-api-js");
+var particle = new Particle();
+var token;
+var index = 0;
+var deviceIds = ["260027001747373335333438", "24002e000947373336323230", "39003b000e47373334323233"]
+
+function getVarsPromise(token, id, name) {
+  //console.log(token);
+  return new Promise((resolve, reject) => {
+    particle
+      .getVariable({
+        deviceId: id,
+        name: name,
+        auth: token,
+      })
+      .then((data) => {
+        if (data) {
+          resolve(data);
+        } else {
+          reject(err);
+        }
+      })
+      .catch((err) => {
+         reject(err);
+         //console.log(err);
+      })
+  })
+}
+
+function getVars(token, id, name){
+  getVarsPromise(token, id, name)
+      .then((data) => {
+           console.log(data.body.result);
+           udpPort.send(
+          {
+            address: "/particle",
+            args: [
+              {
+                type: "s",
+                value: data,
+              },
+            ],
+          },
+          "127.0.0.1",
+          57110
+        );
+        getDevice();
+      })
+      .catch((err) => {
+        //console.log(err);
+        getDevice(token);
+      })
+}
+
+let totalOnline = 0;
+let allOffline = false;
+function getDevice(token){
+  if (index < deviceIds.length) {
+    index++;
+  } else {
+    index = 0;
+  }
+
+  particle.getDevice({deviceId: deviceIds[index], auth: token})
+    .then((device) => {
+       if (device.body.online == true){
+          totalOnline++;
+          //allOffline = false;
+          console.log("device:" + deviceIds[index] + "is online");
+          getVars(token, deviceIds[index], Object.keys(device.body.variables));
+       } else {
+        if (totalOnline == 0 && index == deviceIds.length-1 && allOffline == false) {
+          allOffline = true;
+          console.log("No devices online");
+        }
+        getDevice(token);
+       }
+     })
+     .catch((err) => {
+      // console.log(err);
+      getDevice(token);
+     })
+
+}
+
+particle
+  .login({ username: "thecapstoners2020@gmail.com", password: "capstone2020" })
+  .then(function (data) {
+    console.log("logged in to particle api");
+    getDevice(data.body.access_token);
+    })
+  .catch(function (err) {
+    //console.log("Could not log in.", err);
+  });

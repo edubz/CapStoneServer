@@ -9,57 +9,59 @@ bucket using multer middleware.
 const express = require("express");
 const WebSocket = require('ws');
 var app = express();
-var server = require("http").Server(app);
+var server = require("http").createServer(app);
 var port = process.env.PORT || 3000;
+const io = require('socket.io')(server);
+io.on('connection', (conn) => {
+  console.log('new conn')
+})
 
 //set for audio file upload from p5js
-const aws = require("aws-sdk");
-const multer = require("multer");
-const multer_s3 = require("multer-s3");
+// const aws = require("aws-sdk");
+// const multer = require("multer");
+ // const multer_s3 = require("multer-s3");
 const fs = require("fs");
 
 //gain access to s3
-const s3 = new aws.S3({
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-  region: process.env.region,
-});
+// const s3 = new aws.S3({
+//   accessKeyId: process.env.accessKeyId,
+//   secretAccessKey: process.env.secretAccessKey,
+//   region: process.env.region,
+// });
 
-//make a websocket connection to an esp32 with a known ip
-var ws = new WebSocket("ws://192.168.1.78/ws");
-
-ws.onopen = function() {
-  window.alert("Connected");
-};
-
-//display it on our page
-ws.onmessage = function(evt) {
-  document.getElementById("koala-status").innerHTML  = "koala flex sensor: " + evt.data;
-};
 
 //configure the multer upload's storage settings. in this case uploads are stored in our s3 bucket
-const upload = multer({
-  storage: multer_s3({
-    s3: s3,
-    bucket: "capstone-audio-files",
-    metadata: function (req, file, cb) {
-      cb(null, { fieldname: file.originalname.toString() });
-    },
-    key: function (req, file, cb) {
-      cb(null, file.originalname.toString());
-    },
-  }),
-});
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, __dirname + '/public/uploads')
+  },
+  filename: function(req, file, cb){
+    // console.log(file);
+    cb(null, file.originalname);
+  }
+})
+
+const upload = multer({storage: storage});
+
 //single file upload
-var uploadSingle = upload.single("soundBlob");
+function uploadSingle(){
+
+  upload.single("soundBlob");
+}
 
 //POST request route to allow p5js request to reach server in order to upload to s3 via multer
-app.post("/upload", function (req, res) {
-  uploadSingle(req, res, (err) => {
-    console.log(err);
-  });
-  console.log(res);
+app.post("/upload", upload.single("soundBlob"), function (req, res) {
+  // res.on('finish', () => {
+    // console.log(req)
+    io.emit('file uploaded', req.file.originalname)
+  // })
+  // uploadSingle(req, res, (err) => {
+    
+  // });
+   //console.log(res);
 });
+
+
 
 //serve static site and listen on port 3000 or build platform port
 app.use(express.static("public"));
