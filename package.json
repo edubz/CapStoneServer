@@ -1,0 +1,33 @@
+{
+  "name": "capstoneserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "SERVERmax.js",
+  "dependencies": {
+    "aws-sdk": "^2.674.0",
+    "client-oauth2": "^4.3.0",
+    "errors": "^0.3.0",
+    "multer-s3": "^2.9.0",
+    "node-fetch": "^2.6.0",
+    "osc": "^2.4.1",
+    "particle-api-js": "^8.4.0",
+    "simple-node-logger": "^18.12.24",
+    "simple-oauth2": "^3.4.0",
+    "socket.io-client": "^2.3.0",
+    "stream-to-array": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edubz/CapStoneServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edubz/CapStoneServer/issues"
+  },
+  "homepage": "https://github.com/edubz/CapStoneServer#readme"
+}
