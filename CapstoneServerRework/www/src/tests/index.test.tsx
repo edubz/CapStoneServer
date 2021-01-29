@@ -1,5 +1,4 @@
-import { assert } from 'console';
-import index from '../index.tsx';
+import index from '../index';
 test('index exists', () => {
     expect(index()).toBe(" ");
 })
