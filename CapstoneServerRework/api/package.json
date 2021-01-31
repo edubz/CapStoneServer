@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build:live",
     "test": "NODE_ENV=test jest --detectOpenHandles",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" index.ts"
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" server.ts"
   },
   "repository": {
     "type": "git",

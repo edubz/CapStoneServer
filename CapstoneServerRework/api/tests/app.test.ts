@@ -1,4 +1,5 @@
-import { express, app, router, port } from "../index";
+import { express, app, router } from "../app";
+import { port } from "../server"
 const request = require('supertest')
 
 test('express is installed', () => {
