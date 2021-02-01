@@ -1,13 +1,12 @@
-import { app } from "./app"
+const http = require('http');
+import { app } from "./app";
 const WebSocket = require('ws');
 const port = 5000;
 
-var websocketServer;
+const server = http.createServer(app);
+
 if (process.env.NODE_ENV != "test") {
-    const server = app.listen(port, () => console.log(`app listening at port: ${port}`));
-    websocketServer = new WebSocket.Server({
-        server: server
-    })
+    server.listen(port, () => console.log(`app listening at port: ${port}`));
 }
 
-export { port, websocketServer };
+export { port, server };

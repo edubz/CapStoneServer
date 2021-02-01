@@ -1,15 +1,17 @@
-const osc = require('osc');
+const osc = require("osc");
+import express from "express";
+import { udpHostPort } from "../models/udpHostPort";
 import { Response, Request } from "express";
-import udpPort from "../controllers/createudpserver"
-import websocketPort from "../controllers/createwebsocketport"
-import { createOscMessage, oscMessage } from "../controllers/createoscmessage"
-import { express } from "../app";
+import { oscMessage } from "../models/oscmessage";
+const oscRouter = express.Router();
 
-const oscRoute = (req: Request, res: Response) => {
-    udpPort.on("message", (message: oscMessage) => {
-        websocketPort.send(createOscMessage("osc", "f", message.args[0].value))
+oscRouter.get("/osc", (req: Request, res: Response) => {
+    var staticMessage;
+    udpHostPort.on("message", (message: oscMessage) => {
+        staticMessage = message;
     })
-    res.send("Send osc to this routes to relay it to max");
-}
+    if (staticMessage == undefined) res.send('awaiting osc data');
+    else res.send(`osc snapshot: ${staticMessage}`);
+})
 
-export { oscRoute, udpPort };
+export { oscRouter };
