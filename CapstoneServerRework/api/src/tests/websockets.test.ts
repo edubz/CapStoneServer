@@ -26,7 +26,6 @@ test('web socket does not throw err', () => {
     expect(hasError).toBeFalsy();
 })
 
-const socket = ioClient("localhost:5000");
 test("web socket accepts connections", async () => {
     isReady = await new Promise((resolve) => {
         io.on("connection", () => resolve(true));
@@ -34,6 +33,7 @@ test("web socket accepts connections", async () => {
     expect(isReady).toBeTruthy();
 })
 
+const socket = ioClient("localhost:5000");
 test("web sockets relay osc message", async () => {
     const testUdpHost = createUdpPort("0.0.0.0", 57121)
     const udpTestSender = createUdpPort("0.0.0.0", 57120)
