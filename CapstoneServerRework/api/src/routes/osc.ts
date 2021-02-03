@@ -1,10 +1,7 @@
-const path = require("path");
 import express from "express";
-import { Response, Request } from "express";
+import { sendOscView } from "../controllers/osc/oscroutecontroller"
 const oscRouter = express.Router();
 
-oscRouter.get("/", (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "..", "views", "oscview.html"));
-})
+oscRouter.get("/", sendOscView)
 
 export { oscRouter };

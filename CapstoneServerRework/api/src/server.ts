@@ -2,8 +2,8 @@ const http = require('http');
 import { app } from "./app";
 import { udpHostPort } from "./models/udphostport";
 import { handleWebSocketServer } from "./controllers/websockets/handlewebsocketserver";
-import { database } from "./models/mongoclient"
-import { handleDbConnection } from "./controllers/db/handledbconnection";
+import { database, dbURI, dbOptions } from "./models/mongoclient"
+import { createDbConnection } from "./controllers/db/createdbconnection"
 const port = 5000;
 
 const server = http.createServer(app);
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV != "test") {
         console.log(`app listening at port: ${port}`);
         udpHostPort.open();
         webSocketServer.listen(server, handleWebSocketServer(webSocketServer))
-        database.connect((err: Error) => handleDbConnection(database, err))
+        createDbConnection(database, dbURI, dbOptions);
     })
 }
 

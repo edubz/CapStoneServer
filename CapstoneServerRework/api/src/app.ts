@@ -1,10 +1,11 @@
-const express = require("express");
-const app = express();
+import express from "express";
 import { Response, Request } from 'express';
 import { oscRouter } from "./routes/osc";
 import { devicesRouter } from "./routes/devices"
 
-// app.set('view engine', 'html')
+const app = express();
+
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
     res.sendStatus(200);

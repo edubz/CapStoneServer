@@ -1,3 +1,13 @@
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://capstoner:capstone2020@pcc-creative-coding-cap.3cnck.mongodb.net/PCC-Creative-Coding-Capstone?retryWrites=true&w=majority";
-export const database = new MongoClient(uri, { useUnifiedTopology: true });
+import database from "mongoose";
+const dbURI = "mongodb+srv://capstoner:capstone2020@pcc-creative-coding-cap.3cnck.mongodb.net/pcc-capstone-2020-db?retryWrites=true&w=majority";
+
+interface dbOptions {
+    useNewUrlParse: Boolean,
+    useUnifiedToposlogy: Boolean
+}
+
+const dbOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+};
+export { database, dbURI, dbOptions };

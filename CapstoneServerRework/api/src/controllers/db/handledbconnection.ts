@@ -1,7 +1,3 @@
-export const handleDbConnection = (client: any, err: Error) => {
-    if (err) console.log(`Error at db connect: ${err}`);
-    console.log("connected to database");
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-}
+const handleDbConnect = () => console.log('connected to db');
+const handleDbError = (err: Error) => console.log(err);
+export { handleDbConnect, handleDbError }
