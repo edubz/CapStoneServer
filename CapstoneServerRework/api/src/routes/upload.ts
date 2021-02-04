@@ -1,52 +1,35 @@
 import express, { Request, Response } from "express";
-import { Readable } from "stream";
+import path from "path";
 import { database } from "../models/mongoclient";
+import { uploadFileToDatabase } from "../controllers/upload/uploadcontroller"
 const uploadRouter = express.Router();
 
-var fs = require('fs');
-var Grid = require('gridfs-stream');
 const multer = require('multer');
 
-uploadRouter.post("/", (res: Response, req: Request) => {
-    const storage = multer.memoryStorage()
-    const upload = multer({ storage: storage });
-    upload.single('file')(req, res, (err: Error) => {
-        const uploadName = req.body.name;
-
-        let filestreamInput = new Readable();
-        filestreamInput.push(req.file.buffer);
-        filestreamInput.push(null);
-
-        let bucket = Grid(database.connection.db, database.mongo);
-        let filestreamDestination = GridFS.createWriteStream({
-            filename: uploadName
-        });
-        filestreamInput.pipe(filestreamDestination);
-
-
-    })
-
-    var GridFS = Grid(database.connection.db, database.mongo);
-
-    function putFile(path: String, name: String, callback: Function) {
-        var writestream = GridFS.createWriteStream({
-            filename: name
-        });
-        writestream.on('close', function (file: File) {
-            callback(null, file);
-        });
-        fs.createReadStream(path).pipe(writestream);
-    }
-})
+uploadRouter.post("/", uploadFileToDatabase)
 
 uploadRouter.put("/", (req: Request, res: Response) => {
     res.send(200);
 })
 
-uploadRouter.get("/", (req: Request, res: Response) => {
-    res.send(200);
+var gridSchema = new database.Schema({}, { strict: false });
+var files = database.model("File", gridSchema, "fs.files");
+uploadRouter.get("/", async (req: Request, res: Response) => {
+    const uploadedFiles = await files.find({});
+    const fileView = uploadedFiles.map((curr: any) => {
+        const filename = curr.toObject().filename;
+        const uploadDate = curr.toObject().uploadDate;
+        return `${filename} (created: ${uploadDate})`
+    })
+    res.send(fileView);
+})
+
+uploadRouter.get("/testupload", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "..", "/", "views", "/", "uploadform.html"));
 })
 
 uploadRouter.delete("/", (req: Request, res: Response) => {
     res.send(200);
 })
+
+export { uploadRouter };

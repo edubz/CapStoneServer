@@ -1,7 +1,8 @@
 import express from "express";
 import { Response, Request } from 'express';
 import { oscRouter } from "./routes/osc";
-import { devicesRouter } from "./routes/devices"
+import { devicesRouter } from "./routes/devices";
+import { uploadRouter } from "./routes/upload";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use("/osc", oscRouter)
 app.use("/devices", devicesRouter)
+app.use("/upload", uploadRouter)
 
 app.use(express.static("./views"))
 

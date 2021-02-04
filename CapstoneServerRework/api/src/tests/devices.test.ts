@@ -1,5 +1,4 @@
 const request = require('supertest');
-import { connect } from "mongodb";
 import { app } from "../app";
 import { createDbConnection } from "../controllers/db/createdbconnection"
 import { database, dbURI, dbOptions } from "../models/mongoclient"

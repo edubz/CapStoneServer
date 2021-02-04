@@ -10,4 +10,8 @@ const dbOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
-export { database, dbURI, dbOptions };
+
+let dbIsConnected = new Promise((resolve) => {
+    if (database.connection.readyState == 1) resolve;
+})
+export { database, dbURI, dbOptions, dbIsConnected };
