@@ -2,8 +2,9 @@ const streamifier = require("streamifier");
 
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 import { Request, Response } from "express";
-import { GridFSBucket } from "mongodb";
+import { GridFSBucket, ObjectID } from "mongodb";
 import { database } from "../../models/mongoclient";
 import { galleryChunks, galleryFiles } from "../../models/gallery-audio";
 
@@ -21,31 +22,40 @@ const uploadFileToDatabase = async (req: Request, res: Response) => {
 
 const getAllFiles = async (req: Request, res: Response) => {
     const uploadedFiles = await galleryFiles.find({});
-    const fileView = uploadedFiles.map((curr: any) => {
-        const filename = curr.toObject().filename;
-        const uploadDate = curr.toObject().uploadDate;
-        return `${filename} (created: ${uploadDate})`
-    })
-    res.send(fileView);
+    res.send(uploadedFiles);
 }
 
 const deleteFile = async (req: Request, res: Response) => {
-    const filetoDelete = await galleryFiles.find({ "filename": req.headers.params });
+    const filetoDelete = await galleryFiles.find({ "filename": req.query.name });
     await galleryChunks.deleteMany({ files_id: filetoDelete[0]._id })
     await galleryFiles.deleteOne(filetoDelete[0]);
 
     try {
-        res.send(`file: ${req.headers.params} deleted`)
+        res.send(`file: ${req.query.name} deleted`)
     }
     catch (err) {
         res.send(err);
     }
 }
 
+const downloadFile = async (req: Request, res: Response) => {
+    let id = req.query.id?.toString();
+    const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsgallery" });
+    const fileToDownload = fileBucket.openDownloadStream(new ObjectID(id));
+    const writePath = path.join(__dirname, "..", "..", "views", "file.wav");
+    const newFile = fs.createWriteStream(writePath);
+    fileToDownload.pipe(newFile).on("finish", () => res.sendFile(writePath))
+}
+
 const sendGalleryView = (req: Request, res: Response) => {
-    const galleryViewPath = path.join(__dirname, "..", "..", "views", "galleryuploadform.html")
+    const galleryViewPath = path.join(__dirname, "..", "..", "views", "galleryfilesview.html")
     res.sendFile(galleryViewPath);
 }
 
-export { uploadFileToDatabase, getAllFiles, deleteFile, sendGalleryView }
+const sendGalleryUploadForm = (req: Request, res: Response) => {
+    const galleryFormPath = path.join(__dirname, "..", "..", "views", "galleryuploadform.html")
+    res.sendFile(galleryFormPath);
+}
+
+export { uploadFileToDatabase, getAllFiles, deleteFile, sendGalleryUploadForm, sendGalleryView, downloadFile }
 

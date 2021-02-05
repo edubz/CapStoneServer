@@ -21,13 +21,13 @@ test('can upload file', async () => {
 })
 
 test('can retreive all files', async () => {
-    const getRes = await testApp.get("/gallery");
+    const getRes = await testApp.get("/gallery/data");
     expect(getRes.body).not.toBe([]);
 })
 
 test('can delete files', async () => {
     const testFileName = "testsound.wav"
-    const deleteRes = await testApp.delete("/gallery").set({ "params": "testsound.wav" });
+    const deleteRes = await testApp.delete("/gallery").query({ name: "testsound.wav" });
     expect(deleteRes.status).toBe(200);
     expect(deleteRes.text).toBe(`file: ${testFileName} deleted`)
 })

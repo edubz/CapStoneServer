@@ -1,11 +1,14 @@
 import express from "express";
-import { getAllFiles, uploadFileToDatabase, deleteFile, sendGalleryView } from "../controllers/gallery/gallerycontroller";
+import { getAllFiles, uploadFileToDatabase, deleteFile, sendGalleryUploadForm, sendGalleryView, downloadFile } from "../controllers/gallery/gallerycontroller";
 
 const galleryRouter = express.Router();
 
 galleryRouter.post("/", uploadFileToDatabase);
-galleryRouter.get("/", getAllFiles);
+galleryRouter.get("/", sendGalleryView)
 galleryRouter.delete("/", deleteFile);
-galleryRouter.get("/testupload", sendGalleryView)
+
+galleryRouter.get("/data", getAllFiles);
+galleryRouter.get("/file*", downloadFile);
+galleryRouter.get("/testupload", sendGalleryUploadForm);
 
 export { galleryRouter };
