@@ -16,7 +16,7 @@ afterAll((done) => {
 });
 
 test('can upload file', async () => {
-    const postRes = await testApp.post("/uploads").attach('uploaded_file', testFilePath);
+    const postRes = await testApp.post("/uploads").attach('user_file', testFilePath);
     expect(postRes.status).toBe(302);
 })
 
