@@ -15,17 +15,11 @@ test('port is 5000', () => {
     expect(port).toBe(5000);
 })
 
-// test('router exists', async () => {
-//     const r = await router;
-//     expect(r).not.toBeUndefined();
-//     expect(r).not.toBeNull();
-// })
-
 test('app is running in test env', async () => {
     try {
         await request(app)
             .get('/')
-            .expect('OK')
+            .expect(200)
     }
     catch (err) {
         throw err;

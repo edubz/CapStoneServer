@@ -11,10 +11,8 @@
     <script type = "text/javascript"> 
         const socket = io.connect("http://localhost:5000");
         const valueElement = document.querySelector(".oscValue");
-        socket.on("connect", () => console.log("hi"))
         socket.on("osc message", (message) => {
             valueElement.innerHTML = `address: ${message.address} <br> message: ${message.args[0].value}`;
-            console.log(message);
         })
     </script>
 </body>

@@ -1,36 +1,46 @@
 import { Request, Response } from "express";
+import path from "path";
 import { devices } from "../../models/device"
 
 const getAllDevices = async (req: Request, res: Response) => {
     const allDevices = await devices.find({});
     try {
-        res.send(allDevices);
+        res.status(200).send(allDevices);
     }
     catch (err: any) {
-        res.send(err);
+        res.status(500).send(err);
     }
 }
 
 const createNewDeviceListing = async (req: Request, res: Response) => {
+    console.log(req.body);
     await devices.create(req.body);
     try {
-        res.json(`created document: ${req.body.toString()}`);
+        res.end();
     }
     catch (err) {
-        res.json(err);
+        res.status(500).send(err);
     }
-
 }
 
 const deleteDeviceListing = async (req: Request, res: Response) => {
     await devices.deleteOne(req.body);
     try {
-        res.send("deleted data");
+        res.sendStatus(200);
     }
     catch (err: any) {
-        throw err;
-        res.sendStatus(500);
+        res.status(500).send(err);
     }
 }
 
-export { getAllDevices, createNewDeviceListing, deleteDeviceListing };
+const sendDevicesView = (req: Request, res: Response) => {
+    const deviceViewPath = path.join(__dirname, "..", "..", "views", "devicesview.html");
+    res.sendFile(deviceViewPath);
+};
+
+const sendRegisterForm = (req: Request, res: Response) => {
+    const registerFormPath = path.join(__dirname, "..", "..", "views", "deviceregisterform.html");
+    res.sendFile(registerFormPath);
+}
+
+export { getAllDevices, createNewDeviceListing, deleteDeviceListing, sendDevicesView, sendRegisterForm };

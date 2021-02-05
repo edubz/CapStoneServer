@@ -9,7 +9,7 @@ const deviceSchema = new database.Schema({
         type: String,
         required: true
     },
-    last_active: {
+    lastactive: {
         type: String
     }
 })

@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import { Response, Request } from 'express';
 import { oscRouter } from "./routes/osc";
 import { devicesRouter } from "./routes/devices";
@@ -8,6 +9,10 @@ import { galleryRouter } from "./routes/gallery";
 const app = express();
 
 app.use(express.json())
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(express.static("./views"))
 

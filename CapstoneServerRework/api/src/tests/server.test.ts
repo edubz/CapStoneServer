@@ -12,6 +12,9 @@ test('is port defined', () => {
     expect(port).not.toBeUndefined();
 })
 
+test('server is listening', () => {
+    expect(server.listening).toBe(true);
+})
 
 
 

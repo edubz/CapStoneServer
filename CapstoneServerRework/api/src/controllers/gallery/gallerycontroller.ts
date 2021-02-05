@@ -8,14 +8,14 @@ import { GridFSBucket, ObjectID } from "mongodb";
 import { database } from "../../models/mongoclient";
 import { galleryChunks, galleryFiles } from "../../models/gallery-audio";
 
-const uploadFileToDatabase = async (req: Request, res: Response) => {
+const uploadFileToDatabase = (req: Request, res: Response) => {
     const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsgallery" });
     const storage = multer.memoryStorage();
     const upload = multer({ storage: storage });
     upload.single('gallery_file')(req, res, (err: any) => {
         const readStream = streamifier.createReadStream(req.file.buffer);
         const uploadStream = fileBucket.openUploadStream(req.file.originalname);
-        readStream.pipe(uploadStream).on("finish", () => res.redirect("/gallery"));
+        readStream.pipe(uploadStream).on("finish", () => res.sendStatus(200));
         if (err) res.send(err);
     })
 }
@@ -38,11 +38,11 @@ const deleteFile = async (req: Request, res: Response) => {
     }
 }
 
-const downloadFile = async (req: Request, res: Response) => {
+const downloadFile = (req: Request, res: Response) => {
     let id = req.query.id?.toString();
     const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsgallery" });
     const fileToDownload = fileBucket.openDownloadStream(new ObjectID(id));
-    const writePath = path.join(__dirname, "..", "..", "views", "file.wav");
+    const writePath = path.join(__dirname, "controllers", "file.wav");
     const newFile = fs.createWriteStream(writePath);
     fileToDownload.pipe(newFile).on("finish", () => res.sendFile(writePath))
 }
