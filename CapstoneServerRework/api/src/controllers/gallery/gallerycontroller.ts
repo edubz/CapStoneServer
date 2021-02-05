@@ -42,7 +42,7 @@ const downloadFile = (req: Request, res: Response) => {
     let id = req.query.id?.toString();
     const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsgallery" });
     const fileToDownload = fileBucket.openDownloadStream(new ObjectID(id));
-    const writePath = path.join(__dirname, "controllers", "file.wav");
+    const writePath = path.join(__dirname, "file.wav");
     const newFile = fs.createWriteStream(writePath);
     fileToDownload.pipe(newFile).on("finish", () => res.sendFile(writePath))
 }
