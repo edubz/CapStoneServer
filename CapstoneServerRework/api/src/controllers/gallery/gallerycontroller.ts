@@ -1,12 +1,13 @@
-import multer from "multer";
-import { Request, Response } from "express";
-import { database } from "../../models/mongoclient";
-import { userChunks, userFiles } from "../../models/user-submitted-audio"
-import { GridFSBucket } from "mongodb";
 const streamifier = require("streamifier");
 
+import multer from "multer";
+import { Request, Response } from "express";
+import { GridFSBucket } from "mongodb";
+import { database } from "../../models/mongoclient";
+import { galleryChunks, galleryFiles } from "../../models/gallery-audio";
+
 const uploadFileToDatabase = async (req: Request, res: Response) => {
-    const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsuser" });
+    const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsgallery" });
     const storage = multer.memoryStorage();
     const upload = multer({ storage: storage });
     upload.single('uploaded_file')(req, res, (err: any) => {
@@ -18,7 +19,7 @@ const uploadFileToDatabase = async (req: Request, res: Response) => {
 }
 
 const getAllFiles = async (req: Request, res: Response) => {
-    const uploadedFiles = await userFiles.find({});
+    const uploadedFiles = await galleryFiles.find({});
     const fileView = uploadedFiles.map((curr: any) => {
         const filename = curr.toObject().filename;
         const uploadDate = curr.toObject().uploadDate;
@@ -28,9 +29,9 @@ const getAllFiles = async (req: Request, res: Response) => {
 }
 
 const deleteFile = async (req: Request, res: Response) => {
-    const fileToDelete = await userFiles.find({ "filename": { $eq: req.headers.params } });
-    await userFiles.deleteMany(fileToDelete[0]);
-    await userChunks.deleteMany({ files_id: fileToDelete[0]._id })
+    const filetoDelete = await galleryFiles.find({ "filename": req.headers.params });
+    await galleryFiles.deleteOne(filetoDelete[0]);
+    await galleryChunks.deleteMany({ files_id: filetoDelete[0]._id })
 
     try {
         res.send(`file: ${req.headers.params} deleted`)
@@ -41,3 +42,4 @@ const deleteFile = async (req: Request, res: Response) => {
 }
 
 export { uploadFileToDatabase, getAllFiles, deleteFile }
+
