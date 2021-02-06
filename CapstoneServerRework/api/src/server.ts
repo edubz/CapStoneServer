@@ -5,15 +5,22 @@ import { handleWebSocketServer } from "./controllers/websockets/handlewebsockets
 import { database, dbURI, dbOptions } from "./models/mongoclient"
 import { createDbConnection } from "./controllers/db/createdbconnection"
 
+const osc = require("osc");
 const port = 5000;
 
 const server = http.createServer(app);
-const webSocketServer = require("socket.io").listen(server);
+const webSocketServer = require("socket.io")(server);
+
+const testUdpPort = new osc.udpPort({
+    localAddress: "127.0.0.1",
+    localPort: 57121,
+    metadata: true
+})
 
 if (process.env.NODE_ENV != "test") {
     server.listen(port, () => {
         console.log(`app listening at port: ${port}`);
-        udpHostPort.open();
+        testUdpPort.open();
         createDbConnection(database, dbURI, dbOptions);
     })
 }
