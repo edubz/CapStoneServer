@@ -8,7 +8,7 @@ import { createDbConnection } from "./controllers/db/createdbconnection"
 const port = 5000;
 
 const server = http.createServer(app);
-const webSocketServer = require("socket.io").listen(server);
+const webSocketServer = require("socket.io");
 
 if (process.env.NODE_ENV != "test") {
     server.listen(port, () => {
