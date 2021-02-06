@@ -22,6 +22,8 @@ if (process.env.NODE_ENV != "test") {
         console.log(`app listening at port: ${port}`);
         testUdpPort.open();
         createDbConnection(database, dbURI, dbOptions);
+        testUdpPort.on("ready", () => console.log("osc started"))
+        testUdpPort.on("error", (err: any) => console.log(err))
     })
 }
 
