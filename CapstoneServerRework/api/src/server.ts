@@ -8,13 +8,12 @@ import { createDbConnection } from "./controllers/db/createdbconnection"
 const port = 5000;
 
 const server = http.createServer(app);
-const webSocketServer = require("socket.io");
+const webSocketServer = require("socket.io").listen(server);
 
 if (process.env.NODE_ENV != "test") {
     server.listen(port, () => {
         console.log(`app listening at port: ${port}`);
         udpHostPort.open();
-        webSocketServer.listen(server, handleWebSocketServer(webSocketServer))
         createDbConnection(database, dbURI, dbOptions);
     })
 }
