@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
-import path from "path";
-import { uploadFileToDatabase, getAllFiles, deleteFile, sendUserUploadView } from "../controllers/upload/uploadcontroller"
+import { uploadFileToDatabase, getAllFiles, deleteFile, sendUserUploadView, sendUserFilesView, downloadFile } from "../controllers/upload/uploadcontroller"
 
 const uploadRouter = express.Router();
 
@@ -11,7 +10,10 @@ uploadRouter.put("/", (req: Request, res: Response) => {
     res.send(200);
 })
 
-uploadRouter.get("/", getAllFiles)
+uploadRouter.get("/", sendUserFilesView);
+
+uploadRouter.get("/data", getAllFiles);
+uploadRouter.get("/file*", downloadFile);
 
 uploadRouter.delete("/", deleteFile)
 

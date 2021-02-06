@@ -9,7 +9,7 @@
     <p class="oscValue">Awaiting Osc Message</p>
     <script src="/socket.io/socket.io.js"></script>
     <script type = "text/javascript"> 
-        const socket = io.connect("http://localhost:5000");
+        const socket = io.connect(process.env.URL);
         const valueElement = document.querySelector(".oscValue");
         socket.on("osc message", (message) => {
             valueElement.innerHTML = `address: ${message.address} <br> message: ${message.args[0].value}`;

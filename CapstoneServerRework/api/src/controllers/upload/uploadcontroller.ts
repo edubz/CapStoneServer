@@ -1,5 +1,7 @@
 const streamifier = require("streamifier");
 
+import fs from "fs";
+import { ObjectID } from "mongodb";
 import multer from "multer";
 import path from "path";
 import { Request, Response } from "express";
@@ -21,16 +23,12 @@ const uploadFileToDatabase = async (req: Request, res: Response) => {
 
 const getAllFiles = async (req: Request, res: Response) => {
     const uploadedFiles = await userFiles.find({});
-    const fileView = uploadedFiles.map((curr: any) => {
-        const filename = curr.toObject().filename;
-        const uploadDate = curr.toObject().uploadDate;
-        return `${filename} (created: ${uploadDate})`
-    })
-    res.send(fileView);
+    res.send(uploadedFiles);
 }
 
 const deleteFile = async (req: Request, res: Response) => {
-    const fileToDelete = await userFiles.find({ "filename": { $eq: req.headers.params } });
+    console.log(req.query.name)
+    const fileToDelete = await userFiles.find({ "filename": { $eq: req.query.name } });
     await userChunks.deleteMany({ files_id: fileToDelete[0]._id })
     await userFiles.deleteMany(fileToDelete[0]);
 
@@ -42,8 +40,21 @@ const deleteFile = async (req: Request, res: Response) => {
     }
 }
 
+const downloadFile = (req: Request, res: Response) => {
+    let id = req.query.id?.toString();
+    const fileBucket = new GridFSBucket(database.connection.db, { bucketName: "fsuser" });
+    const fileToDownload = fileBucket.openDownloadStream(new ObjectID(id));
+    const writePath = path.join(__dirname, "file.wav");
+    const newFile = fs.createWriteStream(writePath);
+    fileToDownload.pipe(newFile).on("finish", () => res.sendFile(writePath))
+}
+
 const sendUserUploadView = (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "..", "..", "/", "views", "/", "useruploadform.html"));
 }
 
-export { uploadFileToDatabase, getAllFiles, deleteFile, sendUserUploadView }
+const sendUserFilesView = (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "..", "..", "/", "views", "/", "userfilesview.html"))
+}
+
+export { uploadFileToDatabase, getAllFiles, deleteFile, sendUserUploadView, sendUserFilesView, downloadFile }

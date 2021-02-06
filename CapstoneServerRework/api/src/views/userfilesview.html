@@ -2,30 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input API Devices</title>
+    <title>Input API Gallery</title>
 </head>
 <body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         const entryListContainer = document.createElement("ul");
-        axios.get("/devices/data")
+        axios.get("/uploads/data")
         .then((res) => {
-            
+            console.log(res.data)
             if (res.data.length < 1){
                 var noFilesMessage = document.createElement("P");
-                noFilesMessage.innerHTML = "No devices in db";
+                noFilesMessage.innerHTML = "No audio files in uploads db";
                 var linkToUpload = document.createElement("a");
-                linkToUpload.innerHTML = "Register one.";
-                linkToUpload.href = "/devices/testregister";
+                linkToUpload.innerHTML = "Upload one.";
+                linkToUpload.href = "/uploads/testupload"
                 document.body.appendChild(noFilesMessage);
                 document.body.appendChild(linkToUpload);
             } 
             res.data.forEach((entry) => {
-                console.log(entry);
+                
                 const listElement = document.createElement("li");
-                listElement.innerHTML = `name: ${entry.name} <br> id: ${entry.id} <br> last active: ${entry.lastactive}`;
+                listElement.innerHTML = `${entry.filename} (created at ${entry.uploadDate})`;
                 listElement.style.display = "flex";
                 listElement.style.margin = "10px";
                 
@@ -33,15 +32,27 @@
                 deleteButton.type = "submit";
                 deleteButton.value = "delete";
                 deleteButton.onclick = function(){
-                        axios.delete("/devices", {params: { name: entry.name} }).then(() => {
+                        axios.delete("/uploads", {params: { name: entry.filename} }).then(() => {
                             console.log('made delete request')
                             location.reload();
                         })
                         .catch((err) => console.log(err));
                     }
-
-                    listElement.appendChild(document.createElement("br"))
+                    const openForm = document.createElement("form");
+                    openForm.method = "GET";
+                    openForm.action = "/uploads/file";
+                    const hiddenInput = document.createElement("input");
+                    hiddenInput.style.display = "none";
+                    hiddenInput.name = "id";
+                    hiddenInput.value = entry._id;
+                    const openButton = document.createElement("input");
+                    openButton.type = "submit";
+                    openButton.value = "open";
+                    
+                    openForm.append(hiddenInput);
+                    openForm.append(openButton);
                     listElement.appendChild(deleteButton);
+                    listElement.appendChild(openForm);
                     entryListContainer.appendChild(listElement);
                 })
                 document.body.appendChild(entryListContainer);

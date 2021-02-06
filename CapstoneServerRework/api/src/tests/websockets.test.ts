@@ -18,7 +18,7 @@ beforeAll((done) => {
     testUdpHost.open();
     udpTestSender.open();
     webSocketServer.listen(server, handleWebSocketServer(webSocketServer))
-    socket = ioClient("http://localhost:5000");
+    socket = ioClient(process.env.URL);
     done();
 })
 

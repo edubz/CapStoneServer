@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         const entryListContainer = document.createElement("ul");
-        axios.get("http://localhost:5000/gallery/data")
+        axios.get("/gallery/data")
         .then((res) => {
             console.log(res.data)
             if (res.data.length < 1){
