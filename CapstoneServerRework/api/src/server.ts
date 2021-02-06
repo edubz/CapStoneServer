@@ -5,6 +5,7 @@ import { handleWebSocketServer } from "./controllers/websockets/handlewebsockets
 import { database, dbURI, dbOptions } from "./models/mongoclient"
 import { createDbConnection } from "./controllers/db/createdbconnection"
 import { oscMessage } from './models/oscmessage';
+import { passOscToWebsockets } from './controllers/passosctowebsockets';
 
 const osc = require("osc");
 const port = 5000;
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV != "test") {
         udpHostPort.on("ready", () => console.log("osc started"))
         udpHostPort.on("error", (err: any) => console.log(err))
         udpHostPort.on("message", (m: oscMessage) => console.log(m))
+        passOscToWebsockets();
     })
 }
 

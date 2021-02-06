@@ -13,7 +13,7 @@
         socket.on("connect", () => console.log("connected to wss"))
         socket.on("error", (err) => console.log(err))
         const valueElement = document.querySelector(".oscValue");
-        socket.on("message", (message) => {
+        socket.on("osc message", (message) => {
             console.log(message)
             valueElement.innerHTML = `address: ${message.address} <br> message: ${message.args[0].value}`;
         })
