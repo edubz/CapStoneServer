@@ -4,6 +4,7 @@ import { oscMessage } from "../models/oscmessage"
 
 export const passOscToWebsockets = () => {
     udpHostPort.on("message", (message: oscMessage) => {
+        console.log('message');
         webSocketServer.emit("osc message", message);
     })
 }
