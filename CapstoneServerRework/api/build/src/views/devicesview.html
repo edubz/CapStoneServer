@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input API Devices</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const entryListContainer = document.createElement("ul");
+        axios.get("/devices/data")
+        .then((res) => {
+            
+            if (res.data.length < 1){
+                var noFilesMessage = document.createElement("P");
+                noFilesMessage.innerHTML = "No devices in db";
+                var linkToUpload = document.createElement("a");
+                linkToUpload.innerHTML = "Register one.";
+                linkToUpload.href = "/devices/testregister";
+                document.body.appendChild(noFilesMessage);
+                document.body.appendChild(linkToUpload);
+            } 
+            res.data.forEach((entry) => {
+                console.log(entry);
+                const listElement = document.createElement("li");
+                listElement.innerHTML = `name: ${entry.name} <br> id: ${entry.id} <br> last active: ${entry.lastactive}`;
+                listElement.style.display = "flex";
+                listElement.style.margin = "10px";
+                
+                const deleteButton = document.createElement("input");
+                deleteButton.type = "submit";
+                deleteButton.value = "delete";
+                deleteButton.onclick = function(){
+                        axios.delete("/devices", {params: { name: entry.name} }).then(() => {
+                            console.log('made delete request')
+                            location.reload();
+                        })
+                        .catch((err) => console.log(err));
+                    }
+
+                    listElement.appendChild(document.createElement("br"))
+                    listElement.appendChild(deleteButton);
+                    entryListContainer.appendChild(listElement);
+                })
+                document.body.appendChild(entryListContainer);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    </script>
+</body>
+</html>

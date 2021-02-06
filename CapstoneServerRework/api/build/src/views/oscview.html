@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input API OSC</title>
+</head>
+<body>
+    <p class="oscValue">Awaiting Osc Message</p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type = "text/javascript"> 
+        const socket = io.connect();
+        const valueElement = document.querySelector(".oscValue");
+        socket.on("osc message", (message) => {
+            valueElement.innerHTML = `address: ${message.address} <br> message: ${message.args[0].value}`;
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input API Gallery</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const entryListContainer = document.createElement("ul");
+        axios.get("/gallery/data")
+        .then((res) => {
+            console.log(res.data)
+            if (res.data.length < 1){
+                var noFilesMessage = document.createElement("P");
+                noFilesMessage.innerHTML = "No audio files in gallery db";
+                var linkToUpload = document.createElement("a");
+                linkToUpload.innerHTML = "Upload one.";
+                linkToUpload.href = "/gallery/testupload"
+                document.body.appendChild(noFilesMessage);
+                document.body.appendChild(linkToUpload);
+            } 
+            res.data.forEach((entry) => {
+                
+                const listElement = document.createElement("li");
+                listElement.innerHTML = `${entry.filename} (created at ${entry.uploadDate})`;
+                listElement.style.display = "flex";
+                listElement.style.margin = "10px";
+                
+                const deleteButton = document.createElement("input");
+                deleteButton.type = "submit";
+                deleteButton.value = "delete";
+                deleteButton.onclick = function(){
+                        axios.delete("/gallery", {params: { name: entry.filename} }).then(() => {
+                            console.log('made delete request')
+                            location.reload();
+                        })
+                        .catch((err) => console.log(err));
+                    }
+                    const openForm = document.createElement("form");
+                    openForm.method = "GET";
+                    openForm.action = "/gallery/file";
+                    const hiddenInput = document.createElement("input");
+                    hiddenInput.style.display = "none";
+                    hiddenInput.name = "id";
+                    hiddenInput.value = entry._id;
+                    const openButton = document.createElement("input");
+                    openButton.type = "submit";
+                    openButton.value = "open";
+                    
+                    openForm.append(hiddenInput);
+                    openForm.append(openButton);
+                    listElement.appendChild(deleteButton);
+                    listElement.appendChild(openForm);
+                    entryListContainer.appendChild(listElement);
+                })
+                document.body.appendChild(entryListContainer);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    </script>
+</body>
+</html>
