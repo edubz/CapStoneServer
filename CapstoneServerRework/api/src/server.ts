@@ -4,6 +4,7 @@ import { udpHostPort } from "./models/udphostport";
 import { handleWebSocketServer } from "./controllers/websockets/handlewebsocketserver";
 import { database, dbURI, dbOptions } from "./models/mongoclient"
 import { createDbConnection } from "./controllers/db/createdbconnection"
+import { oscMessage } from './models/oscmessage';
 
 const osc = require("osc");
 const port = 5000;
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV != "test") {
         createDbConnection(database, dbURI, dbOptions);
         testUdpPort.on("ready", () => console.log("osc started"))
         testUdpPort.on("error", (err: any) => console.log(err))
+        testUdpPort.on("message", (m: oscMessage) => console.log(m))
     })
 }
 
