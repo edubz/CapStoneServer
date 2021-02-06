@@ -25,6 +25,4 @@ if (process.env.NODE_ENV != "test") {
     })
 }
 
-udpHostPort.on("ready", console.log("osc could start"))
-
 export { port, server, webSocketServer };
