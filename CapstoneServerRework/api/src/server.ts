@@ -13,7 +13,7 @@ const server = http.createServer(app);
 const webSocketServer = require("socket.io")(server);
 
 const testUdpPort = new osc.UDPPort({
-    localAddress: "127.0.0.1",
+    localAddress: "159.203.191.234",
     localPort: 57121,
     metadata: true
 })
