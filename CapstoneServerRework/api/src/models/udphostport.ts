@@ -1,2 +1,2 @@
 import { createUdpPort } from "../controllers/osc/createudpport"
-export const udpHostPort = createUdpPort("0.0.0.0", 57121);
+export const udpHostPort = createUdpPort("127.0.0.7", 57121);
