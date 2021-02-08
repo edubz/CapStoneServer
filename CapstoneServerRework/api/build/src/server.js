@@ -10,18 +10,12 @@ const udphostport_1 = require("./models/udphostport");
 const mongoclient_1 = require("./models/mongoclient");
 const createdbconnection_1 = require("./controllers/db/createdbconnection");
 const passosctowebsockets_1 = require("./controllers/passosctowebsockets");
-const osc = require("osc");
 const port = 5000;
 exports.port = port;
 const server = http_1.default.createServer(app_1.app);
 exports.server = server;
 const webSocketServer = require("socket.io")(server);
 exports.webSocketServer = webSocketServer;
-// const hostUdpPort = new osc.UDPPort({
-//     localAddress: "159.203.191.234",
-//     localPort: 57121,
-//     metadata: true
-// })
 if (process.env.NODE_ENV != "test") {
     server.listen(port, () => {
         console.log(`app listening at port: ${port}`);

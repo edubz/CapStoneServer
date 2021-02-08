@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input API OSC</title>
+    <title>Input API: OSC</title>
 </head>
 <body>
+    <h1>Input API</h1>
+    <h2>OSC View</h2>
     <p class="oscValue">Awaiting Osc Message</p>
     <script src="/socket.io/socket.io.js"></script>
     <script type = "text/javascript"> 
-        const socket = io.connect();
+        const socket = io.connect("ws://159.203.191.234");
+        socket.on("connect", () => console.log("connected to wss"))
+        socket.on("error", (err) => console.log(err))
         const valueElement = document.querySelector(".oscValue");
         socket.on("osc message", (message) => {
+            console.log(message)
             valueElement.innerHTML = `address: ${message.address} <br> message: ${message.args[0].value}`;
         })
     </script>
