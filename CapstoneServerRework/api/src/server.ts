@@ -18,7 +18,6 @@ if (process.env.NODE_ENV != "test") {
         createDbConnection(database, dbURI, dbOptions);
         udpHostPort.on("ready", () => console.log("osc started"))
         udpHostPort.on("error", (err: any) => console.log(err))
-        udpHostPort.on("message", (m: oscMessage) => console.log(m))
         passOscToWebsockets();
     })
 }

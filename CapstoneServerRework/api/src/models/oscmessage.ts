@@ -1,6 +1,6 @@
 interface oscArgs {
     type: String,
-    value: String
+    value: String | Number;
 }
 
 export interface oscMessage {

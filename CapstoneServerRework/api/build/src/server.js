@@ -23,7 +23,6 @@ if (process.env.NODE_ENV != "test") {
         createdbconnection_1.createDbConnection(mongoclient_1.database, mongoclient_1.dbURI, mongoclient_1.dbOptions);
         udphostport_1.udpHostPort.on("ready", () => console.log("osc started"));
         udphostport_1.udpHostPort.on("error", (err) => console.log(err));
-        udphostport_1.udpHostPort.on("message", (m) => console.log(m));
         passosctowebsockets_1.passOscToWebsockets();
     });
 }
