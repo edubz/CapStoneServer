@@ -2,14 +2,14 @@
 #include <WiFiUdp.h>  
 #include <OSCMessage.h>
 
-const char * ssid = "wifi_ssid";
-const char * password = "wifi-pass";
+const char * ssid = "*******";
+const char * password = "******";
 
 int sensorValue = 0;
 int sensorPin = 36; //
 
-IPAddress outIp(75, 164, 81, 220); //public ip of the computer running max
-const unsigned int outPort = 9999;
+IPAddress outIp(159, 203, 191, 234); //public ip of the server
+const unsigned int outPort = 57121;
 WiFiUDP Udp;
 
 void setup(){
@@ -33,9 +33,9 @@ void loop(){
 
     sensorValue = analogRead(sensorPin);
     
-//    Serial.print("sensor = ");
-//    Serial.print(sensorValue);
-    OSCMessage msg("/sensor");
+    Serial.print("sensor = ");
+    Serial.println(sensorValue);
+    OSCMessage msg("/koalaFlex");
     msg.add(sensorValue);
     Udp.beginPacket(outIp, outPort);
     msg.send(Udp); // send the bytes to the SLIP stream
