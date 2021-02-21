@@ -10,7 +10,6 @@ module.exports = {
     extends: [
         "plugin:react/recommended",
       "plugin:@typescript-eslint/recommended",
-      "prettier/@typescript-eslint",
       "plugin:prettier/recommended"
     ],
     settings: {
@@ -19,7 +18,9 @@ module.exports = {
       }
     },
     rules: {
-      // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-      // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    },
+      // suppress errors for missing 'import React' in files
+     "react/react-in-jsx-scope": "off",
+      // allow jsx syntax in js files (for next.js project)
+     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }], //should add ".ts" if typescript project
+    }
   };
