@@ -2,7 +2,7 @@ import { HeaderContainer } from './headerstyle';
 import { Title, TitleContainer } from '../components/header/title';
 import { NavContainer, NavList, NavItem, NavLink, NavButton } from '../components/header/nav';
 import React from 'react';
-export function Header() {
+export const Header = () => {
     return (
         <>
             <HeaderContainer>
@@ -12,20 +12,20 @@ export function Header() {
                 <NavContainer>
                     <NavList>
                         <NavItem>
-                            <NavLink>HOME</NavLink>
+                            <NavLink href="/">HOME</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink>DEVICES</NavLink>
+                            <NavLink href="/devices">DEVICES</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink>GALLERY</NavLink>
+                            <NavLink href="/gallery">GALLERY</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavButton>REGISTER</NavButton>
+                            <NavButton href="/register">REGISTER</NavButton>
                         </NavItem>
                     </NavList>
                 </NavContainer>
             </HeaderContainer>
         </>
     );
-}
+};

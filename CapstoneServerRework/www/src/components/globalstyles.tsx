@@ -29,15 +29,16 @@ export const GlobalStyle = createGlobalStyle`
     p {margin-bottom: 1rem;}
 
     h2, h3, h4, h5, a {
-        margin: 3rem 0 1.38rem;
+        margin: 2rem 0 1.38rem;
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         line-height: 1.3;
+        padding-left: 1.5vw;
     }
 
     h1 {
         margin-top: 0;
-        font-size: 3.052rem;
+        font-size: 3.52rem;
     }
 
     h2 {font-size: 2.441rem;}
