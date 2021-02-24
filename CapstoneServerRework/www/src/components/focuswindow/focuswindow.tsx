@@ -24,6 +24,6 @@ export const FocusWindow = styled.section`
         opacity: 0.1;
     }
 
-    border: 2px solid ${Colors.dark};
+    border: 2px solid ${Colors.lightest};
     border-radius: 10px;
 `;

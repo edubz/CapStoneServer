@@ -10,6 +10,9 @@ export const Section = styled.section`
     height: ${(props: Props) => (props.primary ? '80vh' : '85vh')};
     max-height: 1440px;
     min-height: 700px;
-    background-color: ${(props: Props) => (props.dark ? Colors.mid : Colors.light)};
+    background: linear-gradient(
+        ${(props: Props) => (props.dark ? Colors.dark : Colors.light)},
+        ${(props: Props) => (props.dark ? Colors.dark : Colors.dark)}
+    );
     padding-top: 1.125vh;
 `;

@@ -8,6 +8,7 @@ const TitleContainer = styled.div`
 const Title = styled.h1`
     width: 50vw;
     padding-left: 1.5vw;
+    padding-top: 1.5vh;
     letter-spacing: 10px;
 `;
 

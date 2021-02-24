@@ -20,14 +20,15 @@ export const NavItem = styled.li``;
 
 export const NavLink = styled.a`
     text-decoration: none;
-    font-size: 1.25rem;
+    font-size: 1.999rem;
+    font-weight: 600;
 
     :link {
-        color: ${Colors.darkest};
+        color: ${Colors.dark};
     }
 
     :visited {
-        color: ${Colors.darkest};
+        color: ${Colors.dark};
     }
 
     :hover {
@@ -42,17 +43,18 @@ export const NavLink = styled.a`
 export const NavButton = styled.a`
     text-decoration: none;
     background-color: ${Colors.lightest};
-    font-size: 1.25rem;
+    font-size: 1.44rem;
     font-weight: bold;
     padding: 0.75em;
     border-radius: 10px;
+    border: 2px solid ${Colors.dark};
 
     :link {
         color: ${Colors.darkest};
     }
 
     :visited {
-        color: ${Colors.darkest};
+        color: ${Colors.dark};
     }
 
     :hover {

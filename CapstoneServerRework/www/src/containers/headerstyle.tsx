@@ -7,5 +7,5 @@ export const HeaderContainer = styled.header`
 
     padding-top: 0.25em;
 
-    background-color: ${Colors.mid};
+    background-color: ${Colors.light};
 `;

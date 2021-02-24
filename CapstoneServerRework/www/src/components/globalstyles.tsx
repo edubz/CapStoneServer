@@ -1,8 +1,8 @@
 export const Colors = {
-    lightest: '#EEEEEE',
-    light: '#E0E0E0',
+    lightest: '#E6EFE9',
+    light: '#CAD2C5',
     mid: '#BDBDBD',
-    dark: '#828282',
+    dark: '#253237',
     darkest: '#333333',
 };
 
@@ -23,31 +23,31 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         line-height: 1.75;
-        color: ${Colors.darkest}
+        color: ${Colors.dark}
     }
 
     p {margin-bottom: 1rem;}
 
-    h2, h3, h4, h5, a {
-        margin: 2rem 0 1.38rem;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 400;
-        line-height: 1.3;
-        padding-left: 1.5vw;
-    }
+h1, h2, h3, h4, h5 {
+  margin: 3rem 0 1.38rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.3;
+}
 
-    h1 {
-        margin-top: 0;
-        font-size: 3.52rem;
-    }
+h1 {
+  margin-top: 0;
+  font-size: 5.653rem;
+  font-family: 'Rubik', sans-serif;
+}
 
-    h2 {font-size: 2.441rem;}
+h2 {font-size: 2.827rem;}
 
-    h3 {font-size: 1.953rem;}
+h3 {font-size: 2.827rem;}
 
-    h4 {font-size: 1.563rem;}
+h4 {font-size: 1.999rem;}
 
-    h5 {font-size: 1.25rem;}
+h5 {font-size: 1.414rem;}
 
     small, .text_small {font-size: 0.8rem;}
 `;
