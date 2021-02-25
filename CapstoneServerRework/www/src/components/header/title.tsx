@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Colors } from '../globalstyles';
 
 const TitleContainer = styled.div`
     display: flex;
@@ -12,4 +13,9 @@ const Title = styled.h1`
     letter-spacing: 10px;
 `;
 
-export { Title, TitleContainer };
+const TitleLink = styled.a`
+    text-decoration: none;
+    color: ${Colors.darkest};
+`;
+
+export { Title, TitleContainer, TitleLink };

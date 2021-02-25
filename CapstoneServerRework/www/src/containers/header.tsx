@@ -1,5 +1,5 @@
 import { HeaderContainer } from './headerstyle';
-import { Title, TitleContainer } from '../components/header/title';
+import { Title, TitleContainer, TitleLink } from '../components/header/title';
 import { NavContainer, NavList, NavItem, NavLink, NavButton } from '../components/header/nav';
 import React from 'react';
 export const Header = () => {
@@ -7,7 +7,9 @@ export const Header = () => {
         <>
             <HeaderContainer>
                 <TitleContainer>
-                    <Title>THE INPUT</Title>
+                    <TitleLink href="/">
+                        <Title>THE INPUT</Title>
+                    </TitleLink>
                 </TitleContainer>
                 <NavContainer>
                     <NavList>

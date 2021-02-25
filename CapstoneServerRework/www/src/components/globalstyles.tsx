@@ -1,9 +1,9 @@
 export const Colors = {
-    lightest: '#E6EFE9',
-    light: '#CAD2C5',
-    mid: '#BDBDBD',
-    dark: '#253237',
-    darkest: '#333333',
+  lightest: '#E6EFE9',
+  light: '#CAD2C5',
+  mid: '#BDBDBD',
+  dark: '#253237',
+  darkest: '#333333',
 };
 
 import { createGlobalStyle } from 'styled-components';
@@ -19,18 +19,16 @@ export const GlobalStyle = createGlobalStyle`
     html {font-size: 100%;} /*16px*/
 
 body {
-  background: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   line-height: 1.75;
-  color: #000000;
 }
 
 p {margin-bottom: 1rem;}
 
 h1, h2, h3, h4, h5 {
   margin: 3rem 0 1.38rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   line-height: 1.3;
 }
