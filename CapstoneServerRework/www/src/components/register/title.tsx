@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Colors } from '../globalstyles';
 
-export const GalleryDate = styled.h5`
-    margin: 0 2em;
-    width: 15%;
-    font-weight: 600;
+export const FormTitle = styled.h2`
+    text-align: center;
+    margin-top: 0;
+    font-weight: 800;
     color: ${Colors.dark};
 `;

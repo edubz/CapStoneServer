@@ -4,7 +4,7 @@ import { Colors } from '../globalstyles';
 export const FocusWindow = styled.section`
     overflow-y: scroll;
     overflow-x: hidden;
-    margin: 5.5vh auto 11vh auto;
+    margin: 1.5vh auto 11vh auto;
     background-color: ${Colors.mid};
     width: 77vw;
     height: 66vh;

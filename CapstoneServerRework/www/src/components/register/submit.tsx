@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 import { Colors } from '../globalstyles';
 
-export const GalleryButton = styled.a`
-    text-decoration: none;
-    background-color: ${Colors.light};
+export const Submit = styled.input`
+    width: 30%;
+    margin: auto;
     font-size: 16px;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 600;
-    padding: 1em 2em;
-    border-radius: 10px;
+    font-weight: 800;
     border: 2px solid ${Colors.dark};
+    border-radius: 10px;
+    padding: 1em 0;
 
     :link {
-        color: ${Colors.dark};
+        color: ${Colors.darkest};
     }
 
     :visited {
@@ -21,7 +20,6 @@ export const GalleryButton = styled.a`
 
     :hover {
         font-weight: 600;
-        padding: 0.8em 1.8em;
     }
 
     :active {

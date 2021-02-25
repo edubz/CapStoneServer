@@ -10,6 +10,7 @@ import { GalleryDate } from '../components/gallery/date';
 import { GalleryName } from '../components/gallery/name';
 import { GalleryTag } from '../components/gallery/tag';
 import { GalleryButton } from '../components/gallery/button';
+import { FooterText } from '../components/footer/footer';
 
 export const Gallery = () => {
     return (
@@ -34,7 +35,15 @@ export const Gallery = () => {
                     </FlexContainer>
                 </FocusWindow>
             </Section>
-            <Footer>Footer</Footer>
+            <Footer>
+                <FooterText className="text_small">
+                    <a>Insta</a>
+                    <br />
+                    <a>Contact</a>
+                    <br />
+                    <a>Donate</a>
+                </FooterText>
+            </Footer>
         </>
     );
 };

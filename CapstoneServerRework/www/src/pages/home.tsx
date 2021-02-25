@@ -20,7 +20,7 @@ export const Home = () => {
                     <FocusWindow />
                 </Section>
                 <Section primary dark>
-                    <InfoTitle>
+                    <InfoTitle main>
                         In &#38; Out Of Euclidean Closeness, We Disregard Distance To Take Digital Pills &#38; Dive Into
                         The Algorithm Life
                     </InfoTitle>
@@ -58,7 +58,7 @@ export const Home = () => {
                     </InfoCardsContainer>
                 </Section>
             </main>
-            <Footer big>
+            <Footer>
                 <FooterText className="text_small">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ullam at sunt harum debitis, ea hic
                     libero laudantium id dolorem exercitationem minus nesciunt nam, quia voluptatem reiciendis sit
