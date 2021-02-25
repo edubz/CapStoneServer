@@ -18,15 +18,15 @@ export const GlobalStyle = createGlobalStyle`
 
     html {font-size: 100%;} /*16px*/
 
-    body {
-        background: white;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 400;
-        line-height: 1.75;
-        color: ${Colors.dark}
-    }
+body {
+  background: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #000000;
+}
 
-    p {margin-bottom: 1rem;}
+p {margin-bottom: 1rem;}
 
 h1, h2, h3, h4, h5 {
   margin: 3rem 0 1.38rem;
@@ -37,17 +37,17 @@ h1, h2, h3, h4, h5 {
 
 h1 {
   margin-top: 0;
-  font-size: 5.653rem;
-  font-family: 'Rubik', sans-serif;
+  font-size: 3.052rem;
+  font-family: "Rubik", sans-serif;
 }
 
-h2 {font-size: 2.827rem;}
+h2 {font-size: 2.441rem;}
 
-h3 {font-size: 2.827rem;}
+h3 {font-size: 1.953rem;}
 
-h4 {font-size: 1.999rem;}
+h4 {font-size: 1.563rem;}
 
-h5 {font-size: 1.414rem;}
+h5 {font-size: 1.25rem;}
 
-    small, .text_small {font-size: 0.8rem;}
+small, .text_small {font-size: 0.8rem;}
 `;

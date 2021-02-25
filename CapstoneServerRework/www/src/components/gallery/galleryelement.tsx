@@ -3,10 +3,14 @@ import { Colors } from '../globalstyles';
 
 export const GalleryElement = styled.div`
     min-height: 15%;
+    width: 100%;
 
-    border: 2px solid ${Colors.dark};
+    border: 2px solid ${Colors.lightest};
     border-radius: 10px;
-    margin: 1.125% 0;
+    margin: 0.5% 0 0 0;
 
-    background-color: ${Colors.mid};
+    background-color: ${Colors.dark};
+
+    display: flex;
+    align-items: center;
 `;

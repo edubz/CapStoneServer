@@ -5,7 +5,7 @@ export const FocusWindow = styled.section`
     overflow-y: scroll;
     overflow-x: hidden;
     margin: 5.5vh auto 11vh auto;
-    background-color: ${Colors.lightest};
+    background-color: ${Colors.mid};
     width: 77vw;
     height: 66vh;
     min-height: 600px;
@@ -20,10 +20,10 @@ export const FocusWindow = styled.section`
 
     ::-webkit-scrollbar-thumb {
         border-radius: 8px;
-        background: ${Colors.mid};
+        background: ${Colors.dark};
         opacity: 0.1;
     }
 
-    border: 2px solid ${Colors.lightest};
+    border: 2px solid ${Colors.dark};
     border-radius: 10px;
 `;

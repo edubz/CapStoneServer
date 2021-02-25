@@ -20,7 +20,7 @@ export const NavItem = styled.li``;
 
 export const NavLink = styled.a`
     text-decoration: none;
-    font-size: 1.999rem;
+    font-size: 1.25em;
     font-weight: 600;
 
     :link {
@@ -43,8 +43,9 @@ export const NavLink = styled.a`
 export const NavButton = styled.a`
     text-decoration: none;
     background-color: ${Colors.lightest};
-    font-size: 1.44rem;
-    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
     padding: 0.75em;
     border-radius: 10px;
     border: 2px solid ${Colors.dark};
@@ -58,7 +59,7 @@ export const NavButton = styled.a`
     }
 
     :hover {
-        font-weight: 400;
+        font-weight: 600;
         padding: 0.8em;
     }
 

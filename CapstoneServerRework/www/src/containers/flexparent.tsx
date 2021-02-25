@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FlexContainer = styled.div`
-    width: 95%;
+    width: 98%;
     height: 100%;
     margin: auto;
 

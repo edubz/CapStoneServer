@@ -4,8 +4,9 @@ import { Colors } from '../globalstyles';
 export const FooterText = styled.p`
     color: ${Colors.lightest};
     text-align: center;
-    width: 70%;
+    width: 65%;
 
     align-self: center;
     margin: auto;
+    padding: 3em 0 1.5em 0;
 `;

@@ -6,6 +6,9 @@ import { Footer } from '../containers/footer';
 import { FocusWindow } from '../components/focuswindow/focuswindow';
 import { DeviceCard } from '../components/devices/devicecard';
 import { FlexContainer } from '../containers/flexparent';
+import { DeviceImage } from '../components/devices/deviceimage';
+import { DeviceName } from '../components/devices/title';
+import { DeviceValue } from '../components/devices/devicevalue';
 
 export const DevicesPage = () => {
     return (
@@ -15,12 +18,26 @@ export const DevicesPage = () => {
             <Section primary>
                 <FocusWindow>
                     <FlexContainer>
-                        <DeviceCard />
-                        <DeviceCard />
-                        <DeviceCard />
-                        <DeviceCard />
-                        <DeviceCard />
-                        <DeviceCard />
+                        <DeviceCard>
+                            <DeviceImage src={window.location.origin + '/images/stuffedanimal1.jpg'} />
+                            <DeviceName>Jimmy</DeviceName>
+                            <DeviceValue>Value: 1</DeviceValue>
+                        </DeviceCard>
+                        <DeviceCard>
+                            <DeviceImage src={window.location.origin + '/images/stuffedanimal2.jpg'} />
+                            <DeviceName>Kat</DeviceName>
+                            <DeviceValue>Value: 3</DeviceValue>
+                        </DeviceCard>
+                        <DeviceCard>
+                            <DeviceImage src={window.location.origin + '/images/stuffedanimal3.jpg'} />
+                            <DeviceName>Panda</DeviceName>
+                            <DeviceValue>Value: 4</DeviceValue>
+                        </DeviceCard>
+                        <DeviceCard>
+                            <DeviceImage src={window.location.origin + '/images/stuffedanimal4.jpg'} />
+                            <DeviceName>Trashlord</DeviceName>
+                            <DeviceValue>Value: 1</DeviceValue>
+                        </DeviceCard>
                     </FlexContainer>
                 </FocusWindow>
             </Section>
