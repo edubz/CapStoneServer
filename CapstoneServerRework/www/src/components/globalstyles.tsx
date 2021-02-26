@@ -1,9 +1,9 @@
 export const Colors = {
-  lightest: '#E6EFE9',
-  light: '#CAD2C5',
-  mid: '#BDBDBD',
-  dark: '#253237',
-  darkest: '#333333',
+    lightest: '#E6EFE9',
+    light: '#CAD2C5',
+    mid: '#BDBDBD',
+    dark: '#253237',
+    darkest: '#333333',
 };
 
 import { createGlobalStyle } from 'styled-components';

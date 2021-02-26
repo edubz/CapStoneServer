@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { Colors } from '../globalstyles';
 
 export const FocusWindow = styled.section`
-    overflow-y: scroll;
+    overflow-y: ${(props: { noscroll?: boolean }) => (props.noscroll ? 'hidden' : 'scroll')};
     overflow-x: hidden;
     margin: 1.5vh auto 11vh auto;
-    background-color: ${Colors.mid};
+    /* background-color: rgba(255, 255, 255, 0.125); */
     width: 77vw;
     height: 66vh;
     min-height: 600px;
@@ -24,6 +24,6 @@ export const FocusWindow = styled.section`
         opacity: 0.1;
     }
 
-    border: 2px solid ${Colors.dark};
+    /* border: 2px solid ${Colors.dark}; */
     border-radius: 10px;
 `;

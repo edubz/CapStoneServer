@@ -9,6 +9,7 @@ import { InfoCardsContainer } from '../containers/infocards';
 import { InfoTitle } from '../components/infosection/title';
 import { FooterText } from '../components/footer/footer';
 import { InfoBlurb } from '../components/infosection/infoblurb';
+import { ReactiveP5Sketch } from '../components/p5/reactivesketch';
 
 export const Home = () => {
     return (
@@ -17,7 +18,9 @@ export const Home = () => {
             <Header />
             <main>
                 <Section primary>
-                    <FocusWindow />
+                    <FocusWindow id="sketch-container" noscroll>
+                        <ReactiveP5Sketch />
+                    </FocusWindow>
                 </Section>
                 <Section primary dark>
                     <InfoTitle main>

@@ -5,5 +5,5 @@ export const GalleryTag = styled.a`
     width: 27%;
     font-weight: 800;
 
-    color: ${Colors.dark};
+    color: ${Colors.lightest};
 `;

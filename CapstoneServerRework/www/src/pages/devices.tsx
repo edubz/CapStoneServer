@@ -9,6 +9,8 @@ import { FlexContainer } from '../containers/flexparent';
 import { DeviceImage } from '../components/devices/deviceimage';
 import { DeviceName } from '../components/devices/title';
 import { DeviceValue } from '../components/devices/devicevalue';
+import { FooterText } from '../components/footer/footer';
+import { PageTitle } from '../components/pagetitle';
 
 export const DevicesPage = () => {
     return (
@@ -16,6 +18,7 @@ export const DevicesPage = () => {
             <GlobalStyle />
             <Header />
             <Section primary>
+                <PageTitle>DEVICES</PageTitle>
                 <FocusWindow>
                     <FlexContainer>
                         <DeviceCard>
@@ -41,7 +44,15 @@ export const DevicesPage = () => {
                     </FlexContainer>
                 </FocusWindow>
             </Section>
-            <Footer>Footer</Footer>
+            <Footer>
+                <FooterText className="text_small">
+                    <a>Insta</a>
+                    <br />
+                    <a>Contact</a>
+                    <br />
+                    <a>Donate</a>
+                </FooterText>
+            </Footer>
         </>
     );
 };

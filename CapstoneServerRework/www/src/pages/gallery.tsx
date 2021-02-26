@@ -11,6 +11,7 @@ import { GalleryName } from '../components/gallery/name';
 import { GalleryTag } from '../components/gallery/tag';
 import { GalleryButton } from '../components/gallery/button';
 import { FooterText } from '../components/footer/footer';
+import { PageTitle } from '../components/pagetitle';
 
 export const Gallery = () => {
     return (
@@ -18,6 +19,7 @@ export const Gallery = () => {
             <GlobalStyle />
             <Header />
             <Section primary>
+                <PageTitle>GALLERY</PageTitle>
                 <FocusWindow>
                     <FlexContainer column>
                         <GalleryElement>

@@ -5,5 +5,5 @@ export const GalleryName = styled.h4`
     margin: 0;
     width: 35%;
     font-weight: 800;
-    color: ${Colors.dark};
+    color: ${Colors.lightest};
 `;
