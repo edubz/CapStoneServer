@@ -6,16 +6,18 @@ export const Submit = styled.input`
     margin: auto;
     font-size: 16px;
     font-weight: 800;
-    border: 2px solid ${Colors.dark};
+    border: 2px solid ${Colors.lightest};
     border-radius: 10px;
     padding: 1em 0;
+    color: ${Colors.lightest};
+    background-color: ${Colors.dark};
 
     :link {
-        color: ${Colors.darkest};
+        color: ${Colors.lightest};
     }
 
     :visited {
-        color: ${Colors.dark};
+        color: ${Colors.lightest};
     }
 
     :hover {

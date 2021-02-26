@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Colors } from '../globalstyles';
 
 export const RegisterForm = styled.form`
-    background-color: ${Colors.lightest};
+    background-color: ${Colors.dark};
     width: 40%;
     margin: auto;
     margin-top: 10%;

@@ -7,7 +7,7 @@ export const PageWrapper = styled.div`
 
     overflow: hidden;
 
-    background-color: ${Colors.lightest};
+    background-color: ${Colors.light};
     margin: 0;
 
     display: flex;

@@ -5,5 +5,5 @@ export const FormTitle = styled.h2`
     text-align: center;
     margin-top: 0;
     font-weight: 800;
-    color: ${Colors.dark};
+    color: ${Colors.light};
 `;

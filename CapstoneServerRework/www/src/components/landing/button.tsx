@@ -4,7 +4,7 @@ import { Colors } from '../globalstyles';
 export const EnterButton = styled.a`
     text-decoration: none;
     text-align: center;
-    background-color: ${Colors.lightest};
+    background-color: ${Colors.light};
     font-size: 5em;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
