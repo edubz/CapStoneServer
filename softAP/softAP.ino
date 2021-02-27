@@ -40,18 +40,18 @@ void setup() {
     Udp.begin(outPort);
     WiFi.begin(Wifissid , Wifipassword );
     request->send(200, "text/html", HTML);
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
+//    while (WiFi.status() != WL_CONNECTED) {
+//        delay(500);
+//        Serial.print(".");
+//    }
     
-    Serial.println("connected to Wifi");
+    
   });
 }
 
 void loop(){
-
-    //sensorValue = digitalRead(sensorPin);
+    if (WiFi.status() == WL_CONNECTED) Serial.println("connected to Wifi");
+    sensorValue = digitalRead(sensorPin);
     sensorValue++;
     OSCMessage msg("/test_via_softap");
     msg.add(sensorValue);
