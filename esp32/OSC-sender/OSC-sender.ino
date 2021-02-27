@@ -2,8 +2,8 @@
 #include <WiFiUdp.h>  
 #include <OSCMessage.h>
 
-const char * ssid = "*******";
-const char * password = "******";
+const char * ssid = "the_gibson";
+const char * password = "cyfermastertm";
 
 int sensorValue = 0;
 int sensorPin = 36; //

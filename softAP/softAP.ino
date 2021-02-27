@@ -16,10 +16,12 @@ WiFiUDP Udp;
 void setup() {
   Serial.begin(115200);
   WiFi.softAP(ssid, password);
-
+  
   Serial.println();
   Serial.print("IP Address: ");
   Serial.println(WiFi.softAPIP());
+  WiFi.mode(WIFI_AP_STA);
+
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(200, "text/html", HTML);
@@ -35,7 +37,6 @@ void setup() {
     Serial.print(request->getParam(1)->value());
     const char *Wifissid = request->getParam(0)->value().c_str();
     const char *Wifipassword= request->getParam(1)->value().c_str();
-    WiFi.mode(WIFI_STA);
     Udp.begin(outPort);
     WiFi.begin(Wifissid , Wifipassword );
     request->send(200, "text/html", HTML);
@@ -43,15 +44,16 @@ void setup() {
         delay(500);
         Serial.print(".");
     }
-    WiFi.softAPdisconnect();
+    
     Serial.println("connected to Wifi");
   });
 }
 
 void loop(){
 
-    sensorValue = digitalRead(sensorPin);
-    OSCMessage msg("/erikssensor");
+    //sensorValue = digitalRead(sensorPin);
+    sensorValue++;
+    OSCMessage msg("/test_via_softap");
     msg.add(sensorValue);
     Udp.beginPacket(outIp, outPort);
     msg.send(Udp); // send the bytes to the SLIP stream
