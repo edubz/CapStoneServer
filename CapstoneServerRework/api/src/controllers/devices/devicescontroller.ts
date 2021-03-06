@@ -15,7 +15,7 @@ const getAllDevices = async (req: Request, res: Response) => {
 const getDeviceByID = async (req: Request, res: Response) => {
     const serialNumber = req.query.id;
     const device = await devices.findOne({ id: serialNumber })
-    res.status(200).send(device);
+    res.status(200).send(device.name);
 }
 
 const createNewDeviceListing = async (req: Request, res: Response) => {
