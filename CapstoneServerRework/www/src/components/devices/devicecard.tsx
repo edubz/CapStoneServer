@@ -3,7 +3,7 @@ import { Colors } from '../globalstyles';
 
 export const DeviceCard = styled.div`
     max-width: 450px;
-    height: 45%;
+    height: fit-content;
     margin: 1%;
     border-radius: 10px;
     background: ${Colors.dark};

@@ -10,14 +10,19 @@ import { DeviceName } from '../components/devices/title';
 import { DeviceValue } from '../components/devices/devicevalue';
 import { FooterText } from '../components/footer/footer';
 import { PageTitle } from '../components/pagetitle';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { axiosInstance } from '../axios';
-
 export const DevicesPage = () => {
+    const [names, setNames] = useState([]);
+
     useEffect(() => {
         async function fetchDeviceData() {
-            const res = axiosInstance.get('/devices/data');
-            console.log(res);
+            const res = await axiosInstance.get('/devices/data');
+            const namesArray = res.data.map((device: any) => {
+                return device.name;
+            });
+            setNames(namesArray);
+            return res;
         }
         fetchDeviceData();
     }, []);
@@ -30,26 +35,28 @@ export const DevicesPage = () => {
                 <PageTitle>DEVICES</PageTitle>
                 <FocusWindow>
                     <FlexContainer>
-                        <DeviceCard>
-                            <DeviceImage src={window.location.origin + '/images/stuffedanimal1.jpg'} />
-                            <DeviceName>Jimmy</DeviceName>
-                            <DeviceValue>Value: 1</DeviceValue>
-                        </DeviceCard>
-                        <DeviceCard>
-                            <DeviceImage src={window.location.origin + '/images/stuffedanimal2.jpg'} />
-                            <DeviceName>Kat</DeviceName>
-                            <DeviceValue>Value: 3</DeviceValue>
-                        </DeviceCard>
-                        <DeviceCard>
-                            <DeviceImage src={window.location.origin + '/images/stuffedanimal3.jpg'} />
-                            <DeviceName>Panda</DeviceName>
-                            <DeviceValue>Value: 4</DeviceValue>
-                        </DeviceCard>
-                        <DeviceCard>
-                            <DeviceImage src={window.location.origin + '/images/stuffedanimal4.jpg'} />
-                            <DeviceName>Trashlord</DeviceName>
-                            <DeviceValue>Value: 1</DeviceValue>
-                        </DeviceCard>
+                        {names.map((name) => {
+                            return (
+                                <DeviceCard key={name}>
+                                    <DeviceImage src={window.location.origin + '/images/stuffedanimal1.jpg'} />
+                                    <DeviceName key={name}>{name}</DeviceName>
+                                    <DeviceValue>5</DeviceValue>
+                                </DeviceCard>
+                            );
+                        })}
+                        ;
+                        {/* {names.map((device) => {
+                            return (
+                                <DeviceCard key={device}>
+                                    <DeviceImage
+                                        key={device}
+                                        src={window.location.origin + '/images/stuffedanimal1.jpg'}
+                                    />
+                                    <DeviceName key={device}>{device}</DeviceName>
+                                    <DeviceValue key={device}>5</DeviceValue>
+                                </DeviceCard>
+                            );
+                        })} */}
                     </FlexContainer>
                 </FocusWindow>
             </Section>
