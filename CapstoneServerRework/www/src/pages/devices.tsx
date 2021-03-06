@@ -12,8 +12,12 @@ import { FooterText } from '../components/footer/footer';
 import { PageTitle } from '../components/pagetitle';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../axios';
+import io from 'socket.io-client';
+
 export const DevicesPage = () => {
     const [names, setNames] = useState([]);
+    const [value, setValue] = useState([]);
+    const [address, setAddress] = useState([]);
 
     useEffect(() => {
         async function fetchDeviceData() {
@@ -24,7 +28,22 @@ export const DevicesPage = () => {
             setNames(namesArray);
             return res;
         }
+
         fetchDeviceData();
+        const socket = io('ws://159.203.191.234');
+        socket.on('connect', () => console.log('connected to wss'));
+        socket.on('error', (e: any) => console.log(e));
+        socket.on('osc message', (message: any) => {
+            const val = message.map((arg: any) => {
+                return arg.args[0].value;
+            });
+            setValue(val);
+
+            const addressArray = message.map((arg: any) => {
+                return arg.address;
+            });
+            setAddress(addressArray);
+        });
     }, []);
 
     return (
@@ -40,23 +59,14 @@ export const DevicesPage = () => {
                                 <DeviceCard key={name}>
                                     <DeviceImage src={window.location.origin + '/images/stuffedanimal1.jpg'} />
                                     <DeviceName key={name}>{name}</DeviceName>
-                                    <DeviceValue>5</DeviceValue>
+                                    <DeviceValue>
+                                        {value.map((val, index) => {
+                                            if ('/' + name == address[index]) return val;
+                                        })}
+                                    </DeviceValue>
                                 </DeviceCard>
                             );
                         })}
-                        ;
-                        {/* {names.map((device) => {
-                            return (
-                                <DeviceCard key={device}>
-                                    <DeviceImage
-                                        key={device}
-                                        src={window.location.origin + '/images/stuffedanimal1.jpg'}
-                                    />
-                                    <DeviceName key={device}>{device}</DeviceName>
-                                    <DeviceValue key={device}>5</DeviceValue>
-                                </DeviceCard>
-                            );
-                        })} */}
                     </FlexContainer>
                 </FocusWindow>
             </Section>
