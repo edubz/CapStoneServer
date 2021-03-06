@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from '../containers/header';
 import { Section } from '../containers/section';
 import { GlobalStyle } from '../components/globalstyles';
@@ -11,8 +10,18 @@ import { DeviceName } from '../components/devices/title';
 import { DeviceValue } from '../components/devices/devicevalue';
 import { FooterText } from '../components/footer/footer';
 import { PageTitle } from '../components/pagetitle';
+import { useEffect } from 'react';
+import { axiosInstance } from '../axios';
 
 export const DevicesPage = () => {
+    useEffect(() => {
+        async function fetchDeviceData() {
+            const res = axiosInstance.get('/devices/data');
+            console.log(res);
+        }
+        fetchDeviceData();
+    }, []);
+
     return (
         <>
             <GlobalStyle />

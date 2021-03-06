@@ -5,12 +5,14 @@ import { oscRouter } from "./routes/osc";
 import { devicesRouter } from "./routes/devices";
 import { uploadRouter } from "./routes/uploads";
 import { galleryRouter } from "./routes/gallery";
-import { homeRouter } from "./routes/home";
 import { sendHomeView } from "./controllers/home/homecontroller";
+import cors from "cors";
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({
     extended: true
