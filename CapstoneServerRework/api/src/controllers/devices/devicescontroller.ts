@@ -12,6 +12,12 @@ const getAllDevices = async (req: Request, res: Response) => {
     }
 }
 
+const getDeviceByID = async (req: Request, res: Response) => {
+    const serialNumber = req.query.id;
+    const device = await devices.findOne({ id: serialNumber })
+    res.status(200).send(device);
+}
+
 const createNewDeviceListing = async (req: Request, res: Response) => {
     console.log(req.body);
     await devices.create(req.body);
@@ -43,4 +49,4 @@ const sendRegisterForm = (req: Request, res: Response) => {
     res.sendFile(registerFormPath);
 }
 
-export { getAllDevices, createNewDeviceListing, deleteDeviceListing, sendDevicesView, sendRegisterForm };
+export { getAllDevices, createNewDeviceListing, deleteDeviceListing, sendDevicesView, sendRegisterForm, getDeviceByID };
