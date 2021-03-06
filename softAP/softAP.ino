@@ -1,12 +1,18 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
 #include <WiFiUdp.h>;
+#include <HTTPClient.h>;
 #include <OSCMessage.h>;
 AsyncWebServer server(80);
 char *ssid = "myEsp";
 char *password = "testpassword";
 const char HTML[] PROGMEM = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Wifi Credentials Input</title>\n</head>\n<body>\n    <form action=\"/\" method=\"POST\" >\n    <fieldset>\n        <label for=\"ssid\">Wifi Network Name</label>\n        <input type=\"text\" name=\"ssid\" id=\"ssid\" value=\"...\">\n        <label for=\"pw\">Wifi Password</label>\n        <input type=\"text\" name=\"pw\" id=\"pw\" value=\"...\">\n    </fieldset>\n    <fieldset>\n        <input type=\"submit\" value=\"submit\">\n    </fieldset>\n    </form>\n</body>\n</html>";
 int prevWifiStatus = 6;
+const String serialNumber = "1976";
+
+const String endpoint = "http://159.203.191.234/devices/find?id=" + serialNumber;
+
+String oscAddress = "/blank_address";
 
 int sensorValue = 0;
 int sensorPin = 5; //
@@ -45,15 +51,41 @@ void setup() {
 }
 
 void reportWifiConnection() {
-  if (WiFi.status() != prevWifiStatus) Serial.println("connected to wifi");
+  if (WiFi.status() != prevWifiStatus) {
+    Serial.println("connected to wifi");
+    assignAddress();
+  }
   prevWifiStatus = WiFi.status();
+}
+
+void assignAddress() {
+  HTTPClient http;
+ 
+    http.begin(endpoint);
+    Serial.println(endpoint);//Specify the URL
+    int httpCode = http.GET();  //Make the request
+ 
+    if (httpCode > 0) { //Check for the returning code
+ 
+        String payload = http.getString();
+        Serial.println(httpCode);
+        Serial.println(payload);
+        oscAddress = "/" + payload;
+        Serial.println(oscAddress);
+      }
+ 
+    else {
+      Serial.println("Error on HTTP request");
+    }
+ 
+    http.end(); //Free the resources
 }
 
 void loop(){
     reportWifiConnection();
     sensorValue = digitalRead(sensorPin);
     sensorValue++;
-    OSCMessage msg("/test_via_softap1");
+    OSCMessage msg(oscAddress.c_str());
     msg.add(sensorValue);
     Udp.beginPacket(outIp, outPort);
     msg.send(Udp); // send the bytes to the SLIP stream
