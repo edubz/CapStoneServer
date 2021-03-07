@@ -17,7 +17,6 @@ export const ReactiveP5Sketch = () => {
 
     const draw = (p5: p5Types) => {
         parent = document.getElementById('sketch-container');
-        console.log(parent);
         if (parent != null) p5.resizeCanvas(parent.clientWidth, parent.clientHeight);
         p5.background(0);
         p5.ellipse(p5.width / 2, p5.height / 2, (p5.width / 4) * Math.sin(x));

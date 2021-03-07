@@ -23,54 +23,46 @@ export const Home = () => {
                     </FocusWindow>
                 </Section>
                 <Section primary dark>
-                    <InfoTitle main>
+                    {/* <InfoTitle main>
                         In &#38; Out Of Euclidean Closeness, We Disregard Distance To Take Digital Pills &#38; Dive Into
                         The Algorithm Life
+                    </InfoTitle> */}
+                    <InfoTitle main>
+                        The Input is an interactive system of software and hardware that is connected to a digital art
+                        installation
                     </InfoTitle>
                     <InfoCardsContainer>
                         <InfoCard>
                             <InfoTitle>What is it?</InfoTitle>
                             <InfoBlurb>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas dicta dolorum rem
-                                consequatur natus. Suscipit magni fuga vel praesentium perferendis. Expedita delectus
-                                quisquam quasi cupiditate excepturi doloribus quos quae rem officiis at, ipsa laboriosam
-                                sit aperiam corrupti quod fuga voluptas nobis! Debitis, dolor explicabo eligendi
-                                quisquam delectus ipsa repellendus rem iure fuga odio eaque sunt incidunt itaque
-                                veritatis tempore dolores id qui, nostrum vero sapiente saepe molestiae vitae
+                                The sound you are hearing consists of audio files that can be submitted by any visitor
+                                of this website, which are put through a custom generative audio processing software.
+                                Various parameters of the software are controlled from this website, as well as by a
+                                collection of distributed embedded devices with touch reactive sensors.
                             </InfoBlurb>
                         </InfoCard>
                         <InfoCard>
                             <InfoTitle>How Does it Work?</InfoTitle>
                             <InfoBlurb>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas dicta dolorum rem
-                                consequatur natus. Suscipit magni fuga vel praesentium perferendis. Expedita delectus
-                                quisquam quasi cupiditate excepturi doloribus quos quae rem officiis at, ipsa laboriosam
+                                It uses a custom Node API with Web Sockets and a cloud-based database to pass audio
+                                files and control data from ESP32 WiFi-enabled microcontrollers and this React.js web
+                                application to Max, a digital signal processing software. The resulting audio output is
+                                streamed to this website and drives an audio-reactive visual made with p5js.
                             </InfoBlurb>
                         </InfoCard>
                         <InfoCard>
                             <InfoTitle>Who We Are</InfoTitle>
                             <InfoBlurb>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas dicta dolorum rem
-                                consequatur natus. Suscipit magni fuga vel praesentium perferendis. Expedita delectus
-                                quisquam quasi cupiditate excepturi doloribus quos quae rem officiis at, ipsa laboriosam
-                                sit aperiam corrupti quod fuga voluptas nobis! Debitis, dolor explicabo eligendi
-                                quisquam delectus ipsa repellendus rem iure fuga odio eaque sunt incidunt itaque
-                                veritatis tempore dolores id qui, nostrum vero sapiente saepe molestiae vitae
+                                The Input was originally created for the 2020 Creative Coding Capstone project at
+                                Portland Community College with the intention to facilitate a sense of connection,
+                                touch,and shared experience during a time of unprecedented isolation.
                             </InfoBlurb>
                         </InfoCard>
                     </InfoCardsContainer>
                 </Section>
             </main>
             <Footer>
-                <FooterText className="text_small">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ullam at sunt harum debitis, ea hic
-                    libero laudantium id dolorem exercitationem minus nesciunt nam, quia voluptatem reiciendis sit
-                    laboriosam eos. Optio qui aliquam perferendis ipsa ipsum eveniet! Nisi quos excepturi eaque cumque
-                    error, et doloremque tempore pariatur expedita earum maiores quibusdam aut cum nulla veritatis
-                    voluptate, amet dolorem, nesciunt dignissimos esse quae ipsum! Mollitia, quia eos? Assumenda ducimus
-                    voluptatum voluptatem, vel quasi ipsum at eligendi tempora. Incidunt numquam, iste nam excepturi
-                    illum, vitae magni dicta facilis at quidem quia quibusdam laboriosam repellat similique assumenda
-                </FooterText>
+                <FooterText className="text_small">thanks to...</FooterText>
             </Footer>
         </React.Fragment>
     );

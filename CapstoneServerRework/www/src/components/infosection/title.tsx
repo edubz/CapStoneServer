@@ -7,4 +7,5 @@ export const InfoTitle = styled.h2`
     color: ${Colors.light};
     font-weight: 600;
     text-align: center;
+    padding-top: 0.6em;
 `;

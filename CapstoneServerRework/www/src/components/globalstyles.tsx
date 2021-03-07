@@ -39,7 +39,7 @@ h1 {
   font-family: "Rubik", sans-serif;
 }
 
-h2 {font-size: 2.441rem;}
+h2 {font-size: 2.641rem;}
 
 h3 {font-size: 1.953rem;}
 
