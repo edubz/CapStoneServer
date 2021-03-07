@@ -9,9 +9,6 @@ const deviceSchema = new mongoclient_1.database.Schema({
     id: {
         type: String,
         required: true
-    },
-    lastactive: {
-        type: String
     }
 });
 const devices = mongoclient_1.database.model("Device", deviceSchema);

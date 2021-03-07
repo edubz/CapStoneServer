@@ -10,6 +10,7 @@ const devicesRouter = express_1.default.Router();
 exports.devicesRouter = devicesRouter;
 devicesRouter.post("/", devicescontroller_1.createNewDeviceListing);
 devicesRouter.get("/", devicescontroller_1.sendDevicesView);
+devicesRouter.get("/find*", devicescontroller_1.getDeviceByID);
 //todo: add update functionality
 devicesRouter.put("/", (req, res) => {
     res.sendStatus(200);

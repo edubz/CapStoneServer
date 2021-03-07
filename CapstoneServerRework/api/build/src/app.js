@@ -11,9 +11,11 @@ const devices_1 = require("./routes/devices");
 const uploads_1 = require("./routes/uploads");
 const gallery_1 = require("./routes/gallery");
 const homecontroller_1 = require("./controllers/home/homecontroller");
+const cors_1 = __importDefault(require("cors"));
 const app = express_1.default();
 exports.app = app;
 app.use(express_1.default.json());
+app.use(cors_1.default());
 app.use(body_parser_1.default.urlencoded({
     extended: true
 }));

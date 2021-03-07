@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendRegisterForm = exports.sendDevicesView = exports.deleteDeviceListing = exports.createNewDeviceListing = exports.getAllDevices = void 0;
+exports.getDeviceByID = exports.sendRegisterForm = exports.sendDevicesView = exports.deleteDeviceListing = exports.createNewDeviceListing = exports.getAllDevices = void 0;
 const path_1 = __importDefault(require("path"));
 const device_1 = require("../../models/device");
 const getAllDevices = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,6 +25,12 @@ const getAllDevices = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getAllDevices = getAllDevices;
+const getDeviceByID = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const serialNumber = req.query.id;
+    const device = yield device_1.devices.findOne({ id: serialNumber });
+    res.status(200).send(device.name);
+});
+exports.getDeviceByID = getDeviceByID;
 const createNewDeviceListing = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     yield device_1.devices.create(req.body);
