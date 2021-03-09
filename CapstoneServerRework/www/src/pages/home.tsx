@@ -10,6 +10,7 @@ import { InfoTitle } from '../components/infosection/title';
 import { FooterText } from '../components/footer/footer';
 import { InfoBlurb } from '../components/infosection/infoblurb';
 import { ReactiveP5Sketch } from '../components/p5/reactivesketch';
+import { InfoMainTitle } from '../components/infosection/maintitle';
 
 export const Home = () => {
     return (
@@ -27,10 +28,10 @@ export const Home = () => {
                         In &#38; Out Of Euclidean Closeness, We Disregard Distance To Take Digital Pills &#38; Dive Into
                         The Algorithm Life
                     </InfoTitle> */}
-                    <InfoTitle main>
+                    <InfoMainTitle>
                         The Input is an interactive system of software and hardware that is connected to a digital art
                         installation
-                    </InfoTitle>
+                    </InfoMainTitle>
                     <InfoCardsContainer>
                         <InfoCard>
                             <InfoTitle>What is it?</InfoTitle>

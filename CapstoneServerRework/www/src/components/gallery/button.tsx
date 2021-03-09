@@ -8,6 +8,7 @@ export const GalleryButton = styled.a`
     font-family: 'Rubik', sans-serif;
     font-weight: 600;
     padding: 0.5em 1em;
+    margin-right: 2em;
     border-radius: 10px;
     border: 2px solid ${Colors.lightest};
     color: ${Colors.lightest};
