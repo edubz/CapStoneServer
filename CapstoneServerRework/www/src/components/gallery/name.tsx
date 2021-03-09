@@ -4,6 +4,6 @@ import { Colors } from '../globalstyles';
 export const GalleryName = styled.h4`
     margin: 0;
     width: 35%;
-    font-weight: 800;
+    font-weight: 400;
     color: ${Colors.lightest};
 `;

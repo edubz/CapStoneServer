@@ -14,6 +14,7 @@ const uploadFileToDatabase = async (req: Request, res: Response) => {
     const storage = multer.memoryStorage();
     const upload = multer({ storage: storage });
     upload.single('user_file')(req, res, (err: any) => {
+        console.log(req);
         const readStream = streamifier.createReadStream(req.file.buffer);
         const uploadStream = fileBucket.openUploadStream(req.file.originalname);
         readStream.pipe(uploadStream).on("finish", () => res.redirect("/uploads"));

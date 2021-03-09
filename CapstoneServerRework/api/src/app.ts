@@ -7,12 +7,16 @@ import { uploadRouter } from "./routes/uploads";
 import { galleryRouter } from "./routes/gallery";
 import { sendHomeView } from "./controllers/home/homecontroller";
 import cors from "cors";
+const corsOptions = {
+    origin: 'http://localhost:3000' && 'http://theinput.tk',
+    optionsSuccessStatus: 200
+}
 
 const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({
     extended: true

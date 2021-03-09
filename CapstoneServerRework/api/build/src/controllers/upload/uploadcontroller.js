@@ -26,6 +26,7 @@ const uploadFileToDatabase = (req, res) => __awaiter(void 0, void 0, void 0, fun
     const storage = multer_1.default.memoryStorage();
     const upload = multer_1.default({ storage: storage });
     upload.single('user_file')(req, res, (err) => {
+        console.log(req);
         const readStream = streamifier.createReadStream(req.file.buffer);
         const uploadStream = fileBucket.openUploadStream(req.file.originalname);
         readStream.pipe(uploadStream).on("finish", () => res.redirect("/uploads"));

@@ -15,27 +15,26 @@ import { PageTitle } from '../components/pagetitle';
 import { axiosInstance } from '../axios';
 
 export const Gallery = () => {
-    const [date, setDate] = useState('');
-    const [id, setID] = useState();
+    const [dates, setDates] = useState([]);
+    const [ids, setIDs] = useState([]);
     // const [user, setUser] = useState();
     // const [tags, setTags] = useState();
 
     async function getGalleryFiles() {
         const res = await axiosInstance.get('/gallery/data');
-        setID(res.data[0]._id);
-        console.log(res.data);
-        const dateString = new Date(res.data[0].uploadDate);
-        setDate(dateString.getMonth() + '/' + dateString.getDay() + '/' + dateString.getFullYear());
-        // setUser(res.data[0].filename);
-        // setTags(res.data[0].tags);
-        // console.log(res);
+        setDates(
+            res.data.map((object: any) => {
+                const dateString = new Date(object.uploadDate);
+                return dateString.getMonth() + '/' + dateString.getDay() + '/' + dateString.getFullYear();
+            }),
+        );
+        setIDs(
+            res.data.map((object: any) => {
+                return object._id;
+            }),
+        );
     }
     getGalleryFiles();
-
-    async function downloadFile() {
-        const res = await axiosInstance.get(`/gallery/files?${id}`);
-        console.log(res);
-    }
 
     return (
         <>
@@ -45,18 +44,18 @@ export const Gallery = () => {
                 <PageTitle>GALLERY</PageTitle>
                 <FocusWindow>
                     <FlexContainer column>
-                        <GalleryElement>
-                            <GalleryDate>{date}</GalleryDate>
-                            <GalleryName>Submitted by: replace</GalleryName>
-                            <GalleryTag>replace</GalleryTag>
-                            <GalleryButton onClick={downloadFile}>OPEN</GalleryButton>
-                        </GalleryElement>
-                        <GalleryElement>
-                            <GalleryDate>1/6/2021</GalleryDate>
-                            <GalleryName>Submitted by: Jeff</GalleryName>
-                            <GalleryTag>spooky</GalleryTag>
-                            <GalleryButton>OPEN</GalleryButton>
-                        </GalleryElement>
+                        {dates.map((date, index) => {
+                            return (
+                                <GalleryElement key={date}>
+                                    <GalleryDate>{date}</GalleryDate>
+                                    <GalleryName>Submitted by: replace</GalleryName>
+                                    <GalleryTag>replace</GalleryTag>
+                                    <GalleryButton href={`http://api.theinput.tk/gallery/file?id=${ids[index]}`}>
+                                        OPEN
+                                    </GalleryButton>
+                                </GalleryElement>
+                            );
+                        })}
                     </FlexContainer>
                 </FocusWindow>
             </Section>

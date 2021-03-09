@@ -22,7 +22,6 @@ export const RegisterPage = () => {
     const handleSubmit = (submit: any) => {
         submit.preventDefault();
         const formValue = { name: name, id: number };
-        console.log(formValue);
         axiosInstance.post('/devices', formValue);
     };
 
