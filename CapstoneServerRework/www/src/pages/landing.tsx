@@ -27,14 +27,14 @@ export const LandingPage = () => {
     const [mediaStateText, setMediaStateText] = useState('loading...');
     const [form, setForm] = useState(new FormData());
     useEffect(() => {
-        navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+        async function getStream() {
+            const stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
+            onMediaSuccess(stream);
+        }
+        getStream();
         setMediaReady(true);
         setMediaStateText('Ready To Record');
     }, [mediaSuccessful]);
-
-    function onMediaError(error: any) {
-        console.log(error);
-    }
 
     function onMediaSuccess(stream: any) {
         setMediaSuccessful(true);
@@ -99,7 +99,7 @@ export const LandingPage = () => {
         };
 
         await axios
-            .post('http://localhost:5000/uploads', formdata, config)
+            .post('http://api.theinput.tk/uploads', formdata, config)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
