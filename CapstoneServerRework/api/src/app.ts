@@ -18,14 +18,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static("./views"))
+app.use(express.static("./views"));
 
-app.get("/", sendHomeView)
+app.get("/", sendHomeView);
 
-app.use("/osc", oscRouter)
-app.use("/devices", devicesRouter)
-app.use("/uploads", uploadRouter)
-app.use("/gallery", galleryRouter)
+app.use("/osc", oscRouter);
+app.use("/devices", devicesRouter);
+app.use("/uploads", uploadRouter);
+app.use("/gallery", galleryRouter);
 
 
 export { app };
