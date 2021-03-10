@@ -30,7 +30,7 @@ export const DevicesPage = () => {
         }
 
         fetchDeviceData();
-        const socket = io('ws://159.203.191.234', { secure: true });
+        const socket = io('https://159.203.191.234', { secure: true });
         socket.on('connect', () => console.log('connected to wss'));
         socket.on('error', (e: any) => console.log(e));
         socket.on('osc message', (message: any) => {
