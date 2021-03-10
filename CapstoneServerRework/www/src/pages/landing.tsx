@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GlobalStyle } from '../components/globalstyles';
 import { EnterButton } from '../components/landing/button';
 import { Logo, LogoSection } from '../components/landing/logo';
@@ -10,74 +10,68 @@ import { RecordPromptContent } from '../components/audio/recordinterface';
 import { ModalTitle } from '../components/audio/title';
 import { ModalButton } from '../components/audio/button';
 import { FlexContainer } from '../containers/flexparent';
-// import { axiosInstance } from '../axios';
-import MediaStreamRecorder from 'msr';
+import { useReactMediaRecorder } from 'react-media-recorder';
 import axios from 'axios';
 // import concat from 'concat-stream';
 
 export const LandingPage = () => {
     const [show, setShow] = useState(false);
-    const [audioRecorder, setAudioRecorder] = useState(new MediaStreamRecorder(new MediaStream()));
-    const mediaConstraints = {
+    const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({
         audio: true,
         video: false,
-    };
-    const [mediaSuccessful, setMediaSuccessful] = useState(false);
-    const [mediaReady, setMediaReady] = useState(false);
-    const [mediaStateText, setMediaStateText] = useState('loading...');
-    const [form, setForm] = useState(new FormData());
-    useEffect(() => {
-        async function getStream() {
-            const stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
-            onMediaSuccess(stream);
-        }
-        getStream();
-        setMediaReady(true);
-        setMediaStateText('Ready To Record');
-    }, [mediaSuccessful]);
+    });
 
-    function onMediaSuccess(stream: any) {
-        setMediaSuccessful(true);
-        const mediaRecorder = new MediaStreamRecorder(stream);
-        setAudioRecorder(mediaRecorder);
-        mediaRecorder.mimeType = 'audio/wav';
-        mediaRecorder.ondataavailable = (blob: Blob) => {
-            // const blobURL = URL.createObjectURL(blob);
-            // console.log(blobURL);
-            const file = new File([blob], 'msr-' + new Date().toISOString().replace(/:|\./g, '-') + '.wav', {
-                type: 'audio/wav',
-            });
-            // console.log(file);
-            const formData = new FormData();
-            formData.append('user_file', file, file.name);
-            setForm(formData);
-            console.log(form);
-            // formData.pipe(
-            //     concat((data) => {
-            //         submitFile(data);
-            //     }),
-            // );
-            // formData.append('fieldname', 'user_file');
-            // formData.append('originalname', file.name);
-            // formData.append('buffer', Buffer.from(file));
-            // for (const p of formData.entries()) {
-            // console.log(p);
-            // }
-        };
-    }
+    // const [mediaSuccessful, setMediaSuccessful] = useState(false);
+    // const [mediaReady, setMediaReady] = useState(false);
+    // const [mediaStateText, setMediaStateText] = useState('loading...');
+    // const [form, setForm] = useState(new FormData());
+    // const [stream, setStream] = useState(new MediaStream());
+    // const [audioRecorder, setAudioRecorder] = useState(new MediaStreamRecorder(stream));
 
-    function startRecording() {
-        audioRecorder.start(3000);
-        setMediaStateText('Recording');
-        setTimeout(() => stopRecording(), 3000);
-    }
+    // useEffect(() => {
+    //     console.log(mediaSuccessful);
+    //     setMediaReady(true);
+    //     console.log('successful');
+    // }, [mediaSuccessful]);
 
-    function stopRecording() {
-        // audioRecorder.save();
-        // console.log(audioRecorder);
-        setMediaStateText('Recording ready to submit');
-        submitFile(form);
-    }
+    // async function useStream() {
+
+    // mediaStream.ondataavailable = (blob: Blob) => {
+    //     const file = new File([blob], 'msr-' + new Date().toISOString().replace(/:|\./g, '-') + '.wav', {
+    //         type: 'audio/wav',
+    //     });
+    //     const formData = new FormData();
+    //     formData.append('user_file', file, file.name);
+    //     setForm(formData);
+    // };
+    // setAudioRecorder(mediaStream);
+    // audioRecorder.start(3000);
+    // }
+
+    // audioRecorder.onstart = () => {
+    //     console.log('started');
+    // };
+
+    // function onMediaSuccess(userMediaStream: any) {
+    //     if (mediaSuccessful) {
+    //         return;
+    //     } else {
+    //         setStream(userMediaStream);
+    //         useStream().then(() => console.log('async completed'));
+    //         setMediaSuccessful(true);
+    //         setMediaStateText('Ready To Record');
+    //     }
+    // }
+
+    // function startRecording() {
+    //     setMediaStateText('Recording');
+    //     setTimeout(() => stopRecording(), 3000);
+    // }
+
+    // function stopRecording() {
+    //     setMediaStateText('Recording ready to submit');
+    //     submitFile(form);
+    // }
 
     function Controls() {
         return (
@@ -90,18 +84,30 @@ export const LandingPage = () => {
         );
     }
 
-    async function submitFile(formdata: any) {
+    function submitFile(formdata: any) {
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
             boundary: formdata.boundary,
         };
-
-        await axios
-            .post('http://api.theinput.tk/uploads', formdata, config)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+        if (mediaBlobUrl) {
+            axios({
+                method: 'get',
+                url: mediaBlobUrl,
+                responseType: 'blob',
+            }).then((res) => {
+                const file = new File([res.data], 'msr-' + new Date().toISOString().replace(/:|\./g, '-') + '.wav', {
+                    type: 'audio/wav',
+                });
+                const formData = new FormData();
+                formData.append('user_file', file, file.name);
+                axios
+                    .post('http://api.theinput.tk/uploads', formData, config)
+                    .then((res) => console.log(res))
+                    .catch((err) => console.log(err));
+            });
+        }
     }
 
     function recorderPrompt() {
@@ -115,9 +121,9 @@ export const LandingPage = () => {
                 <RecordPromptModal shown={show}>
                     <RecordPromptContent>
                         <ModalTitle>Would you like to record and submit an audio file to the input?</ModalTitle>
-                        <p style={{ textAlign: 'center' }}>{mediaStateText}</p>
+                        <p style={{ textAlign: 'center' }}>{status}</p>
                         <FlexContainer style={{ justifyContent: 'space-evenly' }}>
-                            {!mediaReady ? '' : <Controls />}
+                            <Controls />
                         </FlexContainer>
                     </RecordPromptContent>
                 </RecordPromptModal>
