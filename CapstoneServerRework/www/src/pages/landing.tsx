@@ -103,7 +103,7 @@ export const LandingPage = () => {
                 const formData = new FormData();
                 formData.append('user_file', file, file.name);
                 axios
-                    .post('http://api.theinput.tk/uploads', formData, config)
+                    .post('https://api.theinput.tk/uploads', formData, config)
                     .then((res) => console.log(res))
                     .catch((err) => console.log(err));
             });
