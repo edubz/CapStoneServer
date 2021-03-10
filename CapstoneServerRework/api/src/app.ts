@@ -8,7 +8,7 @@ import { galleryRouter } from "./routes/gallery";
 import { sendHomeView } from "./controllers/home/homecontroller";
 import cors from "cors";
 const corsOptions = {
-    origin: 'http://localhost:3000' && 'http://theinput.tk',
+    origin: '*',
     optionsSuccessStatus: 200
 }
 

@@ -13,7 +13,7 @@ const gallery_1 = require("./routes/gallery");
 const homecontroller_1 = require("./controllers/home/homecontroller");
 const cors_1 = __importDefault(require("cors"));
 const corsOptions = {
-    origin: 'http://localhost:3000' && 'http://theinput.tk',
+    origin: '*',
     optionsSuccessStatus: 200
 };
 const app = express_1.default();
