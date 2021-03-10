@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-    baseURL: 'http://api.theinput.tk/',
+    baseURL: 'http://159.203.191.234/',
 });
