@@ -99,7 +99,7 @@ export const LandingPage = () => {
         };
 
         await axios
-            .post('http://api.theinput.tk/uploads', formdata, config)
+            .post('http://159.203.191.234/uploads', formdata, config)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
