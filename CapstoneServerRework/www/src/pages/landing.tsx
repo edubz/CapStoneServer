@@ -12,6 +12,7 @@ import { ModalButton } from '../components/audio/button';
 import { FlexContainer } from '../containers/flexparent';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 // import concat from 'concat-stream';
 
 export const LandingPage = () => {
@@ -20,6 +21,8 @@ export const LandingPage = () => {
         audio: true,
         video: false,
     });
+
+    const [submitted, setSubmitted] = useState(false);
 
     // const [mediaSuccessful, setMediaSuccessful] = useState(false);
     // const [mediaReady, setMediaReady] = useState(false);
@@ -104,7 +107,10 @@ export const LandingPage = () => {
                 formData.append('user_file', file, file.name);
                 axios
                     .post('https://api.theinput.tk/uploads', formData, config)
-                    .then((res) => console.log(res))
+                    .then((res) => {
+                        console.log(res);
+                        setSubmitted(true);
+                    })
                     .catch((err) => console.log(err));
             });
         }
@@ -123,7 +129,7 @@ export const LandingPage = () => {
                         <ModalTitle>Would you like to record and submit an audio file to the input?</ModalTitle>
                         <p style={{ textAlign: 'center' }}>{status}</p>
                         <FlexContainer style={{ justifyContent: 'space-evenly' }}>
-                            <Controls />
+                            {submitted ? <Redirect to="/Home" /> : <Controls />}
                         </FlexContainer>
                     </RecordPromptContent>
                 </RecordPromptModal>
