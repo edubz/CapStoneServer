@@ -12,9 +12,9 @@ import { InfoBlurb } from '../components/infosection/infoblurb';
 import { ReactiveP5Sketch } from '../components/p5/reactivesketch';
 import { InfoMainTitle } from '../components/infosection/maintitle';
 
-export const Home = () => {
+export const Home: React.FC = () => {
     return (
-        <React.Fragment>
+        <>
             <GlobalStyle />
             <Header />
             <main>
@@ -24,10 +24,6 @@ export const Home = () => {
                     </FocusWindow>
                 </Section>
                 <Section primary dark>
-                    {/* <InfoTitle main>
-                        In &#38; Out Of Euclidean Closeness, We Disregard Distance To Take Digital Pills &#38; Dive Into
-                        The Algorithm Life
-                    </InfoTitle> */}
                     <InfoMainTitle>
                         The Input is an interactive system of software and hardware that is connected to a digital art
                         installation
@@ -65,6 +61,6 @@ export const Home = () => {
             <Footer>
                 <FooterText className="text_small">thanks to...</FooterText>
             </Footer>
-        </React.Fragment>
+        </>
     );
 };

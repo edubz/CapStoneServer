@@ -5,7 +5,7 @@ import p5Types from 'p5'; //Import this for typechecking and intellisense
 //     //Your component props
 // }
 
-export const ReactiveP5Sketch = () => {
+export const ReactiveP5Sketch: React.FC = () => {
     let x = 0;
 
     let parent = document.getElementById('sketch-container');

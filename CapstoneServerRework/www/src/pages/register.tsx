@@ -11,15 +11,15 @@ import { Header } from '../containers/header';
 import { Section } from '../containers/section';
 import { axiosInstance } from '../axios';
 
-export const RegisterPage = () => {
-    const [name, setName] = useState();
-    const [number, setNumber] = useState();
+export const RegisterPage: React.FC = () => {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
 
-    const handleChange = (change: any) => {
+    const handleChange = (change: React.ChangeEvent<HTMLInputElement>) => {
         change.target.name == 'Name' ? setName(change.target.value) : setNumber(change.target.value);
         console.log(`name: ${name} \n number: ${number}`);
     };
-    const handleSubmit = (submit: any) => {
+    const handleSubmit = (submit: React.SyntheticEvent) => {
         submit.preventDefault();
         const formValue = { name: name, id: number };
         axiosInstance.post('/devices', formValue);

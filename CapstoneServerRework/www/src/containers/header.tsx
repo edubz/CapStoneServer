@@ -2,7 +2,7 @@ import { HeaderContainer } from './headerstyle';
 import { Title, TitleContainer, TitleLink } from '../components/header/title';
 import { NavContainer, NavList, NavItem, NavLink, NavButton } from '../components/header/nav';
 import React from 'react';
-export const Header = () => {
+export const Header: React.FC = () => {
     return (
         <>
             <HeaderContainer>

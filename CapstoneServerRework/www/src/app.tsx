@@ -8,7 +8,7 @@ import { LandingPage } from './pages/landing';
 
 const history = createBrowserHistory();
 
-export const App = () => {
+export const App: React.FC = () => {
     return (
         <Router history={history}>
             <Switch>

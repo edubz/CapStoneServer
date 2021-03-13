@@ -14,22 +14,29 @@ import { FooterText } from '../components/footer/footer';
 import { PageTitle } from '../components/pagetitle';
 import { axiosInstance } from '../axios';
 
-export const Gallery = () => {
+export const Gallery: React.FC = () => {
     const [dates, setDates] = useState([]);
     const [ids, setIDs] = useState([]);
-    // const [user, setUser] = useState();
-    // const [tags, setTags] = useState();
+
+    interface GalleryFile {
+        _id: string;
+        length: number;
+        chunkSize: number;
+        uploadDate: string;
+        filename: string;
+        md5: string;
+    }
 
     async function getGalleryFiles() {
         const res = await axiosInstance.get('/gallery/data');
         setDates(
-            res.data.map((object: any) => {
+            res.data.map((object: GalleryFile) => {
                 const dateString = new Date(object.uploadDate);
                 return dateString.getMonth() + '/' + dateString.getDay() + '/' + dateString.getFullYear();
             }),
         );
         setIDs(
-            res.data.map((object: any) => {
+            res.data.map((object: GalleryFile) => {
                 return object._id;
             }),
         );

@@ -14,15 +14,30 @@ import { useEffect, useState } from 'react';
 import { axiosInstance } from '../axios';
 import io from 'socket.io-client';
 
-export const DevicesPage = () => {
+export const DevicesPage: React.FC = () => {
     const [names, setNames] = useState([]);
-    const [value, setValue] = useState([]);
-    const [address, setAddress] = useState([]);
+    const [value, setValue] = useState(['']);
+    const [address, setAddress] = useState(['']);
+
+    interface DeviceObject {
+        name: string;
+        number: string;
+    }
+
+    interface OscArgs {
+        type: string;
+        value: string;
+    }
+
+    interface OscMessage {
+        address: string;
+        args: Array<OscArgs>;
+    }
 
     useEffect(() => {
         async function fetchDeviceData() {
             const res = await axiosInstance.get('/devices/data');
-            const namesArray = res.data.map((device: any) => {
+            const namesArray = res.data.map((device: DeviceObject) => {
                 return device.name;
             });
             setNames(namesArray);
@@ -32,14 +47,14 @@ export const DevicesPage = () => {
         fetchDeviceData();
         const socket = io('https://api.theinput.tk', { secure: true });
         socket.on('connect', () => console.log('connected to wss'));
-        socket.on('error', (e: any) => console.log(e));
-        socket.on('osc message', (message: any) => {
-            const val = message.map((arg: any) => {
+        socket.on('error', (e: Error) => console.log(e));
+        socket.on('osc message', (message: Array<OscMessage>) => {
+            const val = message.map((arg: OscMessage) => {
                 return arg.args[0].value;
             });
             setValue(val);
 
-            const addressArray = message.map((arg: any) => {
+            const addressArray = message.map((arg: OscMessage) => {
                 return arg.address;
             });
             setAddress(addressArray);

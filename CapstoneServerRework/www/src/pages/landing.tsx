@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GlobalStyle } from '../components/globalstyles';
 import { EnterButton } from '../components/landing/button';
 import { Logo, LogoSection } from '../components/landing/logo';
@@ -13,68 +13,29 @@ import { FlexContainer } from '../containers/flexparent';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import axios from 'axios';
 import { Redirect } from 'react-router';
-// import concat from 'concat-stream';
 
-export const LandingPage = () => {
+export const LandingPage: React.FC = () => {
     const [show, setShow] = useState(false);
     const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({
         audio: true,
         video: false,
     });
 
+    const [progessText, setProgressText] = useState('Ready To Record');
+
     const [submitted, setSubmitted] = useState(false);
 
-    // const [mediaSuccessful, setMediaSuccessful] = useState(false);
-    // const [mediaReady, setMediaReady] = useState(false);
-    // const [mediaStateText, setMediaStateText] = useState('loading...');
-    // const [form, setForm] = useState(new FormData());
-    // const [stream, setStream] = useState(new MediaStream());
-    // const [audioRecorder, setAudioRecorder] = useState(new MediaStreamRecorder(stream));
+    useEffect(() => {
+        switch (status) {
+            case 'recording':
+                setProgressText('Recording');
+                break;
 
-    // useEffect(() => {
-    //     console.log(mediaSuccessful);
-    //     setMediaReady(true);
-    //     console.log('successful');
-    // }, [mediaSuccessful]);
-
-    // async function useStream() {
-
-    // mediaStream.ondataavailable = (blob: Blob) => {
-    //     const file = new File([blob], 'msr-' + new Date().toISOString().replace(/:|\./g, '-') + '.wav', {
-    //         type: 'audio/wav',
-    //     });
-    //     const formData = new FormData();
-    //     formData.append('user_file', file, file.name);
-    //     setForm(formData);
-    // };
-    // setAudioRecorder(mediaStream);
-    // audioRecorder.start(3000);
-    // }
-
-    // audioRecorder.onstart = () => {
-    //     console.log('started');
-    // };
-
-    // function onMediaSuccess(userMediaStream: any) {
-    //     if (mediaSuccessful) {
-    //         return;
-    //     } else {
-    //         setStream(userMediaStream);
-    //         useStream().then(() => console.log('async completed'));
-    //         setMediaSuccessful(true);
-    //         setMediaStateText('Ready To Record');
-    //     }
-    // }
-
-    // function startRecording() {
-    //     setMediaStateText('Recording');
-    //     setTimeout(() => stopRecording(), 3000);
-    // }
-
-    // function stopRecording() {
-    //     setMediaStateText('Recording ready to submit');
-    //     submitFile(form);
-    // }
+            case 'stopped':
+                setProgressText('Ready To Submit');
+                break;
+        }
+    }, [status]);
 
     function Controls() {
         return (
@@ -87,13 +48,14 @@ export const LandingPage = () => {
         );
     }
 
-    function submitFile(formdata: any) {
+    function submitFile() {
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
-            boundary: formdata.boundary,
+            // boundary: formdata.boundary,
         };
+        setProgressText('Submitting...');
         if (mediaBlobUrl) {
             axios({
                 method: 'get',
@@ -109,6 +71,7 @@ export const LandingPage = () => {
                     .post('https://api.theinput.tk/uploads', formData, config)
                     .then((res) => {
                         console.log(res);
+                        setProgressText('Submitted');
                         setSubmitted(true);
                     })
                     .catch((err) => console.log(err));
@@ -127,7 +90,7 @@ export const LandingPage = () => {
                 <RecordPromptModal shown={show}>
                     <RecordPromptContent>
                         <ModalTitle>Would you like to record and submit an audio file to the input?</ModalTitle>
-                        <p style={{ textAlign: 'center' }}>{status}</p>
+                        <p style={{ textAlign: 'center' }}>{progessText}</p>
                         <FlexContainer style={{ justifyContent: 'space-evenly' }}>
                             {submitted ? <Redirect to="/Home" /> : <Controls />}
                         </FlexContainer>
