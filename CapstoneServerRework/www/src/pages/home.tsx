@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GlobalStyle } from '../components/globalstyles';
 import { FocusWindow } from '../components/focuswindow/focuswindow';
 import { Footer } from '../containers/footer';
@@ -11,8 +11,66 @@ import { FooterText } from '../components/footer/footer';
 import { InfoBlurb } from '../components/infosection/infoblurb';
 import { ReactiveP5Sketch } from '../components/p5/reactivesketch';
 import { InfoMainTitle } from '../components/infosection/maintitle';
+import axios from 'axios';
 
 export const Home: React.FC = () => {
+    const audioSource: any = document.getElementById('audio-source');
+    const [stream, setStream] = useState(new MediaStream());
+    const [mediaRecorder, setMediaRecorder] = useState(new MediaRecorder(stream));
+    const [blobURL, setBlobURL] = useState('');
+    if (audioSource) {
+        audioSource.onplay = () => {
+            setStream(audioSource.captureStream());
+        };
+    }
+
+    useEffect(() => {
+        setMediaRecorder(new MediaRecorder(stream));
+    }, [stream]);
+
+    const chunks: any[] = [];
+
+    function useStreamData(e: any) {
+        chunks.push(e.data);
+    }
+
+    function startRecording() {
+        mediaRecorder.ondataavailable = useStreamData;
+        mediaRecorder.start(100);
+        setTimeout(() => {
+            mediaRecorder.stop();
+            const blob = new Blob(chunks, { type: 'audio/wav' });
+            const blobURL = URL.createObjectURL(blob);
+            setBlobURL(blobURL);
+            console.log('stopped');
+        }, 3000);
+    }
+
+    function submitRecording() {
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+
+        if (blobURL != '') {
+            axios({
+                method: 'get',
+                url: blobURL,
+                responseType: 'blob',
+            }).then((res: any) => {
+                const file = new File([res.data], 'msr-' + new Date().toISOString().replace(/:|\./g, '-') + '.wav', {
+                    type: 'audio/wav',
+                });
+                const formData = new FormData();
+                formData.append('gallery_file', file, file.name);
+                axios.post('https://api.theinput.tk/gallery', formData, config).then((res: any) => {
+                    console.log(res);
+                });
+            });
+        }
+    }
+
     return (
         <>
             <GlobalStyle />
@@ -22,10 +80,12 @@ export const Home: React.FC = () => {
                     <FocusWindow id="sketch-container" noscroll>
                         <ReactiveP5Sketch />
                     </FocusWindow>
+                    <button onClick={startRecording}>Record</button>
+                    <button onClick={submitRecording}>Submit</button>
                 </Section>
                 <Section primary dark>
                     <InfoMainTitle>
-                        The Input is an interactive system of software and hardware that is connected to a digital art
+                        The Input is an interactive system of software and hardware that is connected to a digital sound
                         installation
                     </InfoMainTitle>
                     <InfoCardsContainer>
