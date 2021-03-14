@@ -10,7 +10,7 @@ const char HTML[] PROGMEM = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <m
 int prevWifiStatus = 6;
 const String serialNumber = "1976";
 
-const String endpoint = "http://159.203.191.234/devices/find?id=" + serialNumber;
+const String endpoint = "https://api.theinput.tk/devices/find?id=" + serialNumber;
 
 String oscAddress = "/blank_address";
 
