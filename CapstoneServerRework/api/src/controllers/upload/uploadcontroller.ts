@@ -47,7 +47,7 @@ const downloadFile = (req: Request, res: Response) => {
     const fileToDownload = fileBucket.openDownloadStream(new ObjectID(id));
     const writePath = path.join(__dirname, "file.wav");
     const newFile = fs.createWriteStream(writePath);
-    fileToDownload.pipe(newFile).on("finish", () => res.sendFile(writePath))
+    fileToDownload.pipe(newFile).on("finish", () => res.download(writePath, "file.wav"))
 }
 
 const sendUserUploadView = (req: Request, res: Response) => {
