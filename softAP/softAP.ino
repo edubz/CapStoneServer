@@ -26,8 +26,10 @@ void setup() {
   Serial.begin(115200);
   EEPROM.begin(400);
   s = EEPROM.readString(100);
+  Serial.println(s);
   p = EEPROM.readString(200);
-  if (s.length() > 0 && p.length() >0) {
+  Serial.println(p);
+  if (s.length() > 1 && p.length() > 1) {
     WiFi.begin(s.c_str(), p.c_str());
   } else {
     startSoftAP();
@@ -103,11 +105,6 @@ void assignAddress() {
 }
 
 void loop(){
-//    reportWifiConnection();
-//    while(WiFi.status() != WL_CONNECTED) {
-//      Serial.print(".");
-//    }
-//    Serial.println("connected to wifi");
     sensorValue = digitalRead(sensorPin);
     sensorValue++;
     OSCMessage msg(oscAddress.c_str());
