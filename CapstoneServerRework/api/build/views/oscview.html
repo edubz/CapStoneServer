@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input API: OSC</title>
 </head>
+
 <body>
     <h1>Input API</h1>
     <h2>OSC View</h2>
     <p class="oscValue">Awaiting Osc Message</p>
     <script src="/socket.io/socket.io.js"></script>
-    <script type = "text/javascript"> 
-        const socket = io.connect("ws://159.203.191.234");
+    <script type="text/javascript">
+        const socket = io.connect("wss://159.203.191.234", { secure: true });
         socket.on("connect", () => console.log("connected to wss"))
         socket.on("error", (err) => console.log(err))
         const awaitElement = document.querySelector(".oscValue");
-        
+
         socket.on("osc message", (messages) => {
             awaitElement.innerHTML = "";
             messages.forEach((message) => {
@@ -24,4 +26,5 @@
         })
     </script>
 </body>
+
 </html>
