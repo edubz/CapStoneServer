@@ -4,20 +4,6 @@
 ### bios
 - if possible set auto power on after power failure
 
-### Teamviewer
- open teamviewer on host computer:-
-- click remote control on the left
-- click grant easy access under 'unattended access'
-- click 'start TeamViewer with Windows'
-- enter in the studio credentials (ethan@parallel.studio)
-- click assign
-- it will report that a confirmation email has been sent
-- ethan needs to click 'add to trusted devices' from that email
-- it says added, and 'you can sign in now'
-- quit teamviewer
-- restart, click grant easy access again
-- login again
-- make sure teamviewer on the host computer is NOT logged in as ethan rose, it should only be granting access to ethan rose
 
 on remote computer:
 - logging in will prompt another email to ethan requiring him to add the remote machine to the trusted list
