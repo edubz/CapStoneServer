@@ -1,0 +1,126 @@
+
+## General Windows configuration steps for installations
+
+### bios
+- if possible set auto power on after power failure
+
+### Teamviewer
+ open teamviewer on host computer:-
+- click remote control on the left
+- click grant easy access under 'unattended access'
+- click 'start TeamViewer with Windows'
+- enter in the studio credentials (ethan@parallel.studio)
+- click assign
+- it will report that a confirmation email has been sent
+- ethan needs to click 'add to trusted devices' from that email
+- it says added, and 'you can sign in now'
+- quit teamviewer
+- restart, click grant easy access again
+- login again
+- make sure teamviewer on the host computer is NOT logged in as ethan rose, it should only be granting access to ethan rose
+
+on remote computer:
+- logging in will prompt another email to ethan requiring him to add the remote machine to the trusted list
+- click on remote control and enter 1572152357 as the partner ID and click connect
+you will need to enter a password from the screen of the host machine the first time
+
+
+### disable onedrive
+- Open OneDrive from the systray
+- find settings and uncheck 'start onedrive automatically when i sign in windows', and uncheck all the notifications options
+
+### Install the git command line tools if needed
+- https://git-scm.com/downloads
+- all the defaults installation options are fine
+
+### if the user account is a microcoft online account that needs to get switched to a local account
+- windows key -> manage your account
+- switch to local account
+
+### Disable password login
+- click windows key, type run, hit enter, type netplwiz, hit enter
+- uncheck 'users must enter a user name and password to use this computer'
+- Apply, authenticate, ok
+if this was done while a microsoft account was logged in (before the previous step in this document) it will need to be done for the local account once the previous step has been done
+
+### Turn off sleep mode
+- click windows key,t ype control, hit enter (to select the control panel)
+- click hardware and sound
+- click power options
+- click 'change plan settings'
+- Set 'turn off the displays' to never
+- set 'put the computer to sleep' to never
+- click 'save changes'
+
+### turn off updates
+- click windows key, type run, hit enter, type services.msc, hit enter
+- find the windows update service in the list
+- click properties
+- set startup type to 'disabled'
+- go to the recovery tab, change all dropdowns to 'take no action'
+- got back to general
+- click 'stop'
+- click apply and ok
+
+### turn off anti-virus
+
+- click windows key, type security and select and open windows sercurity
+- click on the shield / virus and threat protection
+- under virus and threat protection settings click 'manage settings'
+- scroll down to tamper protection and turn off
+- click windows key, type regedit and type enter to open the registry editor
+- navigate to HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsDefender
+_you may want to refer to the images in this repo for this step_
+- right click on the WindowsDefender folder and create a new DWORD called DisableAntiSpyware 
+- right click on it and choose modify
+- set  value data to 1 and base to decimal
+- close the registry editor
+- click start, type security, open the windows security panel
+- open virus & threat protection
+- click manage settings under virus & threat protection settings
+- turn off everything on this page
+
+### turn off notifications
+- click start, type notifications, open notifications & actions
+- turn off all notifications
+
+### turn off start menu ads
+- click windows key, type settings and open
+- type start, select start settings and open
+- turn off 'show suggestions ocassionally in start'
+
+### privacy settings
+- click windows key, type privacy
+- turn off everything in this panel
+
+### turn off sync
+- click windows key, type sync, open sync your settings
+- turn it all off
+
+### turn off fancy windows gui
+- click windows key, type performance, open 'adjust the appearance and performance of windows'
+- click 'adjust for best preformance'
+
+
+### clone the project repo
+- open the git command line (windows key -> git)
+- git clone https://gitlab.com/parallel-studio/evolve.git
+- authenticate to gitlab
+- copy the sounds into the project folder
+- open pd, in preferences add a path for the sounds folder
+- make a shortcut on the desktop to the evolve project folder
+
+### set patch to run at boot
+- windows key, run, shell:startup
+- this opens up an exporer window, copy a shortcut of the patch into that
+OR you can setup the patch to delay boot using the “delay_start_application_windows_10” instruction pdf (also in this repo)
+
+### set machine to reboot each night AND disable extraneous tasks
+- windows key, task scheduler
+- create a new task called 'nightly reboot' to 'run a program' called shutdown /r
+- uncheck the synchronize timezones box
+- this task can be viewed in the task scheduler library
+- while in the task scheduler, disable tasks related to microsoft edge, onedrive, and anything else that feels un-necessary.
+
+
+
