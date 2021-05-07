@@ -13,7 +13,7 @@
     <p class="oscValue">Awaiting Osc Message</p>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-        const socket = io.connect("wss://159.203.191.234", { secure: true });
+        const socket = io.connect("https://159.203.191.234");
         socket.on("connect", () => console.log("connected to wss"))
         socket.on("error", (err) => console.log(err))
         const awaitElement = document.querySelector(".oscValue");
