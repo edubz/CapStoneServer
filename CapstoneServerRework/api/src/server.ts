@@ -8,7 +8,7 @@ import { passOscToWebsockets } from './controllers/passosctowebsockets';
 
 const port = 5000;
 
-const server = http.createServer(app);
+const server = require('https').createServer(app);
 const webSocketServer = require("socket.io")(server);
 
 if (process.env.NODE_ENV != "test") {
