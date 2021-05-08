@@ -1,6 +1,6 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-#include "EEPROM.h"
+#include <Preferences.h>
 #include <WiFiUdp.h>;
 #include <HTTPClient.h>;
 #include <OSCMessage.h>;
@@ -13,24 +13,34 @@ const String serialNumber = "1976";
 
 const String endpoint = "https://api.theinput.tk/devices/find?id=" + serialNumber;
 
-String oscAddress = "/blank_address";
+String oscAddress = "";
 
 int sensorValue = 0;
 int sensorPin = 5; //
 IPAddress outIp(159, 203, 191, 234); //public ip of the computer running max
 const unsigned int outPort = 57121;
 WiFiUDP Udp;
+Preferences preferences;
+
 void setup() {
   Serial.begin(115200);
-  EEPROM.begin(400);
-  String s = EEPROM.readString(100);
-  Serial.println(s.c_str());
-  String p = EEPROM.readString(200);
-  Serial.println(p.c_str());
-  if (s.length() > 0 && p.length() >0) {
-    WiFi.begin(EEPROM.readString(100).c_str(), EEPROM.readString(200).c_str());
-  } else {
+  preferences.begin("credentials", false);
+  String Wifissid = preferences.getString("ssid", "");
+  Serial.println(Wifissid);
+  String Wifipw = preferences.getString("pw", "");
+  Serial.println(Wifipw);
+  if (Wifissid == "" && Wifipw == "") {
+    Serial.println("no credentials saved visit 192.168.4.1");
     startSoftAP();
+  } else {
+    WiFi.begin(Wifissid.c_str(), Wifipw.c_str());
+    Serial.print("Connecting to wifi");
+    while (WiFi.status() != WL_CONNECTED) {
+      Serial.print(".");
+      delay(1000);
+    }
+    Serial.println("Connected!");
+    assignAddress();
   }
   
 }
@@ -56,27 +66,14 @@ void startSoftAP() {
     Serial.print(request->getParam(1)->name());
     Serial.println(":");
     Serial.println(request->getParam(1)->value());
-    String Wifissid = request->getParam(0)->value().c_str();
-    String Wifipassword= request->getParam(1)->value().c_str();
+    String ssidFromAP = request->getParam(0)->value().c_str();
+    String passwordFromAP = request->getParam(1)->value().c_str();
     Udp.begin(outPort);
-    char ssidBuff[30];
-    char pwBuff[30];
-    Wifissid.toCharArray(ssidBuff, 30);
-    Wifipassword.toCharArray(pwBuff, 30);
-    EEPROM.writeString(100, ssidBuff);
-    EEPROM.writeString(200, pwBuff);
-    EEPROM.commit();
+    preferences.putString("ssid", ssidFromAP);
+    preferences.putString("pw", passwordFromAP);
     request->send(200, "text/html", HTML);
     ESP.restart();
   });
-}
-
-void reportWifiConnection() {
-  if (WiFi.status() != prevWifiStatus) {
-    Serial.println("connected to wifi");
-    assignAddress();
-  }
-  prevWifiStatus = WiFi.status();
 }
 
 void assignAddress() {
@@ -103,11 +100,6 @@ void assignAddress() {
 }
 
 void loop(){
-    reportWifiConnection();
-//    while(WiFi.status() != WL_CONNECTED) {
-//      Serial.print(".");
-//    }
-//    Serial.println("connected to wifi");
     sensorValue = digitalRead(sensorPin);
     sensorValue++;
     OSCMessage msg(oscAddress.c_str());
