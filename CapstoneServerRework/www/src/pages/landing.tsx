@@ -43,7 +43,7 @@ export const LandingPage: React.FC = () => {
                 <ModalButton onClick={startRecording}>Start</ModalButton>
                 <ModalButton onClick={stopRecording}>Stop</ModalButton>
                 <ModalButton onClick={submitFile}>Submit</ModalButton>
-                <ModalButton href="./home">Cancel</ModalButton>
+                <ModalButton href="./home">Skip</ModalButton>
             </>
         );
     }

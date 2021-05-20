@@ -3,7 +3,7 @@ import { Colors } from '../globalstyles';
 
 export const InfoBlurb = styled.p`
     color: ${Colors.lightest};
-    padding: 0 1.5em;
+    padding: 0 0.5em;
 
     text-align: justify;
 `;

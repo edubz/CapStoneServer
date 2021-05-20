@@ -30,4 +30,12 @@ export const EnterButton = styled.a`
     :active {
         opacity: 0.9;
     }
+
+    @media (max-width: 1050px) {
+        margin: 2em;
+    }
+
+    @media (max-width: 1050px) and (max-height: 1020px) {
+        margin: 1em;
+    }
 `;

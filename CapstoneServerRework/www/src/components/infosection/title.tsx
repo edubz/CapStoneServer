@@ -6,6 +6,6 @@ export const InfoTitle = styled.h3`
     margin: auto auto 5% auto;
     color: ${Colors.light};
     font-weight: 600;
-    text-align: center;
+    /* text-align: center; */
     padding-top: 0.6em;
 `;

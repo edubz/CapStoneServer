@@ -13,4 +13,8 @@ export const PageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+
+    @media (max-width: 1050px) {
+        flex-wrap: nowrap;
+    }
 `;
