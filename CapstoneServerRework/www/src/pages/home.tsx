@@ -80,8 +80,6 @@ export const Home: React.FC = () => {
                     <FocusWindow id="sketch-container" noscroll>
                         <ReactiveP5Sketch />
                     </FocusWindow>
-                    <button onClick={startRecording}>Record</button>
-                    <button onClick={submitRecording}>Submit</button>
                 </Section>
                 <Section primary dark>
                     <InfoMainTitle>
@@ -116,10 +114,14 @@ export const Home: React.FC = () => {
                             </InfoBlurb>
                         </InfoCard>
                     </InfoCardsContainer>
+                    <button onClick={startRecording}>Record</button>
+                    <button onClick={submitRecording}>Submit</button>
                 </Section>
             </main>
             <Footer>
-                <FooterText className="text_small">thanks to...</FooterText>
+                <FooterText className="text_small">
+                    Our thanks go out to the Portland Community College Creative Coding program
+                </FooterText>
             </Footer>
         </>
     );

@@ -22,7 +22,9 @@ export const RegisterPage: React.FC = () => {
     const handleSubmit = (submit: React.SyntheticEvent) => {
         submit.preventDefault();
         const formValue = { name: name, id: number };
-        axiosInstance.post('/devices', formValue);
+        axiosInstance.post('/devices', formValue).then(() => {
+            location.href = '/home';
+        });
     };
 
     return (
