@@ -18,10 +18,12 @@ export const DevicesPage: React.FC = () => {
     const [names, setNames] = useState([]);
     const [value, setValue] = useState(['']);
     const [address, setAddress] = useState(['']);
+    const [description, setDescription] = useState(['']);
 
     interface DeviceObject {
         name: string;
         number: string;
+        description: string;
     }
 
     interface OscArgs {
@@ -41,6 +43,10 @@ export const DevicesPage: React.FC = () => {
                 return device.name;
             });
             setNames(namesArray);
+            const descriptionArray = res.data.map((device: DeviceObject) => {
+                return device.description;
+            });
+            setDescription(descriptionArray);
             return res;
         }
 
@@ -69,11 +75,12 @@ export const DevicesPage: React.FC = () => {
                 <PageTitle>DEVICES</PageTitle>
                 <FocusWindow>
                     <FlexContainer>
-                        {names.map((name) => {
+                        {names.map((name, index) => {
                             return (
                                 <DeviceCard key={name}>
                                     <DeviceImage src={window.location.origin + '/images/stuffedanimal1.jpg'} />
                                     <DeviceName key={name}>{name}</DeviceName>
+                                    <DeviceName>{description[index]}</DeviceName>
                                     <DeviceValue>
                                         {value.map((val, index) => {
                                             if ('/' + name == address[index]) return val;

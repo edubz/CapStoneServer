@@ -14,14 +14,19 @@ import { axiosInstance } from '../axios';
 export const RegisterPage: React.FC = () => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
+    const [description, setDescription] = useState('');
 
     const handleChange = (change: React.ChangeEvent<HTMLInputElement>) => {
-        change.target.name == 'Name' ? setName(change.target.value) : setNumber(change.target.value);
+        change.target.name == 'Name'
+            ? setName(change.target.value)
+            : change.target.name == 'Number'
+            ? setNumber(change.target.value)
+            : setDescription(change.target.value);
         console.log(`name: ${name} \n number: ${number}`);
     };
     const handleSubmit = (submit: React.SyntheticEvent) => {
         submit.preventDefault();
-        const formValue = { name: name, id: number };
+        const formValue = { name: name, id: number, description: description };
         axiosInstance.post('/devices', formValue).then(() => {
             location.href = '/home';
         });
@@ -42,6 +47,10 @@ export const RegisterPage: React.FC = () => {
                         <FormLabel>
                             Serial Number
                             <TextInput name="Number" type="text" onChange={(e) => handleChange(e)}></TextInput>
+                        </FormLabel>
+                        <FormLabel>
+                            Description
+                            <TextInput name="Description" type="text" onChange={(e) => handleChange(e)}></TextInput>
                         </FormLabel>
                         <Submit type="submit" value="SUBMIT"></Submit>
                     </RegisterForm>
