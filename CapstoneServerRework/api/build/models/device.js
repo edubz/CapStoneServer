@@ -9,6 +9,9 @@ const deviceSchema = new mongoclient_1.database.Schema({
     id: {
         type: String,
         required: true
+    },
+    description: {
+        type: String
     }
 });
 const devices = mongoclient_1.database.model("Device", deviceSchema);

@@ -27,7 +27,7 @@
             res.data.forEach((entry) => {
                 console.log(entry);
                 const listElement = document.createElement("li");
-                listElement.innerHTML = `name: ${entry.name} <br> id: ${entry.id} <br> last active: ${entry.lastactive}`;
+                listElement.innerHTML = `name: ${entry.name} <br> id: ${entry.id} <br> description: ${entry.description}`;
                 listElement.style.display = "flex";
                 listElement.style.margin = "10px";
                 

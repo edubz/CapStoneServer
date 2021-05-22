@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import path from "path";
-import { devices } from "../../models/device"
+import { devices } from "../../models/device";
+import { serialNumbers } from "../../models/serial-numbers";
 
 const getAllDevices = async (req: Request, res: Response) => {
     const allDevices = await devices.find({});
@@ -20,17 +21,22 @@ const getDeviceByID = async (req: Request, res: Response) => {
 
 const createNewDeviceListing = async (req: Request, res: Response) => {
     console.log(req.body);
-    await devices.create(req.body);
-    try {
-        res.end();
-    }
-    catch (err) {
-        res.status(500).send(err);
+    
+    if (serialNumbers.includes(req.body.id)) {
+        await devices.create(req.body);
+        try {
+            res.end();
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+    } else {
+        res.sendStatus(500);
     }
 }
 
 const deleteDeviceListing = async (req: Request, res: Response) => {
-    await devices.deleteOne(req.body);
+    await devices.deleteOne(req.query);
     try {
         res.sendStatus(200);
     }

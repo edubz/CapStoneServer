@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDeviceByID = exports.sendRegisterForm = exports.sendDevicesView = exports.deleteDeviceListing = exports.createNewDeviceListing = exports.getAllDevices = void 0;
 const path_1 = __importDefault(require("path"));
 const device_1 = require("../../models/device");
+const serial_numbers_1 = require("../../models/serial-numbers");
 const getAllDevices = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const allDevices = yield device_1.devices.find({});
     try {
@@ -33,17 +34,22 @@ const getDeviceByID = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.getDeviceByID = getDeviceByID;
 const createNewDeviceListing = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
-    yield device_1.devices.create(req.body);
-    try {
-        res.end();
+    if (serial_numbers_1.serialNumbers.includes(req.body.id)) {
+        yield device_1.devices.create(req.body);
+        try {
+            res.end();
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
     }
-    catch (err) {
-        res.status(500).send(err);
+    else {
+        res.sendStatus(500);
     }
 });
 exports.createNewDeviceListing = createNewDeviceListing;
 const deleteDeviceListing = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield device_1.devices.deleteOne(req.body);
+    yield device_1.devices.deleteOne(req.query);
     try {
         res.sendStatus(200);
     }
