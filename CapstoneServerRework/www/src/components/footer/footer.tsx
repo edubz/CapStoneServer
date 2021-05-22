@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { Colors } from '../globalstyles';
 
 export const FooterText = styled.p`
-    color: ${Colors.lightest};
+    * {
+        color: ${Colors.lightest};
+        /* text-decoration: none; */
+    }
     text-align: center;
     width: 65%;
 

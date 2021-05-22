@@ -33,8 +33,7 @@ const getDeviceByID = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.getDeviceByID = getDeviceByID;
 const createNewDeviceListing = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
-    if (serial_numbers_1.serialNumbers.includes(req.body.id)) {
+    if (serial_numbers_1.serialNumbers.includes(parseInt(req.body.id))) {
         yield device_1.devices.create(req.body);
         try {
             res.end();

@@ -32,7 +32,7 @@ export const RegisterPage: React.FC = () => {
         axiosInstance
             .post('/devices', formValue)
             .then(() => {
-                location.href = '/home';
+                location.href = '/devices';
             })
             .catch(() => {
                 setUnregisterable(true);
@@ -66,11 +66,19 @@ export const RegisterPage: React.FC = () => {
             </main>
             <Footer>
                 <FooterText className="text_small">
-                    <a>Add insta logo here</a>
+                    <a href="https://www.instagram.com/ioecwddtdpdal/">
+                        <img
+                            src={window.location.origin + '/images/instagram-logo.png'}
+                            alt=""
+                            width="50px"
+                            height="auto"
+                            style={{ opacity: 0.5 }}
+                        />
+                    </a>
                     <br />
                     <a href="mailto:thecapstoners2020@gmail.com">Support</a>
                     <br />
-                    <a>Donate</a>
+                    <a href="https://www.paypal.com/donate?hosted_button_id=5M3ECDG7GMQP8">Donate</a>
                 </FooterText>
             </Footer>
         </>

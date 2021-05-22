@@ -68,11 +68,19 @@ export const Gallery: React.FC = () => {
             </Section>
             <Footer>
                 <FooterText className="text_small">
-                    <a>Insta</a>
+                    <a href="https://www.instagram.com/ioecwddtdpdal/">
+                        <img
+                            src={window.location.origin + '/images/instagram-logo.png'}
+                            alt=""
+                            width="50px"
+                            height="auto"
+                            style={{ opacity: 0.5 }}
+                        />
+                    </a>
                     <br />
-                    <a>Contact</a>
+                    <a href="mailto:thecapstoners2020@gmail.com">Support</a>
                     <br />
-                    <a>Donate</a>
+                    <a href="https://www.paypal.com/donate?hosted_button_id=5M3ECDG7GMQP8">Donate</a>
                 </FooterText>
             </Footer>
         </>

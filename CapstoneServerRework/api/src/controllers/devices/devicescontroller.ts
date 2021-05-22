@@ -20,9 +20,7 @@ const getDeviceByID = async (req: Request, res: Response) => {
 }
 
 const createNewDeviceListing = async (req: Request, res: Response) => {
-    console.log(req.body);
-    
-    if (serialNumbers.includes(req.body.id)) {
+    if (serialNumbers.includes(parseInt(req.body.id))) {
         await devices.create(req.body);
         try {
             res.end();

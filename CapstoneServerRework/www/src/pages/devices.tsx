@@ -13,7 +13,7 @@ import { PageTitle } from '../components/pagetitle';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../axios';
 import io from 'socket.io-client';
-// import { StyledDetails, StyledSummary } from '../components/devices/devicedetails';
+import { StyledDetails, StyledSummary } from '../components/devices/devicedetails';
 
 export const DevicesPage: React.FC = () => {
     const [names, setNames] = useState([]);
@@ -80,17 +80,17 @@ export const DevicesPage: React.FC = () => {
                             return (
                                 <DeviceCard key={name}>
                                     <DeviceImage src={window.location.origin + '/images/stuffedanimal1.jpg'} />
-                                    {/* <StyledDetails> */}
-                                    {/* <StyledSummary> */}
-                                    <DeviceName key={name}>{name}</DeviceName>
-                                    {/* </StyledSummary> */}
-                                    <DeviceValue>{description[index]}</DeviceValue>
-                                    <DeviceValue>
-                                        {value.map((val, index) => {
-                                            if ('/' + name == address[index]) return `current value: ${val}`;
-                                        })}
-                                    </DeviceValue>
-                                    {/* </StyledDetails> */}
+                                    <StyledDetails>
+                                        <StyledSummary>
+                                            <DeviceName key={name}>{name}</DeviceName>
+                                        </StyledSummary>
+                                        <DeviceValue>{description[index]}</DeviceValue>
+                                        <DeviceValue>
+                                            {value.map((val, index) => {
+                                                if ('/' + name == address[index]) return `current value: ${val}`;
+                                            })}
+                                        </DeviceValue>
+                                    </StyledDetails>
                                 </DeviceCard>
                             );
                         })}
@@ -99,11 +99,19 @@ export const DevicesPage: React.FC = () => {
             </Section>
             <Footer>
                 <FooterText className="text_small">
-                    <a>Insta</a>
+                    <a href="https://www.instagram.com/ioecwddtdpdal/">
+                        <img
+                            src={window.location.origin + '/images/instagram-logo.png'}
+                            alt=""
+                            width="50px"
+                            height="auto"
+                            style={{ opacity: 0.5 }}
+                        />
+                    </a>
                     <br />
                     <a href="mailto:thecapstoners2020@gmail.com">Support</a>
                     <br />
-                    <a>Donate</a>
+                    <a href="https://www.paypal.com/donate?hosted_button_id=5M3ECDG7GMQP8">Donate</a>
                 </FooterText>
             </Footer>
         </>

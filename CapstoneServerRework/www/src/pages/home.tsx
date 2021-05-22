@@ -120,7 +120,21 @@ export const Home: React.FC = () => {
             </main>
             <Footer>
                 <FooterText className="text_small">
-                    Our thanks go out to the Portland Community College Creative Coding program
+                    <a href="https://www.instagram.com/ioecwddtdpdal/">
+                        <img
+                            src={window.location.origin + '/images/instagram-logo.png'}
+                            alt=""
+                            width="50px"
+                            height="auto"
+                            style={{ opacity: 0.5 }}
+                        />
+                    </a>
+                    <br />
+                    <a href="mailto:thecapstoners2020@gmail.com">Support</a>
+                    <br />
+                    <a href="https://www.paypal.com/donate?hosted_button_id=5M3ECDG7GMQP8">Donate</a>
+                    <br />
+                    <small>Our thanks go out to the Portland Community College Creative Coding program</small>
                 </FooterText>
             </Footer>
         </>
