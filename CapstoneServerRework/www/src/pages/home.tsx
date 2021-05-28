@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GlobalStyle } from '../components/globalstyles';
+import { Colors, GlobalStyle } from '../components/globalstyles';
 import { FocusWindow } from '../components/focuswindow/focuswindow';
 import { Footer } from '../containers/footer';
 import { Header } from '../containers/header';
@@ -114,8 +114,17 @@ export const Home: React.FC = () => {
                             </InfoBlurb>
                         </InfoCard>
                     </InfoCardsContainer>
-                    <button onClick={startRecording}>Record</button>
-                    <button onClick={submitRecording}>Submit</button>
+                    <InfoCard style={{ margin: '10vh auto 1vh auto', height: '30vh', background: Colors.darkest }}>
+                        <InfoTitle style={{ textAlign: 'center' }}>Contribute To Gallery</InfoTitle>
+                        <InfoBlurb>
+                            Like what you hear? Record a couple seconds of the audio installation to be posted to the
+                            Gallery for others to hear
+                        </InfoBlurb>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <button onClick={startRecording}>Record</button>
+                            <button onClick={submitRecording}>Submit</button>
+                        </div>
+                    </InfoCard>
                 </Section>
             </main>
             <Footer>

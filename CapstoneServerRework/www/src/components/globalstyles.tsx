@@ -22,6 +22,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   line-height: 1.75;
+  height: fit-content;
 }
 
 p {margin-bottom: 1rem;}

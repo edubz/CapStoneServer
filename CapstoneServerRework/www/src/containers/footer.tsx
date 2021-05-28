@@ -3,5 +3,5 @@ import { Colors } from '../components/globalstyles';
 export const Footer = styled.footer`
     background: ${Colors.dark};
     width: 100%;
-    display: inline-block;
+    display: block;
 `;
