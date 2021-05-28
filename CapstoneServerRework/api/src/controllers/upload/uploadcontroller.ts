@@ -47,6 +47,7 @@ const downloadFile = (req: Request, res: Response) => {
     const fileToDownload = fileBucket.openDownloadStream(new ObjectID(id));
     const writePath = path.join(__dirname, "file.wav");
     const newFile = fs.createWriteStream(writePath);
+    res.setHeader('content-type', 'audio/wav');
     fileToDownload.pipe(newFile).on("finish", () => res.download(writePath, "file.wav"))
 }
 

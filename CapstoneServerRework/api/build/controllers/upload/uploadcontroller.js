@@ -60,6 +60,7 @@ const downloadFile = (req, res) => {
     const fileToDownload = fileBucket.openDownloadStream(new mongodb_1.ObjectID(id));
     const writePath = path_1.default.join(__dirname, "file.wav");
     const newFile = fs_1.default.createWriteStream(writePath);
+    res.setHeader('content-type', 'audio/wav');
     fileToDownload.pipe(newFile).on("finish", () => res.download(writePath, "file.wav"));
 };
 exports.downloadFile = downloadFile;
