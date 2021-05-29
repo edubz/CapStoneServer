@@ -46,10 +46,6 @@ void loop(){
     }else{
       digitalWrite(friendPin, LOW);
     }
-    sensorValue = analogRead(sensorPin);
-    sensorValue = constrain(sensorValue, 2900, 4100);
-    sensorValue = map(sensorValue, 2900, 4100, 0, 127);
-    Serial.println(sensorValue);
     if (onPublicWifi) handleOSC();
 }
 
@@ -138,7 +134,9 @@ void assignAddress() {
 }
 
 void handleOSC() {
-  sensorValue = digitalRead(sensorPin);
+  sensorValue = analogRead(sensorPin);
+  sensorValue = constrain(sensorValue, 2900, 4100);
+  sensorValue = map(sensorValue, 2900, 4100, 0, 127);
   OSCMessage msg(oscAddress.c_str());
   msg.add(sensorValue);
   Udp.beginPacket(outIp, outPort);
