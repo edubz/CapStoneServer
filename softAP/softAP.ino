@@ -1,9 +1,17 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
+#include <WebSocketClient.h>;
 #include <Preferences.h>
 #include <WiFiUdp.h>;
 #include <HTTPClient.h>;
 #include <OSCMessage.h>;
+
+char packetBuffer[255];
+
+WebSocketClient webSocketClient;
+WiFiClient client;
+char path[] = "/";
+char uri[] = "159.203.191.234";
 
 //preferences lib setup
 Preferences preferences;
@@ -26,28 +34,68 @@ IPAddress outIp(159, 203, 191, 234); //public ip of the computer running max
 const unsigned int outPort = 57121;
 WiFiUDP Udp;
 
-void setup() {
-  Serial.begin(115200);
-  if (wifiCredentialsAreSaved()) connectToWifi();
-  else startSoftAP();
-}
-
-void loop(){
-    if (onPublicWifi) handleOSC();
-}
-
 boolean wifiCredentialsAreSaved() {
   //instantiate preferences class as read/write 
   preferences.begin("credentials", false);
   //attempt to load ssid and pw from preferences memory
   Wifissid = preferences.getString("ssid", "");
   Wifipw = preferences.getString("pw", "");
+  Serial.println(Wifissid+" "+ Wifipw);
   
   if (Wifissid == "" && Wifipw == "") return false;
   else return true;
 }
 
+void setup() {
+  Serial.begin(115200);
+  if (wifiCredentialsAreSaved()) connectToWifi();
+  else startSoftAP();
+
+  String buddyAddr = "/buddy_flag"; 
+  OSCMessage msg(buddyAddr.c_str());
+  msg.add("1");
+  Udp.beginPacket(outIp, outPort);
+  msg.send(Udp); // send the bytes to the SLIP stream
+  Udp.endPacket(); // mark the end of the OSC Packet
+  msg.empty(); // free space occupied by message
+  delay(2);
+
+//  if (client.connect(outIp, 80)) {
+//    Serial.println("client is working");
+//  } else {
+//    Serial.println("client failed");
+//  }
+//
+//  webSocketClient.path = path;
+//  webSocketClient.host = uri;
+//  if (webSocketClient.handshake(client)) {
+//    Serial.println("ws handshake successful");
+//  } else {
+//    Serial.println("ws handshake failed");
+//  }
+}
+
+void loop(){
+  String data;
+    if (onPublicWifi) handleOSC();
+    if (client.connected()) {
+      webSocketClient.getData(data);
+      if (data.length() > 0) {
+        Serial.println(data);
+      }
+    }
+    int packetSize = Udp.parsePacket();
+    Serial.println(packetSize);
+
+  if (packetSize) {
+    Serial.println("buddy");
+    Udp.read(packetBuffer, 255);
+    Serial.println(packetBuffer);
+  }
+}
+
 void connectToWifi() {
+  Serial.println(Wifissid.c_str());
   //begin wifi connection and prepare for osc connection
   Serial.print("Connecting to " + Wifissid);
   while (WiFi.status() != WL_CONNECTED) {
