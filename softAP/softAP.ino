@@ -1,17 +1,19 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-#include <WebSocketClient.h>;
+#include <WebSocketsClient.h>;
+#include <SocketIOclient.h>;
 #include <Preferences.h>
 #include <WiFiUdp.h>;
 #include <HTTPClient.h>;
 #include <OSCMessage.h>;
+#include <ArduinoJson.h>
 
-char packetBuffer[255];
+#define USE_SERIAL Serial
 
-WebSocketClient webSocketClient;
-WiFiClient client;
+SocketIOclient socketIO;
+
 char path[] = "/";
-char uri[] = "159.203.191.234";
+char uri[] = "ws://159.203.191.234:5000";
 
 //preferences lib setup
 Preferences preferences;
@@ -46,53 +48,9 @@ boolean wifiCredentialsAreSaved() {
   else return true;
 }
 
-void setup() {
-  Serial.begin(115200);
-  if (wifiCredentialsAreSaved()) connectToWifi();
-  else startSoftAP();
-
-  String buddyAddr = "/buddy_flag"; 
-  OSCMessage msg(buddyAddr.c_str());
-  msg.add("1");
-  Udp.beginPacket(outIp, outPort);
-  msg.send(Udp); // send the bytes to the SLIP stream
-  Udp.endPacket(); // mark the end of the OSC Packet
-  msg.empty(); // free space occupied by message
-  delay(2);
-
-//  if (client.connect(outIp, 80)) {
-//    Serial.println("client is working");
-//  } else {
-//    Serial.println("client failed");
-//  }
-//
-//  webSocketClient.path = path;
-//  webSocketClient.host = uri;
-//  if (webSocketClient.handshake(client)) {
-//    Serial.println("ws handshake successful");
-//  } else {
-//    Serial.println("ws handshake failed");
-//  }
-}
-
-void loop(){
-  String data;
-    if (onPublicWifi) handleOSC();
-    if (client.connected()) {
-      webSocketClient.getData(data);
-      if (data.length() > 0) {
-        Serial.println(data);
-      }
-    }
-    int packetSize = Udp.parsePacket();
-    Serial.println(packetSize);
-
-  if (packetSize) {
-    Serial.println("buddy");
-    Udp.read(packetBuffer, 255);
-    Serial.println(packetBuffer);
-  }
-}
+void event(const char * payload, size_t length) {
+  Serial.println(payload);
+};
 
 void connectToWifi() {
   Serial.println(Wifissid.c_str());
@@ -109,6 +67,38 @@ void connectToWifi() {
   delay(500);
   onPublicWifi = true;
   Udp.begin(outPort);
+}
+
+void setup() {
+  Serial.begin(115200);
+  if (wifiCredentialsAreSaved()) connectToWifi();
+  else startSoftAP();
+
+  socketIO.begin("https://api.theinput.tk", 443, "/socket.io/?EIO=4");
+  socketIO.onEvent(socketIOEvent);
+
+  String buddyAddr = "/buddy_flag"; 
+  OSCMessage msg(buddyAddr.c_str());
+  msg.add("1");
+  Udp.beginPacket(outIp, outPort);
+  msg.send(Udp); // send the bytes to the SLIP stream
+  Udp.endPacket(); // mark the end of the OSC Packet
+  msg.empty(); // free space occupied by message
+  delay(2);
+
+  
+}
+
+void loop(){
+  socketIO.loop();
+  String data;
+    if (onPublicWifi) handleOSC();
+//    if (client.connected()) {
+//      webSocketClient.getData(data);
+//      if (data.length() > 0) {
+//        Serial.println(data);
+//      }
+//    }
 }
 
 
@@ -177,4 +167,69 @@ void handleOSC() {
   Udp.endPacket(); // mark the end of the OSC Packet
   msg.empty(); // free space occupied by message
   delay(2);
+}
+
+void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
+    switch(type) {
+        case sIOtype_DISCONNECT:
+            USE_SERIAL.printf("[IOc] Disconnected!\n");
+            break;
+        case sIOtype_CONNECT:
+            USE_SERIAL.printf("[IOc] Connected to url: %s\n", payload);
+
+            // join default namespace (no auto join in Socket.IO V3)
+            socketIO.send(sIOtype_CONNECT, "/");
+            break;
+        case sIOtype_EVENT:
+        {
+            char * sptr = NULL;
+            int id = strtol((char *)payload, &sptr, 10);
+            USE_SERIAL.printf("[IOc] get event: %s id: %d\n", payload, id);
+            if(id) {
+                payload = (uint8_t *)sptr;
+            }
+            DynamicJsonDocument doc(1024);
+            DeserializationError error = deserializeJson(doc, payload, length);
+            if(error) {
+                USE_SERIAL.print(F("deserializeJson() failed: "));
+                USE_SERIAL.println(error.c_str());
+                return;
+            }
+
+            String eventName = doc[0];
+            USE_SERIAL.printf("[IOc] event name: %s\n", eventName.c_str());
+
+            // Message Includes a ID for a ACK (callback)
+            if(id) {
+                // creat JSON message for Socket.IO (ack)
+                DynamicJsonDocument docOut(1024);
+                JsonArray array = docOut.to<JsonArray>();
+
+                // add payload (parameters) for the ack (callback function)
+                JsonObject param1 = array.createNestedObject();
+                param1["now"] = millis();
+
+                // JSON to String (serializion)
+                String output;
+                output += id;
+                serializeJson(docOut, output);
+
+                // Send event
+                socketIO.send(sIOtype_ACK, output);
+            }
+        }
+            break;
+        case sIOtype_ACK:
+            USE_SERIAL.printf("[IOc] get ack: %u\n", length);
+            break;
+        case sIOtype_ERROR:
+            USE_SERIAL.printf("[IOc] get error: %u\n", length);
+            break;
+        case sIOtype_BINARY_EVENT:
+            USE_SERIAL.printf("[IOc] get binary: %u\n", length);
+            break;
+        case sIOtype_BINARY_ACK:
+            USE_SERIAL.printf("[IOc] get binary ack: %u\n", length);
+            break;
+    }
 }
