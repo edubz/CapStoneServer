@@ -8,6 +8,20 @@ const passOscToWebsockets = () => {
     udphostport_1.udpHostPort.on("message", (message) => {
         const messageArray = parsemessages_1.parseOscMessagetoArray(message);
         server_1.webSocketServer.emit("osc message", messageArray);
+	//console.log(message);
+	if (message.address == "/buddy_flag") {
+		udphostport_1.udpHostPort.send({
+			address: "/buddy_broadcast",
+			args: [{
+				type: "i",
+				value: 1
+				}]
+		})
+	}
+    });
+    udphostport_1.udpHostPort.on("message", (message) => {
+	//console.log("message");
+        udphostport_1.udpHostPort.send({ address: "/buddy_broadcast", args: [{ type: "i", value: 1 }] });
     });
 };
 exports.passOscToWebsockets = passOscToWebsockets;
