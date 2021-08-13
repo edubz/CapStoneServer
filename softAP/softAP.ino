@@ -13,7 +13,7 @@
 SocketIOclient socketIO;
 
 char path[] = "/";
-char uri[] = "ws://159.203.191.234:5000";
+char uri[] = "ws://api.theinput.tk";
 
 //preferences lib setup
 Preferences preferences;
@@ -31,10 +31,63 @@ const String serialNumber = "1976";
 boolean onPublicWifi = false;
 String oscAddress = "";
 int sensorValue = 0;
-int sensorPin = 5; //
-IPAddress outIp(159, 203, 191, 234); //public ip of the computer running max
+int sensorPin = 2; //SET THIS ACCORDING TO THE PIN YOUR SENSOR IS ON
+int vibePin = 0; //SET THIS ACCORING TO THE PIN YOUR VIBRATING MOTOR IS ON
+IPAddress outIp(159, 203, 191, 234); 
 const unsigned int outPort = 57121;
 WiFiUDP Udp;
+
+void setup() {
+  Serial.begin(115200);
+  if (wifiCredentialsAreSaved()) connectToWifi();
+  else startSoftAP();
+
+  socketIO.begin("api.theinput.tk", 80, "/socket.io/?EIO=4");
+  socketIO.onEvent(socketIOEventCallback);
+
+  String buddyAddr = "/buddy_flag"; 
+  OSCMessage msg(buddyAddr.c_str());
+  msg.add("0");
+  Udp.beginPacket(outIp, outPort);
+  msg.send(Udp); // send the bytes to the SLIP stream
+  Udp.endPacket(); // mark the end of the OSC Packet
+  msg.empty(); // free space occupied by message
+  delay(2);
+
+  
+}
+
+void loop(){
+  if (onPublicWifi) handleOSC();
+  socketIO.loop();
+}
+
+void vibrate() {
+  /* COPY/PASTE VIBRATE CODE HERE!!! 
+     THIS FUNCTION WILL RUN ANY TIME
+     SOMEONE SENDS THE NUMBER 1 TO
+     OSC ADDRESS "buddy_flag"
+     
+     THE CODE WILL PROBABLY LOOK SOMETHING LIKE THIS*/
+     digitalWrite(vibePin, HIGH);
+     Serial.println("vibeee");
+}
+
+void setVibrateFlag() {
+  /* THIS IS CODE FOR SENDING THE MESSAGE
+     THAT TELLS EVERYONE ELSE TO VIBRATE
+     VALUE SHOULD BE A 0 OR 1
+   */
+   sensorValue = digitalRead(sensorPin);
+   String buddyAddr = "/buddy_flag"; 
+   OSCMessage msg(buddyAddr.c_str());
+   msg.add(sensorValue);
+   Udp.beginPacket(outIp, outPort);
+   msg.send(Udp); // send the bytes to the SLIP stream
+   Udp.endPacket(); // mark the end of the OSC Packet
+   msg.empty(); // free space occupied by message
+   delay(2);
+}
 
 boolean wifiCredentialsAreSaved() {
   //instantiate preferences class as read/write 
@@ -47,10 +100,6 @@ boolean wifiCredentialsAreSaved() {
   if (Wifissid == "" && Wifipw == "") return false;
   else return true;
 }
-
-void event(const char * payload, size_t length) {
-  Serial.println(payload);
-};
 
 void connectToWifi() {
   Serial.println(Wifissid.c_str());
@@ -69,36 +118,8 @@ void connectToWifi() {
   Udp.begin(outPort);
 }
 
-void setup() {
-  Serial.begin(115200);
-  if (wifiCredentialsAreSaved()) connectToWifi();
-  else startSoftAP();
-
-  socketIO.begin("https://api.theinput.tk", 443, "/socket.io/?EIO=4");
-  socketIO.onEvent(socketIOEvent);
-
-  String buddyAddr = "/buddy_flag"; 
-  OSCMessage msg(buddyAddr.c_str());
-  msg.add("1");
-  Udp.beginPacket(outIp, outPort);
-  msg.send(Udp); // send the bytes to the SLIP stream
-  Udp.endPacket(); // mark the end of the OSC Packet
-  msg.empty(); // free space occupied by message
-  delay(2);
-
-  
-}
-
-void loop(){
-  socketIO.loop();
-  String data;
-    if (onPublicWifi) handleOSC();
-//    if (client.connected()) {
-//      webSocketClient.getData(data);
-//      if (data.length() > 0) {
-//        Serial.println(data);
-//      }
-//    }
+void messageRecieved(const char * payload, size_t length) {
+  Serial.println(payload);
 }
 
 
@@ -167,9 +188,11 @@ void handleOSC() {
   Udp.endPacket(); // mark the end of the OSC Packet
   msg.empty(); // free space occupied by message
   delay(2);
+
+  setVibrateFlag();
 }
 
-void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
+void socketIOEventCallback(socketIOmessageType_t type, uint8_t * payload, size_t length) {
     switch(type) {
         case sIOtype_DISCONNECT:
             USE_SERIAL.printf("[IOc] Disconnected!\n");
@@ -184,20 +207,39 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length)
         {
             char * sptr = NULL;
             int id = strtol((char *)payload, &sptr, 10);
-            USE_SERIAL.printf("[IOc] get event: %s id: %d\n", payload, id);
+//            USE_SERIAL.printf("[IOc] get event: %s", payload);
             if(id) {
                 payload = (uint8_t *)sptr;
             }
-            DynamicJsonDocument doc(1024);
-            DeserializationError error = deserializeJson(doc, payload, length);
+            DynamicJsonDocument wsEvent(1024);
+            DeserializationError error = deserializeJson(wsEvent, payload, length);
+            
+            String allMessages = wsEvent[1];
+            DynamicJsonDocument oscMessages(1024);
+            deserializeJson(oscMessages, allMessages);
+
+            
+//            oneMessage = "[" + oneMessage + "]";
+            for (int i=0;i<oscMessages.size();i++) {
+        
+                String oscAddress = oscMessages[i]["address"];
+                int oscValue = oscMessages[i]["args"][0]["value"];
+                if (oscAddress == "/buddy_flag" && oscValue == 1) { 
+                  vibrate();
+                } else {
+                  digitalWrite(vibePin, LOW);
+                }
+            }
+     
+            
             if(error) {
                 USE_SERIAL.print(F("deserializeJson() failed: "));
                 USE_SERIAL.println(error.c_str());
                 return;
             }
 
-            String eventName = doc[0];
-            USE_SERIAL.printf("[IOc] event name: %s\n", eventName.c_str());
+            String eventName = wsEvent[0];
+//            USE_SERIAL.printf("[IOc] event name: %s\n", eventName.c_str());
 
             // Message Includes a ID for a ACK (callback)
             if(id) {
