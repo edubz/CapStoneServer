@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/edubz/CapStoneServer#readme",
   "dependencies": {
-    "aws-sdk": "^2.674.0",
+    "aws-sdk": "^2.814.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
